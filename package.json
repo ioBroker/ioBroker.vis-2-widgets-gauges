@@ -55,5 +55,6 @@
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.vis-2-widgets-material/issues"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {}
 }

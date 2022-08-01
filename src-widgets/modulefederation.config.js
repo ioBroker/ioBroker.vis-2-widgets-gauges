@@ -5,6 +5,6 @@ module.exports = makeFederation(
     {
         './ColorGauge': './src/ColorGauge',
         './WaterGauge': './src/ColorGauge',
-        './BatterGauge': './src/ColorGauge'
+        './BatteryGauge': './src/ColorGauge'
     }
 );

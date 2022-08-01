@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@mui/styles';
+import { withStyles, withTheme } from '@mui/styles';
+import GaugeChart from 'react-gauge-chart';
+import Generic from './Generic';
 
 const styles = () => ({
-   
+
 });
 
 class ColorGauge extends Generic {
     constructor(props) {
         super(props);
+        this.state.rxData = this.state.data;
     }
 
     static getWidgetInfo() {
@@ -22,35 +25,53 @@ class ColorGauge extends Generic {
                 fields: [
                     {
                         name: 'name',
-                        label: 'vis_2_widgets_material_name',
+                        label: 'vis_2_widgets_gauge_name',
                     },
                     {
-                        name: 'oid-temp-set',
+                        name: 'oid',
                         type: 'id',
-                        label: 'vis_2_widgets_material_temperature_oid',
+                        label: 'vis_2_widgets_gauge_oid',
                     },
                     {
-                        name: 'oid-temp-actual',
-                        type: 'id',
-                        label: 'vis_2_widgets_material_actual_oid',
+                        name: 'min',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_min',
                     },
                     {
-                        name: 'oid-power',
-                        type: 'id',
-                        label: 'vis_2_widgets_material_power_oid',
+                        name: 'max',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_max',
                     },
                     {
-                        name: 'oid-mode',
-                        type: 'id',
-                        label: 'vis_2_widgets_material_mode_oid',
+                        name: 'needleColor',
+                        type: 'color',
+                        label: 'vis_2_widgets_gauge_needle_color',
                     },
                     {
-                        name: 'oid-step',
-                        type: 'select',
-                        disabled: '!data["oid-temp-set"]',
-                        label: 'vis_2_widgets_material_step',
-                        options: ['0.5', '1'],
-                        default: '1',
+                        name: 'needleBaseColor',
+                        type: 'color',
+                        label: 'vis_2_widgets_gauge_needle_base_color',
+                    },
+                    {
+                        name: 'levelsCount',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_levels_count',
+                    },
+                ],
+            }, {
+                name: 'level',
+                indexFrom: 1,
+                indexTo: 'levelsCount',
+                fields: [
+                    {
+                        name: 'color',
+                        type: 'color',
+                        label: 'vis_2_widgets_gauge_color',
+                    },
+                    {
+                        name: 'range',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_range',
                     },
                 ],
             }],
@@ -64,45 +85,10 @@ class ColorGauge extends Generic {
     }
 
     async propertiesUpdate() {
-        const newState = {};
-
-        if (this.state.rxData['oid-mode'] && this.state.rxData['oid-mode'] !== 'nothing_selected') {
-            const modeObj = await this.props.socket.getObject(this.state.rxData['oid-mode']);
-            newState.modes = modeObj?.common?.states;
-            newState.modeObject = { common: modeObj.common, _id: modeObj._id };
-            if (Array.isArray(newState.modes)) {
-                const result = {};
-                newState.modes.forEach(m => result[m] = m);
-                newState.modes = result;
-            }
-        } else {
-            newState.modes = null;
-            newState.mode = null;
+        if (this.state.data.oid && this.state.data.oid !== 'nothing_selected') {
+            const obj = await this.props.socket.getObject(this.state.data.oid);
+            this.setState({ object: obj });
         }
-
-        if (this.state.rxData['oid-temp-set'] && this.state.rxData['oid-temp-set'] !== 'nothing_selected') {
-            const tempObj = await this.props.socket.getObject(this.state.rxData['oid-temp-set']);
-            newState.min = tempObj?.common?.min === undefined ? 12 : tempObj.common.min;
-            newState.max = tempObj?.common?.max === undefined ? 30 : tempObj.common.max;
-            newState.tempObject = { common: tempObj.common, _id: tempObj._id };
-        } else {
-            newState.tempObject = null;
-            newState.temp = null;
-            newState.max = null;
-            newState.min = null;
-        }
-
-        if (this.state.rxData['oid-temp-actual'] && this.state.rxData['oid-temp-actual'] !== 'nothing_selected') {
-            const tempStateObj = await this.props.socket.getObject(this.state.rxData['oid-temp-actual']);
-            newState.tempStateObject = { common: tempStateObj.common, _id: tempStateObj._id };
-        } else {
-            newState.tempStateObject = null;
-        }
-
-        newState.isChart = (newState.tempObject?.common?.custom && newState.tempObject.common.custom[this.props.systemConfig.common.defaultHistory]) ||
-            (newState.tempStateObject?.common?.custom && newState.tempStateObject.common.custom[this.props.systemConfig.common.defaultHistory]);
-
-        Object.keys(newState).find(key => JSON.stringify(this.state[key]) !== JSON.stringify(newState[key])) && this.setState(newState);
     }
 
     componentDidMount() {
@@ -120,28 +106,42 @@ class ColorGauge extends Generic {
         return ColorGauge.getWidgetInfo();
     }
 
-    formatValue(value, round) {
-        if (typeof value === 'number') {
-            if (round === 0) {
-                value = Math.round(value);
-            } else {
-                value = Math.round(value * 100) / 100;
-            }
-            if (this.props.systemConfig?.common) {
-                if (this.props.systemConfig.common.isFloatComma) {
-                    value = value.toString().replace('.', ',');
-                }
-            }
-        }
-
-        return value === undefined || value === null ? '' : value.toString();
-    }
-
-
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        return this.wrapContent(null, this.state.rxData.name ? chartButton : null, { textAlign: 'center' });
+        if (!this.state.object) {
+            return null;
+        }
+
+        const value = this.state.values[`${this.state.object._id}.val`];
+
+        const colors = [];
+        const ranges = [];
+
+        const min = this.state.data.min || 0;
+        const max = this.state.data.max || 100;
+
+        for (let i = 1; i <= this.state.data.levelsCount; i++) {
+            if (this.state.data[`color${i}`]) {
+                colors.push(this.state.data[`color${i}`]);
+            }
+            if (this.state.data[`range${i}`]) {
+                ranges.push((this.state.data[`range${i}`]) / (max - min));
+            }
+        }
+
+        const content = <GaugeChart
+            percent={(value - min) / (max - min)}
+            nrOfLevels={this.state.data.levelsCount || undefined}
+            colors={colors.length ? colors : undefined}
+            arcsLength={ranges.length ? ranges : undefined}
+            needleColor={this.state.data.needleColor || undefined}
+            needleBaseColor={this.state.data.needleBaseColor || undefined}
+            animate={false}
+            textColor={this.props.theme.palette.text.primary}
+        />;
+
+        return this.wrapContent(content, this.state.data.name, { textAlign: 'center' });
     }
 }
 
@@ -153,4 +153,4 @@ ColorGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(ColorGauge);
+export default withStyles(styles)(withTheme(ColorGauge));

@@ -4,13 +4,7 @@ import { withStyles } from '@mui/styles';
 import WidgetDemoApp from '@iobroker/vis-widgets-react-dev/widgetDemoApp';
 import { i18n as I18n } from '@iobroker/adapter-react-v5';
 
-import Thermostat from './Thermostat';
-import Actual from './Actual';
-import Switches from './Switches';
-import Static from './Static';
-import SimpleState from './SimpleState';
-import Clock from './Clock';
-import ViewInWidget from './ViewInWidget';
+import ColorGauge from './ColorGauge';
 
 const styles = theme => ({
     app: {
@@ -54,80 +48,7 @@ class App extends WidgetDemoApp {
 
     renderWidget() {
         return <div className={this.props.classes.app}>
-            <Clock
-                socket={this.socket}
-                themeType={this.state.themeType}
-                style={{
-                    width: 160,
-                    height: 420,
-                }}
-                systemConfig={this.state.systemConfig}
-                data={{
-                    type: 'digital',
-                    withSeconds: true,
-                    showNumbers: true,
-                    blinkDelimiter: true,
-                    hoursFormat: '12',
-                }}
-            />
-            <Static
-                socket={this.socket}
-                themeType={this.state.themeType}
-                style={{
-                    width: 400,
-                    height: 160,
-                }}
-                systemConfig={this.state.systemConfig}
-                data={{
-                    name: 'Static information',
-                    count: 2,
-                    oid1: 'javascript.0.thermostat.actual',
-                    oid2: 'javascript.0.numberWithStates',
-                    title1: 'Number',
-                    title2: 'States',
-                }}
-            />
-            <SimpleState
-                socket={this.socket}
-                style={{
-                    width: 400,
-                    height: 180,
-                }}
-                systemConfig={this.state.systemConfig}
-                data={{
-                    name: 'SimpleState',
-                    values_count: 5,
-                    oid: 'javascript.0.temperatureSet',
-                    value1: 'COOL',
-                    color1: 'blue',
-                    value2: 'DRY',
-                    color2: 'red',
-                }}
-            />
-            <Switches
-                socket={this.socket}
-                themeType={this.state.themeType}
-                style={{
-                    width: 400,
-                    height: 180,
-                }}
-                systemConfig={this.state.systemConfig}
-                data={{
-                    name: 'Switches',
-                    count: 5,
-                    type: 'buttons',
-                    allSwitch: true,
-                    buttonsWidth: 110,
-                    buttonsHeight: 80,
-                    oid1: 'javascript.0.boolean',
-                    oid2: 'javascript.0.test',
-                    oid3: 'javascript.0.boolean',
-                    // oid4: 'javascript.0.test',
-                    // oid5: 'javascript.0.numberWithStates',
-                    title2: 'Dimmer',
-                }}
-            />
-            <Thermostat
+            <ColorGauge
                 socket={this.socket}
                 themeType={this.state.themeType}
                 style={{
@@ -136,38 +57,20 @@ class App extends WidgetDemoApp {
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
-                    name: 'Thermostat',
-                    'oid-mode': 'javascript.0.thermostat.mode',
-                    'oid-power': 'javascript.0.thermostat.power',
-                    'oid-temp-set': 'javascript.0.thermostat.setPoint',
-                    'oid-temp-actual': 'javascript.0.thermostat.actual',
-                }}
-            />
-            <Actual
-                socket={this.socket}
-                themeType={this.state.themeType}
-                style={{
-                    width: 400,
-                    height: 200,
-                }}
-                systemConfig={this.state.systemConfig}
-                data={{
-                    name: 'Actual temperature',
-                    timeInterval: 6,
-                    'oid-temperature': 'system.adapter.admin.0.memHeapTotal',
-                    'oid-humidity': 'system.adapter.admin.0.memHeapUsed',
-                }}
-            />
-            <ViewInWidget
-                socket={this.socket}
-                themeType={this.state.themeType}
-                style={{
-                    width: 400,
-                    height: 200,
-                }}
-                systemConfig={this.state.systemConfig}
-                data={{
-                    name: 'Actual temperature',
+                    name: 'Gauge',
+                    oid: 'javascript.0.temperatureActual',
+                    levelsCount: 3,
+                    color1: 'rgba(155,211,134,1)',
+                    range1: 10,
+                    'g_level-1': true,
+                    color2: 'rgba(30,24,68,1)',
+                    range2: 2,
+                    'g_level-2': true,
+                    color3: 'rgba(199,194,220,1)',
+                    range3: 6,
+                    'g_level-3': true,
+                    max: 30,
+                    min: 12,
                 }}
             />
         </div>;
