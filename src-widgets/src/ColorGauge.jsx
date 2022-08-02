@@ -38,6 +38,21 @@ class ColorGauge extends Generic {
                         label: 'vis_2_widgets_gauge_max',
                     },
                     {
+                        name: 'unit',
+                        label: 'vis_2_widgets_gauge_unit',
+                    },
+                    {
+                        name: 'levelsCount',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_levels_count',
+                    },
+                ],
+            },
+            {
+                name: 'visual',
+                label: 'vis_2_widgets_gauge_visual',
+                fields: [
+                    {
                         name: 'needleColor',
                         type: 'color',
                         label: 'vis_2_widgets_gauge_needle_color',
@@ -48,19 +63,52 @@ class ColorGauge extends Generic {
                         label: 'vis_2_widgets_gauge_needle_base_color',
                     },
                     {
+                        name: 'marginInPercent',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_margin_in_percent',
+                    },
+                    {
+                        name: 'cornerRadius',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_corner_radius',
+                    },
+                    {
+                        name: 'arcPadding',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_arc_padding',
+                    },
+                    {
+                        name: 'arcWidth',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_arc_width',
+                    },
+                ],
+            },
+            {
+                name: 'anumation',
+                label: 'vis_2_widgets_gauge_animation',
+                fields: [
+                    {
                         name: 'animate',
                         type: 'checkbox',
                         default: true,
                         label: 'vis_2_widgets_gauge_animate',
                     },
                     {
-                        name: 'levelsCount',
+                        name: 'animDelay',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_levels_count',
+                        label: 'vis_2_widgets_gauge_anim_delay',
+                    },
+                    {
+                        name: 'animateDuration',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_animate_duration',
                     },
                 ],
-            }, {
+            },
+            {
                 name: 'level',
+                label: 'vis_2_widgets_gauge_level',
                 indexFrom: 1,
                 indexTo: 'levelsCount',
                 fields: [
@@ -122,12 +170,19 @@ class ColorGauge extends Generic {
 
         const content = <GaugeChart
             percent={(value - min) / (max - min)}
+            formatTextValue={this.state.rxData.unit ? (value) => `${value}${this.state.rxData.unit}` : undefined}
             nrOfLevels={this.state.rxData.levelsCount || undefined}
             colors={colors.length ? colors : undefined}
             arcsLength={ranges.length ? ranges : undefined}
             needleColor={this.state.rxData.needleColor || undefined}
             needleBaseColor={this.state.rxData.needleBaseColor || undefined}
             animate={!!this.state.rxData.animate}
+            marginInPercent={this.state.rxData.marginInPercent || undefined}
+            cornerRadius={this.state.rxData.cornerRadius || undefined}
+            arcPadding={this.state.rxData.arcPadding || undefined}
+            arcWidth={this.state.rxData.arcWidth || undefined}
+            animDelay={this.state.rxData.animDelay || undefined}
+            animateDuration={this.state.rxData.animateDuration || undefined}
             textColor={this.props.theme.palette.text.primary}
         />;
 

@@ -38,14 +38,60 @@ class WaterGauge extends Generic {
                         label: 'vis_2_widgets_gauge_max',
                     },
                     {
-                        name: 'needleColor',
-                        type: 'color',
-                        label: 'vis_2_widgets_gauge_needle_color',
+                        name: 'width',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_width',
                     },
                     {
-                        name: 'needleBaseColor',
-                        type: 'color',
-                        label: 'vis_2_widgets_gauge_needle_base_color',
+                        name: 'height',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_height',
+                    },
+                    {
+                        name: 'unit',
+                        label: 'vis_2_widgets_gauge_unit',
+                    },
+                    {
+                        name: 'textSize',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_text_size',
+                    },
+                    {
+                        name: 'textOffsetX',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_text_offset_x',
+                    },
+                    {
+                        name: 'textOffsetY',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_text_offset_y',
+                    },
+                    {
+                        name: 'riseAnimation',
+                        type: 'checkbox',
+                        default: true,
+                        label: 'vis_2_widgets_gauge_rise_animation',
+                    },
+                    {
+                        name: 'waveAnimation',
+                        type: 'checkbox',
+                        default: true,
+                        label: 'vis_2_widgets_gauge_wave_animation',
+                    },
+                    {
+                        name: 'waveFrequency',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_wave_frequency',
+                    },
+                    {
+                        name: 'waveAmplitude',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_wave_amplitude',
+                    },
+                    {
+                        name: 'gradient',
+                        type: 'checkbox',
+                        label: 'vis_2_widgets_gauge_gradient',
                     },
                     {
                         name: 'levelsCount',
@@ -59,18 +105,23 @@ class WaterGauge extends Generic {
                 indexTo: 'levelsCount',
                 fields: [
                     {
-                        name: 'color',
+                        name: 'stopColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_color',
+                        label: 'vis_2_widgets_gauge_level_stop_color',
+                    },
+                    {
+                        name: 'stopOpacity',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauge_level_stop_opacity',
                     },
                     {
                         name: 'range',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_range',
+                        label: 'vis_2_widgets_gauge_level_range',
                     },
                 ],
             }],
-            visPrev: 'widgets/vis-2-widgets-material/img/prev_color_gauge.png',
+            visPrev: 'widgets/vis-2-widgets-material/img/prev_water_gauge.png',
         };
     }
 
@@ -101,22 +152,35 @@ class WaterGauge extends Generic {
 
         const value = this.state.values[`${this.state.object?._id}.val`];
 
-        const colors = [];
-        const ranges = [];
+        const gradientStops = [];
 
         const min = this.state.rxData.min || 0;
         const max = this.state.rxData.max || 100;
 
         for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
-            if (this.state.rxData[`color${i}`]) {
-                colors.push(this.state.rxData[`color${i}`]);
-            }
-            if (this.state.rxData[`range${i}`]) {
-                ranges.push((this.state.rxData[`range${i}`]) / (max - min));
-            }
+            gradientStops.push({
+                key: `${this.state.rxData[`range${i}`]}%`,
+                stopColor: this.state.rxData[`stopColor${i}`],
+                stopOpacity: this.state.rxData[`stopOpacity${i}`],
+                offset: `${this.state.rxData[`range${i}`]}%`,
+            });
         }
 
-        const content = <LiquidFillGauge value={value} riseAnimation />;
+        const content = <LiquidFillGauge
+            value={(value - min) / (max - min) * 100}
+            percent={this.state.rxData.unit || undefined}
+            width={this.state.rxData.width || undefined}
+            height={this.state.rxData.height || undefined}
+            textSize={this.state.rxData.textSize || undefined}
+            textOffsetX={this.state.rxData.textOffsetX || undefined}
+            textOffsetY={this.state.rxData.textOffsetY || undefined}
+            riseAnimation={this.state.rxData.riseAnimation || undefined}
+            waveAnimation={this.state.rxData.waveAnimation || undefined}
+            waveFrequency={this.state.rxData.waveFrequency || undefined}
+            waveAmplitude={this.state.rxData.waveAmplitude || undefined}
+            gradient={this.state.rxData.gradient || undefined}
+            gradientStops={gradientStops}
+        />;
 
         return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
     }
