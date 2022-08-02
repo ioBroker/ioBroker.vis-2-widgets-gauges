@@ -5,6 +5,8 @@ import WidgetDemoApp from '@iobroker/vis-widgets-react-dev/widgetDemoApp';
 import { i18n as I18n } from '@iobroker/adapter-react-v5';
 
 import ColorGauge from './ColorGauge';
+import WaterGauge from './WaterGauge';
+import BatteryGauge from './BatteryGauge';
 
 const styles = theme => ({
     app: {
@@ -57,7 +59,57 @@ class App extends WidgetDemoApp {
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
-                    name: 'Gauge',
+                    name: 'Color gauge',
+                    oid: 'javascript.0.temperatureActual',
+                    levelsCount: 3,
+                    color1: 'rgba(155,211,134,1)',
+                    range1: 10,
+                    'g_level-1': true,
+                    color2: 'rgba(30,24,68,1)',
+                    range2: 2,
+                    'g_level-2': true,
+                    color3: 'rgba(199,194,220,1)',
+                    range3: 6,
+                    'g_level-3': true,
+                    max: 30,
+                    min: 12,
+                }}
+            />
+            <WaterGauge
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 600,
+                    height: 650,
+                }}
+                systemConfig={this.state.systemConfig}
+                data={{
+                    name: 'Water gauge',
+                    oid: 'javascript.0.temperatureActual',
+                    levelsCount: 3,
+                    color1: 'rgba(155,211,134,1)',
+                    range1: 10,
+                    'g_level-1': true,
+                    color2: 'rgba(30,24,68,1)',
+                    range2: 2,
+                    'g_level-2': true,
+                    color3: 'rgba(199,194,220,1)',
+                    range3: 6,
+                    'g_level-3': true,
+                    max: 30,
+                    min: 12,
+                }}
+            />
+            <BatteryGauge
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 600,
+                    height: 650,
+                }}
+                systemConfig={this.state.systemConfig}
+                data={{
+                    name: 'Battery gauge',
                     oid: 'javascript.0.temperatureActual',
                     levelsCount: 3,
                     color1: 'rgba(155,211,134,1)',

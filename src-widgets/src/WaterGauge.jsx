@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, withTheme } from '@mui/styles';
-import GaugeChart from 'react-gauge-chart';
+import LiquidFillGauge from 'react-liquid-gauge';
 import Generic from './Generic';
 
 const styles = () => ({
 
 });
 
-class ColorGauge extends Generic {
+class WaterGauge extends Generic {
     constructor(props) {
         super(props);
         this.state.rxData = this.state.data;
@@ -16,10 +16,10 @@ class ColorGauge extends Generic {
 
     static getWidgetInfo() {
         return {
-            id: 'tplGauge2Color',
+            id: 'tplGauge2Water',
             visSet: 'vis-2-widgets-gauge',
-            visWidgetLabel: 'vis-2-widgets-gauge',  // Label of widget
-            visName: 'Color gauge',
+            visWidgetLabel: 'vis-2-widgets-water',  // Label of widget
+            visName: 'Water gauge',
             visAttrs: [{
                 name: 'common',
                 fields: [
@@ -51,12 +51,6 @@ class ColorGauge extends Generic {
                         name: 'needleBaseColor',
                         type: 'color',
                         label: 'vis_2_widgets_gauge_needle_base_color',
-                    },
-                    {
-                        name: 'animate',
-                        type: 'checkbox',
-                        default: true,
-                        label: 'vis_2_widgets_gauge_animate',
                     },
                     {
                         name: 'levelsCount',
@@ -104,13 +98,13 @@ class ColorGauge extends Generic {
 
     // eslint-disable-next-line class-methods-use-this
     getWidgetInfo() {
-        return ColorGauge.getWidgetInfo();
+        return WaterGauge.getWidgetInfo();
     }
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        const value = this.state.values[`${this.state.object?._id}.val`] || 0;
+        const value = this.state.values[`${this.state.object?._id}.val`];
 
         const colors = [];
         const ranges = [];
@@ -122,25 +116,18 @@ class ColorGauge extends Generic {
             if (this.state.data[`color${i}`]) {
                 colors.push(this.state.data[`color${i}`]);
             }
-            ranges.push(this.state.data[`range${i}`] || (max - min / this.state.data.levelsCount) / (max - min));
+            if (this.state.data[`range${i}`]) {
+                ranges.push((this.state.data[`range${i}`]) / (max - min));
+            }
         }
 
-        const content = <GaugeChart
-            percent={(value - min) / (max - min)}
-            nrOfLevels={this.state.data.levelsCount || undefined}
-            colors={colors.length ? colors : undefined}
-            arcsLength={ranges.length ? ranges : undefined}
-            needleColor={this.state.data.needleColor || undefined}
-            needleBaseColor={this.state.data.needleBaseColor || undefined}
-            animate={!!this.state.data.animate}
-            textColor={this.props.theme.palette.text.primary}
-        />;
+        const content = <LiquidFillGauge value={value} riseAnimation />;
 
         return this.wrapContent(content, this.state.data.name, { textAlign: 'center' });
     }
 }
 
-ColorGauge.propTypes = {
+WaterGauge.propTypes = {
     systemConfig: PropTypes.object,
     socket: PropTypes.object,
     themeType: PropTypes.string,
@@ -148,4 +135,4 @@ ColorGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(ColorGauge));
+export default withStyles(styles)(withTheme(WaterGauge));
