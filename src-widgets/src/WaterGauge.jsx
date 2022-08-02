@@ -9,11 +9,6 @@ const styles = () => ({
 });
 
 class WaterGauge extends Generic {
-    constructor(props) {
-        super(props);
-        this.state.rxData = this.state.data;
-    }
-
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Water',
@@ -80,8 +75,8 @@ class WaterGauge extends Generic {
     }
 
     async propertiesUpdate() {
-        if (this.state.data.oid && this.state.data.oid !== 'nothing_selected') {
-            const obj = await this.props.socket.getObject(this.state.data.oid);
+        if (this.state.rxData.oid && this.state.rxData.oid !== 'nothing_selected') {
+            const obj = await this.props.socket.getObject(this.state.rxData.oid);
             this.setState({ object: obj });
         }
     }
@@ -109,21 +104,21 @@ class WaterGauge extends Generic {
         const colors = [];
         const ranges = [];
 
-        const min = this.state.data.min || 0;
-        const max = this.state.data.max || 100;
+        const min = this.state.rxData.min || 0;
+        const max = this.state.rxData.max || 100;
 
-        for (let i = 1; i <= this.state.data.levelsCount; i++) {
-            if (this.state.data[`color${i}`]) {
-                colors.push(this.state.data[`color${i}`]);
+        for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
+            if (this.state.rxData[`color${i}`]) {
+                colors.push(this.state.rxData[`color${i}`]);
             }
-            if (this.state.data[`range${i}`]) {
-                ranges.push((this.state.data[`range${i}`]) / (max - min));
+            if (this.state.rxData[`range${i}`]) {
+                ranges.push((this.state.rxData[`range${i}`]) / (max - min));
             }
         }
 
         const content = <LiquidFillGauge value={value} riseAnimation />;
 
-        return this.wrapContent(content, this.state.data.name, { textAlign: 'center' });
+        return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
     }
 }
 

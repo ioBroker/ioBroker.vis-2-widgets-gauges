@@ -9,11 +9,6 @@ const styles = () => ({
 });
 
 class ColorGauge extends Generic {
-    constructor(props) {
-        super(props);
-        this.state.rxData = this.state.data;
-    }
-
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Color',
@@ -86,8 +81,8 @@ class ColorGauge extends Generic {
     }
 
     async propertiesUpdate() {
-        if (this.state.data.oid && this.state.data.oid !== 'nothing_selected') {
-            const obj = await this.props.socket.getObject(this.state.data.oid);
+        if (this.state.rxData.oid && this.state.rxData.oid !== 'nothing_selected') {
+            const obj = await this.props.socket.getObject(this.state.rxData.oid);
             this.setState({ object: obj });
         }
     }
@@ -115,28 +110,28 @@ class ColorGauge extends Generic {
         const colors = [];
         const ranges = [];
 
-        const min = this.state.data.min || 0;
-        const max = this.state.data.max || 100;
+        const min = this.state.rxData.min || 0;
+        const max = this.state.rxData.max || 100;
 
-        for (let i = 1; i <= this.state.data.levelsCount; i++) {
-            if (this.state.data[`color${i}`]) {
-                colors.push(this.state.data[`color${i}`]);
+        for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
+            if (this.state.rxData[`color${i}`]) {
+                colors.push(this.state.rxData[`color${i}`]);
             }
-            ranges.push(this.state.data[`range${i}`] || (max - min / this.state.data.levelsCount) / (max - min));
+            ranges.push(this.state.rxData[`range${i}`] || (max - min / this.state.rxData.levelsCount) / (max - min));
         }
 
         const content = <GaugeChart
             percent={(value - min) / (max - min)}
-            nrOfLevels={this.state.data.levelsCount || undefined}
+            nrOfLevels={this.state.rxData.levelsCount || undefined}
             colors={colors.length ? colors : undefined}
             arcsLength={ranges.length ? ranges : undefined}
-            needleColor={this.state.data.needleColor || undefined}
-            needleBaseColor={this.state.data.needleBaseColor || undefined}
-            animate={!!this.state.data.animate}
+            needleColor={this.state.rxData.needleColor || undefined}
+            needleBaseColor={this.state.rxData.needleBaseColor || undefined}
+            animate={!!this.state.rxData.animate}
             textColor={this.props.theme.palette.text.primary}
         />;
 
-        return this.wrapContent(content, this.state.data.name, { textAlign: 'center' });
+        return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
     }
 }
 
