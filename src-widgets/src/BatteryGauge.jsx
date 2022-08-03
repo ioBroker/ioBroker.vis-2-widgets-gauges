@@ -13,7 +13,7 @@ class BatteryGauge extends Generic {
         return {
             id: 'tplGauge2Battery',
             visSet: 'vis-2-widgets-gauge',
-            visWidgetLabel: 'vis-2-widgets-battery',  // Label of widget
+            visWidgetLabel: 'vis-2-widgets-gauge-battery',  // Label of widget
             visName: 'Battery gauge',
             visAttrs: [{
                 name: 'common',

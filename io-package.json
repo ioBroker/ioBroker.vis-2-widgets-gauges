@@ -1,6 +1,6 @@
 {
   "common": {
-    "name": "vis-2-widgets-material",
+    "name": "vis-2-widgets-gauge",
     "version": "0.1.0",
     "news": {
       "0.1.0": {
@@ -16,25 +16,25 @@
         "zh-cn": "初始提交"
       }
     },
-    "title": "Vis 2 Widgets Material",
+    "title": "Vis 2 Widgets Gauge",
     "titleLang": {
-      "en": "Vis 2 Widgets Material"
+      "en": "Vis 2 Widgets Gauge"
     },
     "desc": {
-      "en": "Vis 2 Widgets Material"
+      "en": "Vis 2 Widgets Gauge"
     },
     "authors": [
       "bluefox <dogafox@gmail.com>"
     ],
     "keywords": [
-      "vis-2-widgets-material"
+      "vis-2-widgets-gauge"
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
-    "icon": "vis-2-widgets-material.png",
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-material/master/admin/vis-2-widgets-material.png",
+    "icon": "vis-2-widgets-gauge.png",
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-gauge/master/admin/vis-2-widgets-gauge.png",
     "enabled": true,
-    "readme": "https://github.com/ioBroker/ioBroker.vis-2-widgets-material/blob/master/README.md",
+    "readme": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauge/blob/master/README.md",
     "loglevel": "info",
     "mode": "schedule",
     "adminUI": {
@@ -46,9 +46,9 @@
     "dataSource": "poll",
     "visWidgets": {
       "i18n": true,
-      "vis2materialWidgets": {
-        "name": "vis2materialWidgets",
-        "url": "vis-2-widgets-material/customWidgets.js",
+      "vis2gaugeWidgets": {
+        "name": "vis2gaugeWidgets",
+        "url": "vis-2-widgets-gauge/customWidgets.js",
         "components": [
           "Thermostat",
           "Actual",

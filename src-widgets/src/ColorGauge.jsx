@@ -13,7 +13,7 @@ class ColorGauge extends Generic {
         return {
             id: 'tplGauge2Color',
             visSet: 'vis-2-widgets-gauge',
-            visWidgetLabel: 'vis-2-widgets-gauge',  // Label of widget
+            visWidgetLabel: 'vis-2-widgets-gauge-color',  // Label of widget
             visName: 'Color gauge',
             visAttrs: [{
                 name: 'common',

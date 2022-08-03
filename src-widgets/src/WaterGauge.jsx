@@ -13,7 +13,7 @@ class WaterGauge extends Generic {
         return {
             id: 'tplGauge2Water',
             visSet: 'vis-2-widgets-gauge',
-            visWidgetLabel: 'vis-2-widgets-water',  // Label of widget
+            visWidgetLabel: 'vis-2-widgets-gauge-water',  // Label of widget
             visName: 'Water gauge',
             visAttrs: [{
                 name: 'common',
@@ -115,9 +115,9 @@ class WaterGauge extends Generic {
                         label: 'vis_2_widgets_gauge_level_stop_opacity',
                     },
                     {
-                        name: 'range',
+                        name: 'percentThreshold',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_level_range',
+                        label: 'vis_2_widgets_gauge_percent_threshold',
                     },
                 ],
             }],
@@ -159,10 +159,10 @@ class WaterGauge extends Generic {
 
         for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
             gradientStops.push({
-                key: `${this.state.rxData[`range${i}`]}%`,
+                key: `${this.state.rxData[`percentThreshold${i}`]}%`,
                 stopColor: this.state.rxData[`stopColor${i}`],
                 stopOpacity: this.state.rxData[`stopOpacity${i}`],
-                offset: `${this.state.rxData[`range${i}`]}%`,
+                offset: `${this.state.rxData[`percentThreshold${i}`]}%`,
             });
         }
 
