@@ -180,6 +180,12 @@ class WaterGauge extends Generic {
             waveAmplitude={this.state.rxData.waveAmplitude || undefined}
             gradient={this.state.rxData.gradient || undefined}
             gradientStops={gradientStops}
+            textStyle={{
+                fill: this.props.theme.palette.text.primary,
+            }}
+            waveTextStyle={{
+                fill: this.props.theme.palette.primary.contrastText,
+            }}
         />;
 
         return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
