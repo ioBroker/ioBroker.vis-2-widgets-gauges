@@ -1,6 +1,6 @@
 {
   "common": {
-    "name": "vis-2-widgets-gauge",
+    "name": "vis-2-widgets-gauges",
     "version": "0.1.0",
     "news": {
       "0.1.0": {
@@ -27,14 +27,14 @@
       "bluefox <dogafox@gmail.com>"
     ],
     "keywords": [
-      "vis-2-widgets-gauge"
+      "vis-2-widgets-gauges"
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
-    "icon": "vis-2-widgets-gauge.png",
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-gauge/master/admin/vis-2-widgets-gauge.png",
+    "icon": "vis-2-widgets-gauges.png",
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-gauges/master/admin/vis-2-widgets-gauges.png",
     "enabled": true,
-    "readme": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauge/blob/master/README.md",
+    "readme": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges/blob/master/README.md",
     "loglevel": "info",
     "mode": "schedule",
     "adminUI": {
@@ -48,15 +48,11 @@
       "i18n": true,
       "vis2gaugeWidgets": {
         "name": "vis2gaugeWidgets",
-        "url": "vis-2-widgets-gauge/customWidgets.js",
+        "url": "vis-2-widgets-gauges/customWidgets.js",
         "components": [
-          "Thermostat",
-          "Actual",
-          "Static",
-          "Switches",
-          "Clock",
-          "SimpleState",
-          "ViewInWidget"
+          "ColorGauge",
+          "WaterGauge",
+          "BatteryGauge"
         ]
       }
     },

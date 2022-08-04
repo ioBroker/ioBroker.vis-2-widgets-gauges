@@ -12,220 +12,224 @@ class BatteryGauge extends Generic {
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Battery',
-            visSet: 'vis-2-widgets-gauge',
-            visWidgetLabel: 'vis-2-widgets-gauge-battery',  // Label of widget
+            visSet: 'vis-2-widgets-gauges',
+            visWidgetLabel: 'vis_2_widgets_gauges_battery',  // Label of widget
             visName: 'Battery gauge',
             visAttrs: [{
                 name: 'common',
                 fields: [
                     {
                         name: 'name',
-                        label: 'vis_2_widgets_gauge_name',
+                        label: 'vis_2_widgets_gauges_name',
                     },
                     {
                         name: 'oid',
                         type: 'id',
-                        label: 'vis_2_widgets_gauge_oid',
+                        label: 'vis_2_widgets_gauges_oid',
                     },
                     {
                         name: 'min',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_min',
+                        label: 'vis_2_widgets_gauges_min',
                     },
                     {
                         name: 'max',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_max',
+                        label: 'vis_2_widgets_gauges_max',
                     },
                     {
                         name: 'orientation',
                         type: 'select',
                         options: ['horizontal', 'vertical'],
-                        label: 'vis_2_widgets_gauge_orientation',
+                        label: 'vis_2_widgets_gauges_orientation',
                     },
                     {
                         name: 'padding',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_padding',
+                        label: 'vis_2_widgets_gauges_padding',
                     },
                     {
                         name: 'size',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_size',
+                        label: 'vis_2_widgets_gauges_size',
                     },
                     {
                         name: 'aspectRatio',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_aspect_ratio',
+                        label: 'vis_2_widgets_gauges_aspect_ratio',
                     },
                     {
                         name: 'animated',
                         type: 'checkbox',
-                        label: 'vis_2_widgets_gauge_animated',
+                        label: 'vis_2_widgets_gauges_animated',
                     },
                     {
                         name: 'charging',
                         type: 'checkbox',
-                        label: 'vis_2_widgets_gauge_charging',
+                        label: 'vis_2_widgets_gauges_charging',
                     },
                 ],
             },
             {
                 name: 'batteryBody',
-                label: 'vis_2_widgets_gauge_battery_body',
+                label: 'vis_2_widgets_gauges_battery_body',
                 fields: [
                     {
                         name: 'batteryBodyWidth',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_stroke_width',
+                        label: 'vis_2_widgets_gauges_stroke_width',
                     },
                     {
                         name: 'batteryBodyCornerRadius',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_corner_radius',
+                        label: 'vis_2_widgets_gauges_corner_radius',
                     },
                     {
                         name: 'batteryBodyFill',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_fill',
+                        label: 'vis_2_widgets_gauges_fill',
                     },
                     {
                         name: 'batteryBodyStrokeColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_stroke_color',
+                        label: 'vis_2_widgets_gauges_stroke_color',
                     },
                 ],
             },
             {
                 name: 'batteryCap',
-                label: 'vis_2_widgets_gauge_battery_cap',
+                label: 'vis_2_widgets_gauges_battery_cap',
                 fields: [
                     {
                         name: 'batteryCapFill',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_fill',
+                        label: 'vis_2_widgets_gauges_fill',
                     },
                     {
                         name: 'batteryCapStrokeWidth',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_stroke_width',
+                        label: 'vis_2_widgets_gauges_stroke_width',
                     },
                     {
                         name: 'batteryCapStrokeColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_stroke_color',
+                        label: 'vis_2_widgets_gauges_stroke_color',
                     },
                     {
                         name: 'batteryCapCornerRadius',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_corner_radius',
+                        label: 'vis_2_widgets_gauges_corner_radius',
                     },
                     {
                         name: 'batteryCapCapToBodyRatio',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_cap_to_body_ratio',
+                        label: 'vis_2_widgets_gauges_cap_to_body_ratio',
                     },
                 ],
             },
             {
                 name: 'batteryMeter',
-                label: 'vis_2_widgets_gauge_battery_meter',
+                label: 'vis_2_widgets_gauges_battery_meter',
                 fields: [
                     {
                         name: 'batteryMeterFill',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_fill',
+                        label: 'vis_2_widgets_gauges_fill',
                     },
                     {
                         name: 'batteryMeterLowBatteryValue',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_low_battery_value',
+                        label: 'vis_2_widgets_gauges_low_battery_value',
                     },
                     {
                         name: 'batteryMeterLowBatteryFill',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_low_battery_fill',
+                        label: 'vis_2_widgets_gauges_low_battery_fill',
                     },
                     {
                         name: 'batteryMeterOuterGap',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_outer_gap',
+                        label: 'vis_2_widgets_gauges_outer_gap',
                     },
                     {
                         name: 'batteryMeterNoOfCells',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_no_of_cells',
+                        label: 'vis_2_widgets_gauges_no_of_cells',
                     },
                     {
                         name: 'batteryMeterInterCellsGap',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_inter_cells_gap',
+                        label: 'vis_2_widgets_gauges_inter_cells_gap',
                     },
                 ],
             },
             {
                 name: 'readingText',
-                label: 'vis_2_widgets_gauge_reading_text',
+                label: 'vis_2_widgets_gauges_reading_text',
                 fields: [
                     {
                         name: 'readingTextLightContrastColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_light_contrast_color',
+                        label: 'vis_2_widgets_gauges_light_contrast_color',
                     },
                     {
                         name: 'readingTextDarkContrastColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_dark_contrast_color',
+                        label: 'vis_2_widgets_gauges_dark_contrast_color',
                     },
                     {
                         name: 'readingTextLowBatteryColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_low_battery_color',
+                        label: 'vis_2_widgets_gauges_low_battery_color',
                     },
                     {
                         name: 'readingTextFontFamily',
-                        label: 'vis_2_widgets_gauge_font_family',
+                        label: 'vis_2_widgets_gauges_font_family',
                     },
                     {
                         name: 'readingTextFontSize',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_font_size',
+                        label: 'vis_2_widgets_gauges_font_size',
                     },
                     {
                         name: 'readingTextShowPercentage',
                         type: 'checkbox',
-                        label: 'vis_2_widgets_gauge_show_percentage',
+                        label: 'vis_2_widgets_gauges_show_percentage',
                     },
                 ],
             },
             {
                 name: 'chargingFlash',
-                label: 'vis_2_widgets_gauge_charging_flash',
+                label: 'vis_2_widgets_gauges_charging_flash',
                 fields: [
                     {
                         name: 'chargingFlashScale',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_scale',
+                        label: 'vis_2_widgets_gauges_scale',
                     },
                     {
                         name: 'chargingFlashFill',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_fill',
+                        label: 'vis_2_widgets_gauges_fill',
                     },
                     {
                         name: 'chargingFlashAnimated',
                         type: 'checkbox',
-                        label: 'vis_2_widgets_gauge_animated',
+                        label: 'vis_2_widgets_gauges_animated',
                     },
                     {
                         name: 'chargingFlashAnimationDuration',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_animation_duration',
+                        label: 'vis_2_widgets_gauges_animation_duration',
                     },
                 ],
+            }],
+            visDefaultStyle: {
+                width: '100%',
+                height: 120,
+                position: 'relative',
             },
-            ],
-            visPrev: 'widgets/vis-2-widgets-material/img/prev_color_gauge.png',
+            visPrev: 'widgets/vis-2-widgets-gauges/img/prev_color_gauge.png',
         };
     }
 
@@ -308,7 +312,7 @@ class BatteryGauge extends Generic {
         }
 
         const content = <ReactBatteryGauge
-            value={(value - min) / (max - min) * 100}
+            value={((value - min) / (max - min)) * 100}
             orientation={this.state.rxData.orientation || undefined}
             padding={this.state.rxData.padding || undefined}
             size={this.state.rxData.size || undefined}

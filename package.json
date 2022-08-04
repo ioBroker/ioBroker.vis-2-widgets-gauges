@@ -1,22 +1,22 @@
 {
-  "name": "iobroker.vis-2-widgets-gauge",
+  "name": "iobroker.vis-2-widgets-gauges",
   "version": "0.1.0",
   "description": "ioBroker vis2 gauge widgets",
   "author": "bluefox <dogafox@gmail.com>",
   "contributors": [
     "bluefox <dogafox@gmail.com>"
   ],
-  "homepage": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauge",
+  "homepage": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauge"
+    "url": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges"
   },
   "keywords": [
     "ioBroker",
     "weather",
     "home automation",
-    "vis-2-widgets-gauge"
+    "vis-2-widgets-gauges"
   ],
   "devDependencies": {
     "@alcalzone/release-script": "^3.5.9",

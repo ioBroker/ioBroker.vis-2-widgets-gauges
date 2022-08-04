@@ -12,119 +12,124 @@ class ColorGauge extends Generic {
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Color',
-            visSet: 'vis-2-widgets-gauge',
-            visWidgetLabel: 'vis-2-widgets-gauge-color',  // Label of widget
+            visSet: 'vis-2-widgets-gauges',
+            visWidgetLabel: 'vis_2_widgets_gauges_color',  // Label of widget
             visName: 'Color gauge',
             visAttrs: [{
                 name: 'common',
                 fields: [
                     {
                         name: 'name',
-                        label: 'vis_2_widgets_gauge_name',
+                        label: 'vis_2_widgets_gauges_name',
                     },
                     {
                         name: 'oid',
                         type: 'id',
-                        label: 'vis_2_widgets_gauge_oid',
+                        label: 'vis_2_widgets_gauges_oid',
                     },
                     {
                         name: 'min',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_min',
+                        label: 'vis_2_widgets_gauges_min',
                     },
                     {
                         name: 'max',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_max',
+                        label: 'vis_2_widgets_gauges_max',
                     },
                     {
                         name: 'unit',
-                        label: 'vis_2_widgets_gauge_unit',
+                        label: 'vis_2_widgets_gauges_unit',
                     },
                     {
                         name: 'levelsCount',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_levels_count',
+                        label: 'vis_2_widgets_gauges_levels_count',
                     },
                 ],
             },
             {
                 name: 'visual',
-                label: 'vis_2_widgets_gauge_visual',
+                label: 'vis_2_widgets_gauges_visual',
                 fields: [
                     {
                         name: 'needleColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_needle_color',
+                        label: 'vis_2_widgets_gauges_needle_color',
                     },
                     {
                         name: 'needleBaseColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_needle_base_color',
+                        label: 'vis_2_widgets_gauges_needle_base_color',
                     },
                     {
                         name: 'marginInPercent',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_margin_in_percent',
+                        label: 'vis_2_widgets_gauges_margin_in_percent',
                     },
                     {
                         name: 'cornerRadius',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_corner_radius',
+                        label: 'vis_2_widgets_gauges_corner_radius',
                     },
                     {
                         name: 'arcPadding',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_arc_padding',
+                        label: 'vis_2_widgets_gauges_arc_padding',
                     },
                     {
                         name: 'arcWidth',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_arc_width',
+                        label: 'vis_2_widgets_gauges_arc_width',
                     },
                 ],
             },
             {
                 name: 'anumation',
-                label: 'vis_2_widgets_gauge_animation',
+                label: 'vis_2_widgets_gauges_animation',
                 fields: [
                     {
                         name: 'animate',
                         type: 'checkbox',
                         default: true,
-                        label: 'vis_2_widgets_gauge_animate',
+                        label: 'vis_2_widgets_gauges_animate',
                     },
                     {
                         name: 'animDelay',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_anim_delay',
+                        label: 'vis_2_widgets_gauges_anim_delay',
                     },
                     {
                         name: 'animateDuration',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_animate_duration',
+                        label: 'vis_2_widgets_gauges_animate_duration',
                     },
                 ],
             },
             {
                 name: 'level',
-                label: 'vis_2_widgets_gauge_level',
+                label: 'vis_2_widgets_gauges_level',
                 indexFrom: 1,
                 indexTo: 'levelsCount',
                 fields: [
                     {
                         name: 'color',
                         type: 'color',
-                        label: 'vis_2_widgets_gauge_color',
+                        label: 'vis_2_widgets_gauges_color',
                     },
                     {
                         name: 'range',
                         type: 'number',
-                        label: 'vis_2_widgets_gauge_range',
+                        label: 'vis_2_widgets_gauges_range',
                     },
                 ],
             }],
-            visPrev: 'widgets/vis-2-widgets-material/img/prev_color_gauge.png',
+            visDefaultStyle: {
+                width: '100%',
+                height: 120,
+                position: 'relative',
+            },
+            visPrev: 'widgets/vis-2-widgets-gauges/img/prev_color_gauge.png',
         };
     }
 
@@ -170,7 +175,7 @@ class ColorGauge extends Generic {
 
         const content = <GaugeChart
             percent={(value - min) / (max - min)}
-            formatTextValue={this.state.rxData.unit ? (value) => `${value}${this.state.rxData.unit}` : undefined}
+            formatTextValue={this.state.rxData.unit ? _value => `${_value}${this.state.rxData.unit}` : undefined}
             nrOfLevels={this.state.rxData.levelsCount || undefined}
             colors={colors.length ? colors : undefined}
             arcsLength={ranges.length ? ranges : undefined}

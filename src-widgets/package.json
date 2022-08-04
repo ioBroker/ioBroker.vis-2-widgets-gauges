@@ -1,5 +1,5 @@
 {
-    "name": "iobroker.vis-2-widgets-gauge",
+    "name": "iobroker.vis-2-widgets-gauges",
     "private": true,
     "version": "0.1.0",
     "dependencies": {
@@ -33,7 +33,7 @@
         "build": "craco build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "i18n": "node node_modules/@iobroker/vis-2-widgets-react-dev/searchI18n vis-2-widgets-gauge"
+        "i18n": "node node_modules/@iobroker/vis-2-widgets-react-dev/searchI18n vis-2-widgets-gauges"
     },
     "eslintConfig": {
         "extends": "react-app"
