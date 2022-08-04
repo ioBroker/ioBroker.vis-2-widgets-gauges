@@ -76,7 +76,7 @@ class ColorGauge extends Generic {
                         name: 'arcPadding',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_arc_padding',
-                        title: 'vis_2_widgets_gauges_arc_padding_title',
+                        tooltip: 'vis_2_widgets_gauges_arc_padding_title',
                     },
                     {
                         name: 'arcWidth',
@@ -122,9 +122,7 @@ class ColorGauge extends Generic {
                         name: 'range',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_range',
-                        hidden: function (data, index) {
-                            return index === data.levelsCount;
-                        },
+                        hidden: (data, index) => index === data.levelsCount,
                     },
                 ],
             }],
