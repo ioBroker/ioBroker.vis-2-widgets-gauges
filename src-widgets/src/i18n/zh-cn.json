@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "波浪动画",
   "vis_2_widgets_gauges_wave_frequency": "波频率",
   "vis_2_widgets_gauges_width": "宽度",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - 仪表"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - 仪表",
+  "vis_2_widgets_gauges_arc_padding_title": "弧中元素之间的距离（默认 0.05）"
 }

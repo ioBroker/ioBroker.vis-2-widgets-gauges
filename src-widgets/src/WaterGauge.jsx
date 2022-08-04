@@ -9,6 +9,11 @@ const styles = () => ({
 });
 
 class WaterGauge extends Generic {
+    constructor(props) {
+        super(props);
+        this.refCardContent = React.createRef();
+    }
+
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Water',
@@ -27,6 +32,15 @@ class WaterGauge extends Generic {
                         name: 'oid',
                         type: 'id',
                         label: 'vis_2_widgets_gauges_oid',
+                        onChange: async (field, data, changeData, socket) => {
+                            const object = await socket.getObject(data.oid);
+                            if (object && object.common) {
+                                data.min = object.common.min !== undefined ? object.common.min : 0;
+                                data.max = object.common.max !== undefined ? object.common.max : 100;
+                                data.unit = object.common.unit !== undefined ? object.common.unit : '';
+                                changeData(data);
+                            }
+                        },
                     },
                     {
                         name: 'min',
@@ -39,14 +53,9 @@ class WaterGauge extends Generic {
                         label: 'vis_2_widgets_gauges_max',
                     },
                     {
-                        name: 'width',
+                        name: 'size',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_width',
-                    },
-                    {
-                        name: 'height',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_height',
+                        label: 'vis_2_widgets_gauges_size',
                     },
                     {
                         name: 'unit',
@@ -172,23 +181,38 @@ class WaterGauge extends Generic {
             });
         }
 
-        const content = <LiquidFillGauge
-            value={((value - min) / (max - min)) * 100}
-            percent={this.state.rxData.unit || undefined}
-            width={this.state.rxData.width || undefined}
-            height={this.state.rxData.height || undefined}
-            textSize={this.state.rxData.textSize || undefined}
-            textOffsetX={this.state.rxData.textOffsetX || undefined}
-            textOffsetY={this.state.rxData.textOffsetY || undefined}
-            riseAnimation={this.state.rxData.riseAnimation || undefined}
-            waveAnimation={this.state.rxData.waveAnimation || undefined}
-            waveFrequency={this.state.rxData.waveFrequency || undefined}
-            waveAmplitude={this.state.rxData.waveAmplitude || undefined}
-            gradient={this.state.rxData.gradient || undefined}
-            gradientStops={gradientStops}
-            textStyle={{ fill: this.props.theme.palette.text.primary }}
-            waveTextStyle={{ fill: this.props.theme.palette.primary.contrastText }}
-        />;
+        let size = this.state.rxData.size;
+
+        if (!size) {
+            if (!this.refCardContent.current) {
+                setTimeout(() => this.forceUpdate(), 50);
+            } else {
+                size = this.refCardContent.current.offsetWidth;
+                if (size > this.refCardContent.current.offsetHeight) {
+                    size = this.refCardContent.current.offsetHeight;
+                }
+            }
+        }
+
+        const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
+            {size ? <LiquidFillGauge
+                value={((value - min) / (max - min)) * 100}
+                percent={this.state.rxData.unit || undefined}
+                width={size}
+                height={size}
+                textSize={this.state.rxData.textSize || undefined}
+                textOffsetX={this.state.rxData.textOffsetX || undefined}
+                textOffsetY={this.state.rxData.textOffsetY || undefined}
+                riseAnimation={this.state.rxData.riseAnimation || undefined}
+                waveAnimation={this.state.rxData.waveAnimation || undefined}
+                waveFrequency={this.state.rxData.waveFrequency || undefined}
+                waveAmplitude={this.state.rxData.waveAmplitude || undefined}
+                gradient={this.state.rxData.gradient || undefined}
+                gradientStops={gradientStops}
+                textStyle={{ fill: this.props.theme.palette.text.primary }}
+                waveTextStyle={{ fill: this.props.theme.palette.primary.contrastText }}
+            /> : null}
+        </div>;
 
         return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
     }

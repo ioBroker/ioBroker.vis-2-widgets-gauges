@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Animação de onda",
   "vis_2_widgets_gauges_wave_frequency": "Frequência da onda",
   "vis_2_widgets_gauges_width": "Largura",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Manômetros"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Manômetros",
+  "vis_2_widgets_gauges_arc_padding_title": "A distância entre os elementos no arco (padrão 0,05)"
 }

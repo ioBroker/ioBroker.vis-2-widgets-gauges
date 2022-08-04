@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Wellenanimation",
   "vis_2_widgets_gauges_wave_frequency": "Wellenfrequenz",
   "vis_2_widgets_gauges_width": "Breite",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Messgeräte"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Messgeräte",
+  "vis_2_widgets_gauges_arc_padding_title": "Der Abstand zwischen den Elementen im Bogen (Standard 0,05)"
 }

@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Animación de olas",
   "vis_2_widgets_gauges_wave_frequency": "Frecuencia de onda",
   "vis_2_widgets_gauges_width": "Ancho",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Calibres"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Calibres",
+  "vis_2_widgets_gauges_arc_padding_title": "La distancia entre los elementos en el arco (por defecto 0.05)"
 }

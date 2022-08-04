@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Animation de vague",
   "vis_2_widgets_gauges_wave_frequency": "Fréquence des vagues",
   "vis_2_widgets_gauges_width": "Largeur",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Jauges"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Jauges",
+  "vis_2_widgets_gauges_arc_padding_title": "La distance entre les éléments de l'arc (0,05 par défaut)"
 }

@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Animacja fali",
   "vis_2_widgets_gauges_wave_frequency": "Częstotliwość fali",
   "vis_2_widgets_gauges_width": "Szerokość",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Wskaźniki"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Wskaźniki",
+  "vis_2_widgets_gauges_arc_padding_title": "Odległość między elementami w łuku (domyślnie 0,05)"
 }

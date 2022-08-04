@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Golf animatie",
   "vis_2_widgets_gauges_wave_frequency": "golf frequentie:",
   "vis_2_widgets_gauges_width": "Breedte",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Meters"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Meters",
+  "vis_2_widgets_gauges_arc_padding_title": "De afstand tussen de elementen in de boog (standaard 0,05)"
 }

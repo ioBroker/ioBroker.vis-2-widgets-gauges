@@ -63,5 +63,6 @@
   "vis_2_widgets_gauges_wave_animation": "Волновая анимация",
   "vis_2_widgets_gauges_wave_frequency": "Частота волны",
   "vis_2_widgets_gauges_width": "Ширина",
-  "vis_2_widgets_gauges_set_label": "Vis 2 - Датчики"
+  "vis_2_widgets_gauges_set_label": "Vis 2 - Датчики",
+  "vis_2_widgets_gauges_arc_padding_title": "Расстояние между элементами дуги (по умолчанию 0,05)"
 }
