@@ -290,10 +290,11 @@ class BatteryGauge extends Generic {
         if (!size) {
             if (!this.refCardContent.current) {
                 setTimeout(() => this.forceUpdate(), 50);
-            } else if (this.state.rxData.orientation === 'vertical') {
-                size = this.refCardContent.current.offsetHeight - 20;
             } else {
-                size = this.refCardContent.current.offsetWidth;
+                size = this.refCardContent.current.offsetHeight - 20;
+                if (size > this.refCardContent.current.offsetWidth) {
+                    size = this.refCardContent.current.offsetWidth;
+                }
             }
         }
 

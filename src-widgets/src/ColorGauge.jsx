@@ -198,27 +198,38 @@ class ColorGauge extends Generic {
             remaining -= levelThreshold;
         }
 
-        const content = <GaugeChart
-            percent={(value - min) / (max - min)}
-            formatTextValue={() => `${value}${this.state.rxData.unit || '%'}`}
-            nrOfLevels={this.state.rxData.levelsCount || undefined}
-            colors={colors.length ? colors : undefined}
-            arcsLength={ranges.length ? ranges : undefined}
-            needleColor={this.state.rxData.needleColor || undefined}
-            needleBaseColor={this.state.rxData.needleBaseColor || undefined}
-            animate={!!this.state.rxData.animate}
-            marginInPercent={this.state.rxData.marginInPercent || undefined}
-            cornerRadius={this.state.rxData.cornerRadius || undefined}
-            arcPadding={this.state.rxData.arcPadding || undefined}
-            arcWidth={this.state.rxData.arcWidth || undefined}
-            animDelay={this.state.rxData.animDelay || undefined}
-            animateDuration={this.state.rxData.animateDuration || undefined}
-            textColor={this.props.theme.palette.text.primary}
-            style={{
-                width: '100%',
-                height: '100%',
-            }}
-        />;
+        let size;
+        if (!this.refCardContent.current) {
+            setTimeout(() => this.forceUpdate(), 50);
+        } else {
+            size = this.refCardContent.current.offsetWidth;
+            if (size > (this.refCardContent.current.offsetHeight - 20) * 2) {
+                size = (this.refCardContent.current.offsetHeight - 20) * 2;
+            }
+        }
+
+        const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
+            {size ? <GaugeChart
+                percent={(value - min) / (max - min)}
+                formatTextValue={() => `${value}${this.state.rxData.unit || '%'}`}
+                nrOfLevels={this.state.rxData.levelsCount || undefined}
+                colors={colors.length ? colors : undefined}
+                arcsLength={ranges.length ? ranges : undefined}
+                needleColor={this.state.rxData.needleColor || undefined}
+                needleBaseColor={this.state.rxData.needleBaseColor || undefined}
+                animate={!!this.state.rxData.animate}
+                marginInPercent={this.state.rxData.marginInPercent || undefined}
+                cornerRadius={this.state.rxData.cornerRadius || undefined}
+                arcPadding={this.state.rxData.arcPadding || undefined}
+                arcWidth={this.state.rxData.arcWidth || undefined}
+                animDelay={this.state.rxData.animDelay || undefined}
+                animateDuration={this.state.rxData.animateDuration || undefined}
+                textColor={this.props.theme.palette.text.primary}
+                style={{
+                    width: `${size}px`,
+                }}
+            /> : null}
+        </div>;
 
         return this.wrapContent(content, null, { textAlign: 'center' });
     }

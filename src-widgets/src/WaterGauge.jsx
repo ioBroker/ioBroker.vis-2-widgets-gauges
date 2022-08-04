@@ -299,7 +299,7 @@ class WaterGauge extends Generic {
                 height={size}
                 textSize={this.state.rxData.textSize || undefined}
                 textOffsetX={this.state.rxData.textOffsetX || undefined}
-                textOffsetY={this.state.rxData.textOffsetY || undefined}
+                textOffsetY={this.state.rxData.textOffsetY || Math.round(size / 15)}
                 riseAnimation={this.state.rxData.riseAnimation || undefined}
                 riseAnimationTime={this.state.rxData.riseAnimationTime || undefined}
                 riseAnimationEasing={this.state.rxData.riseAnimationEasing || undefined}
