@@ -62,7 +62,7 @@
   "vis_2_widgets_gauges_level_stop_color": "Level stop color",
   "vis_2_widgets_gauges_level_stop_opacity": "Level stop opacity",
   "vis_2_widgets_gauges_level_range": "Level range",
-  "vis_2_widgets_gauges_percent_threshold": "Percent threshold",
+  "vis_2_widgets_gauges_level_threshold": "Level threshold",
   "vis_2_widgets_gauges_set_label": "Vis 2 - Gauges",
   "vis_2_widgets_gauges_arc_padding_title": "The distance between the elements in the arc (default 0.05)"
 }

@@ -177,11 +177,16 @@ class ColorGauge extends Generic {
         const min = this.state.rxData.min || 0;
         const max = this.state.rxData.max || 100;
 
+        let remaining = max - min;
         for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
             if (this.state.rxData[`color${i}`]) {
                 colors.push(this.state.rxData[`color${i}`]);
             }
-            ranges.push(this.state.rxData[`range${i}`] || (max - min / this.state.rxData.levelsCount) / (max - min));
+            const levelThreshold = this.state.rxData[`levelThreshold${i}`]
+                ? this.state.rxData[`levelThreshold${i}`] - (this.state.rxData[`levelThreshold${i - 1}`] || min)
+                : (max - min) / (this.state.rxData.levelsCount);
+            ranges.push((i === this.state.rxData.levelsCount ? remaining : levelThreshold) / (max - min));
+            remaining -= levelThreshold;
         }
 
         const content = <GaugeChart
