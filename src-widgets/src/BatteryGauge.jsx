@@ -26,6 +26,20 @@ class BatteryGauge extends Generic {
                         name: 'oid',
                         type: 'id',
                         label: 'vis_2_widgets_gauges_oid',
+                        onChange: async (field, data, changeData, socket) => {
+                            const object = await socket.getObject(data.oid);
+                            if (object && object.common) {
+                                data.min = object.common.min !== undefined ? object.common.min : 0;
+                                data.max = object.common.max !== undefined ? object.common.max : 100;
+                                data.unit = object.common.unit !== undefined ? object.common.unit : '';
+                                changeData(data);
+                            }
+                        },
+                    },
+                    {
+                        name: 'charging-oid',
+                        type: 'id',
+                        label: 'vis_2_widgets_gauges_charging',
                     },
                     {
                         name: 'min',
@@ -259,6 +273,7 @@ class BatteryGauge extends Generic {
         super.renderWidgetBody(props);
 
         const value = this.state.values[`${this.state.object?._id}.val`] || 0;
+        const charging = !!this.state.values[`${this.state.data['charging-oid']}.val`];
 
         const min = this.state.rxData.min || 0;
         const max = this.state.rxData.max || 100;
@@ -318,11 +333,11 @@ class BatteryGauge extends Generic {
             size={this.state.rxData.size || undefined}
             aspectRatio={this.state.rxData.aspectRatio || undefined}
             animated={this.state.rxData.animated || undefined}
-            charging={this.state.rxData.charging || undefined}
+            charging={charging}
             customization={customization}
         />;
 
-        return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 

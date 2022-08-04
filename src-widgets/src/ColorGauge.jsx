@@ -26,6 +26,15 @@ class ColorGauge extends Generic {
                         name: 'oid',
                         type: 'id',
                         label: 'vis_2_widgets_gauges_oid',
+                        onChange: async (field, data, changeData, socket) => {
+                            const object = await socket.getObject(data.oid);
+                            if (object && object.common) {
+                                data.min = object.common.min !== undefined ? object.common.min : 0;
+                                data.max = object.common.max !== undefined ? object.common.max : 100;
+                                data.unit = object.common.unit !== undefined ? object.common.unit : '';
+                                changeData(data);
+                            }
+                        },
                     },
                     {
                         name: 'min',
@@ -119,10 +128,10 @@ class ColorGauge extends Generic {
                         label: 'vis_2_widgets_gauges_color',
                     },
                     {
-                        name: 'range',
+                        name: 'levelThreshold',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_range',
-                        hidden: function (data, index) {
+                        label: 'vis_2_widgets_gauges_level_threshold',
+                        hidden(data, index) {
                             return index === data.levelsCount;
                         },
                     },
@@ -179,7 +188,7 @@ class ColorGauge extends Generic {
 
         const content = <GaugeChart
             percent={(value - min) / (max - min)}
-            formatTextValue={this.state.rxData.unit ? _value => `${_value}${this.state.rxData.unit}` : undefined}
+            formatTextValue={() => `${value}${this.state.rxData.unit || '%'}`}
             nrOfLevels={this.state.rxData.levelsCount || undefined}
             colors={colors.length ? colors : undefined}
             arcsLength={ranges.length ? ranges : undefined}
@@ -195,7 +204,7 @@ class ColorGauge extends Generic {
             textColor={this.props.theme.palette.text.primary}
         />;
 
-        return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 

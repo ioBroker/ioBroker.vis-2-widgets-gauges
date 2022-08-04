@@ -125,9 +125,12 @@ class WaterGauge extends Generic {
                         label: 'vis_2_widgets_gauges_level_stop_opacity',
                     },
                     {
-                        name: 'percentThreshold',
+                        name: 'levelThreshold',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_percent_threshold',
+                        label: 'vis_2_widgets_gauges_level_threshold',
+                        hidden(data, index) {
+                            return index === data.levelsCount;
+                        },
                     },
                 ],
             }],
@@ -173,11 +176,14 @@ class WaterGauge extends Generic {
         const max = this.state.rxData.max || 100;
 
         for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
+            const levelThreshold = i === 0
+                ? 0
+                : Math.round((this.state.rxData[`levelThreshold${i - 1}`] - min) / (max - min) * 100);
             gradientStops.push({
-                key: `${this.state.rxData[`percentThreshold${i}`]}%`,
+                key: `${levelThreshold}%`,
                 stopColor: this.state.rxData[`stopColor${i}`],
                 stopOpacity: this.state.rxData[`stopOpacity${i}`],
-                offset: `${this.state.rxData[`percentThreshold${i}`]}%`,
+                offset: `${levelThreshold}%`,
             });
         }
 
@@ -188,8 +194,8 @@ class WaterGauge extends Generic {
                 setTimeout(() => this.forceUpdate(), 50);
             } else {
                 size = this.refCardContent.current.offsetWidth;
-                if (size > this.refCardContent.current.offsetHeight) {
-                    size = this.refCardContent.current.offsetHeight;
+                if (size > this.refCardContent.current.offsetHeight - 20) {
+                    size = this.refCardContent.current.offsetHeight - 20;
                 }
             }
         }
@@ -197,6 +203,23 @@ class WaterGauge extends Generic {
         const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
             {size ? <LiquidFillGauge
                 value={((value - min) / (max - min)) * 100}
+                textRenderer={textProps => {
+                    const radius = Math.min(textProps.height / 2, textProps.width / 2);
+                    const textPixels = (textProps.textSize * radius / 2);
+                    const valueStyle = {
+                        fontSize: textPixels,
+                    };
+                    const percentStyle = {
+                        fontSize: textPixels * 0.6,
+                    };
+
+                    return (
+                        <tspan>
+                            <tspan className="value" style={valueStyle}>{value}</tspan>
+                            <tspan style={percentStyle}>{textProps.percent}</tspan>
+                        </tspan>
+                    );
+                }}
                 percent={this.state.rxData.unit || undefined}
                 width={size}
                 height={size}
@@ -214,7 +237,7 @@ class WaterGauge extends Generic {
             /> : null}
         </div>;
 
-        return this.wrapContent(content, this.state.rxData.name, { textAlign: 'center' });
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 
