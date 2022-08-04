@@ -4,6 +4,35 @@ import { withStyles, withTheme } from '@mui/styles';
 import LiquidFillGauge from 'react-liquid-gauge';
 import Generic from './Generic';
 
+const ease = ['linear',
+    'quadIn',
+    'quadOut',
+    'quadInOut',
+    'cubicIn',
+    'cubicOut',
+    'cubicInOut',
+    'polyIn',
+    'polyOut',
+    'polyInOut',
+    'sinIn',
+    'sinOut',
+    'sinInOut',
+    'expIn',
+    'expOut',
+    'expInOut',
+    'circleIn',
+    'circleOut',
+    'circleInOut',
+    'bounceIn',
+    'bounceOut',
+    'bounceInOut',
+    'backIn',
+    'backOut',
+    'backInOut',
+    'elasticIn',
+    'elasticOut',
+    'elasticInOut'];
+
 const styles = () => ({
 
 });
@@ -65,6 +94,7 @@ class WaterGauge extends Generic {
                         name: 'textSize',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_text_size',
+                        tooltip: 'vis_2_widgets_gauges_text_size_tooltip',
                     },
                     {
                         name: 'textOffsetX',
@@ -83,20 +113,64 @@ class WaterGauge extends Generic {
                         label: 'vis_2_widgets_gauges_rise_animation',
                     },
                     {
+                        name: 'riseAnimationTime',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauges_rise_animation_time',
+                        tooltip: 'vis_2_widgets_gauges_rise_animation_time_tooltip',
+                    },
+                    {
+                        name: 'riseAnimationEasing',
+                        type: 'select',
+                        options: ease,
+                        label: 'vis_2_widgets_gauges_rise_animation_easing',
+                    },
+                    {
                         name: 'waveAnimation',
                         type: 'checkbox',
                         default: true,
                         label: 'vis_2_widgets_gauges_wave_animation',
                     },
                     {
+                        name: 'waveAnimationTime',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauges_wave_animation_time',
+                        tooltip: 'vis_2_widgets_gauges_wave_animation_time_tooltip',
+                    },
+                    {
+                        name: 'waveAnimationEasing',
+                        type: 'select',
+                        options: ease,
+                        label: 'vis_2_widgets_gauges_wave_animation_easing',
+                    },
+                    {
                         name: 'waveFrequency',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_wave_frequency',
+                        tooltip: 'vis_2_widgets_gauges_wave_frequency_tooltip',
                     },
                     {
                         name: 'waveAmplitude',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_wave_amplitude',
+                        tooltip: 'vis_2_widgets_gauges_wave_amplitude_tooltip',
+                    },
+                    {
+                        name: 'innerRadius',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauges_inner_radius',
+                        tooltip: 'vis_2_widgets_gauges_inner_radius_tooltip',
+                    },
+                    {
+                        name: 'outerRadius',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauges_outer_radius',
+                        tooltip: 'vis_2_widgets_gauges_outer_radius_tooltip',
+                    },
+                    {
+                        name: 'margin',
+                        type: 'number',
+                        label: 'vis_2_widgets_gauges_margin',
+                        tooltip: 'vis_2_widgets_gauges_margin_tooltip',
                     },
                     {
                         name: 'gradient',
@@ -227,9 +301,16 @@ class WaterGauge extends Generic {
                 textOffsetX={this.state.rxData.textOffsetX || undefined}
                 textOffsetY={this.state.rxData.textOffsetY || undefined}
                 riseAnimation={this.state.rxData.riseAnimation || undefined}
+                riseAnimationTime={this.state.rxData.riseAnimationTime || undefined}
+                riseAnimationEasing={this.state.rxData.riseAnimationEasing || undefined}
                 waveAnimation={this.state.rxData.waveAnimation || undefined}
                 waveFrequency={this.state.rxData.waveFrequency || undefined}
                 waveAmplitude={this.state.rxData.waveAmplitude || undefined}
+                waveAnimationTime={this.state.rxData.waveAnimationTime || undefined}
+                waveAnimationEasing={this.state.rxData.waveAnimationEasing || undefined}
+                innerRadius={this.state.rxData.innerRadius || undefined}
+                outerRadius={this.state.rxData.outerRadius || undefined}
+                margin={this.state.rxData.margin || undefined}
                 gradient={this.state.rxData.gradient || undefined}
                 gradientStops={gradientStops}
                 textStyle={{ fill: this.props.theme.palette.text.primary }}

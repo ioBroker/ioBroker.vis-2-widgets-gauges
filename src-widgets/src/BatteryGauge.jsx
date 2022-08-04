@@ -9,6 +9,11 @@ const styles = () => ({
 });
 
 class BatteryGauge extends Generic {
+    constructor(props) {
+        super(props);
+        this.refCardContent = React.createRef();
+    }
+
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Battery',
@@ -71,6 +76,7 @@ class BatteryGauge extends Generic {
                         name: 'aspectRatio',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_aspect_ratio',
+                        tooltip: 'vis_2_widgets_gauges_aspect_ratio_tooltip',
                     },
                     {
                         name: 'animated',
@@ -169,6 +175,7 @@ class BatteryGauge extends Generic {
                         name: 'batteryMeterNoOfCells',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_no_of_cells',
+                        tooltip: 'vis_2_widgets_gauges_no_of_cells_tooltip',
                     },
                     {
                         name: 'batteryMeterInterCellsGap',
@@ -278,6 +285,18 @@ class BatteryGauge extends Generic {
         const min = this.state.rxData.min || 0;
         const max = this.state.rxData.max || 100;
 
+        let size = this.state.rxData.size;
+
+        if (!size) {
+            if (!this.refCardContent.current) {
+                setTimeout(() => this.forceUpdate(), 50);
+            } else if (this.state.rxData.orientation === 'vertical') {
+                size = this.refCardContent.current.offsetHeight - 20;
+            } else {
+                size = this.refCardContent.current.offsetWidth;
+            }
+        }
+
         const customizationSource = {
             batteryBody: {
                 strokeWidth: this.state.rxData.batteryBodyStrokeWidth || undefined,
@@ -326,16 +345,18 @@ class BatteryGauge extends Generic {
             }
         }
 
-        const content = <ReactBatteryGauge
-            value={((value - min) / (max - min)) * 100}
-            orientation={this.state.rxData.orientation || undefined}
-            padding={this.state.rxData.padding || undefined}
-            size={this.state.rxData.size || undefined}
-            aspectRatio={this.state.rxData.aspectRatio || undefined}
-            animated={this.state.rxData.animated || undefined}
-            charging={charging}
-            customization={customization}
-        />;
+        const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
+            {size ? <ReactBatteryGauge
+                value={((value - min) / (max - min)) * 100}
+                orientation={this.state.rxData.orientation || undefined}
+                padding={this.state.rxData.padding || undefined}
+                size={size}
+                aspectRatio={this.state.rxData.aspectRatio || undefined}
+                animated={this.state.rxData.animated || undefined}
+                charging={charging}
+                customization={customization}
+            /> : null}
+        </div>;
 
         return this.wrapContent(content, null, { textAlign: 'center' });
     }

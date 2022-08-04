@@ -9,6 +9,11 @@ const styles = () => ({
 });
 
 class ColorGauge extends Generic {
+    constructor(props) {
+        super(props);
+        this.refCardContent = React.createRef();
+    }
+
     static getWidgetInfo() {
         return {
             id: 'tplGauge2Color',
@@ -75,6 +80,7 @@ class ColorGauge extends Generic {
                         name: 'marginInPercent',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_margin_in_percent',
+                        tooltip: 'vis_2_widgets_gauges_margin_in_percent_tooltip',
                     },
                     {
                         name: 'cornerRadius',
@@ -91,6 +97,7 @@ class ColorGauge extends Generic {
                         name: 'arcWidth',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_arc_width',
+                        tooltip: 'vis_2_widgets_gauges_arc_tooltip',
                     },
                 ],
             },
@@ -108,11 +115,13 @@ class ColorGauge extends Generic {
                         name: 'animDelay',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_anim_delay',
+                        tooltip: 'vis_2_widgets_gauges_anim_delay_tooltip',
                     },
                     {
                         name: 'animateDuration',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_animate_duration',
+                        tooltip: 'vis_2_widgets_gauges_animate_duration_tooltip',
                     },
                 ],
             },
@@ -205,6 +214,10 @@ class ColorGauge extends Generic {
             animDelay={this.state.rxData.animDelay || undefined}
             animateDuration={this.state.rxData.animateDuration || undefined}
             textColor={this.props.theme.palette.text.primary}
+            style={{
+                width: '100%',
+                height: '100%',
+            }}
         />;
 
         return this.wrapContent(content, null, { textAlign: 'center' });
