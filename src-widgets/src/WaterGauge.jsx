@@ -48,6 +48,7 @@ class WaterGauge extends Generic {
             id: 'tplGauge2Water',
             visSet: 'vis-2-widgets-gauges',
             visSetLabel: 'vis_2_widgets_gauges_set_label',
+            visSetColor: '#334455',
             visWidgetLabel: 'vis_2_widgets_gauges_water',  // Label of widget
             visName: 'Water gauge',
             visAttrs: [{
