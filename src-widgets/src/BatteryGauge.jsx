@@ -287,14 +287,25 @@ class BatteryGauge extends Generic {
 
         let size = this.state.rxData.size;
 
+        const aspectRatio = this.state.rxData.aspectRatio || 0.52;
+
         if (!size) {
             if (!this.refCardContent.current) {
                 setTimeout(() => this.forceUpdate(), 50);
-            } else {
-                size = this.refCardContent.current.offsetHeight - 20;
-                if (size > this.refCardContent.current.offsetWidth) {
-                    size = this.refCardContent.current.offsetWidth;
+            } else if (this.state.rxData.orientation === 'vertical') {
+                size = this.refCardContent.current.offsetHeight;
+                if (size * aspectRatio > this.refCardContent.current.offsetWidth) {
+                    size = this.refCardContent.current.offsetWidth / aspectRatio;
                 }
+            } else {
+                size = this.refCardContent.current.offsetWidth;
+                if (size * aspectRatio > this.refCardContent.current.offsetHeight) {
+                    size = this.refCardContent.current.offsetHeight / aspectRatio;
+                }
+            }
+
+            if (size) {
+                size -= 10;
             }
         }
 
@@ -303,12 +314,12 @@ class BatteryGauge extends Generic {
                 strokeWidth: this.state.rxData.batteryBodyStrokeWidth || undefined,
                 cornerRadius: this.state.rxData.batteryBodyCornerRadius || undefined,
                 fill: this.state.rxData.batteryBodyFill || undefined,
-                strokeColor: this.state.rxData.batteryBodyStrokeColor || undefined,
+                strokeColor: this.state.rxData.batteryBodyStrokeColor || this.props.theme.palette.text.primary,
             },
             batteryCap: {
                 fill: this.state.rxData.batteryCapFill || undefined,
                 strokeWidth: this.state.rxData.batteryCapStrokeWidth || undefined,
-                strokeColor: this.state.rxData.batteryCapStrokeColor || undefined,
+                strokeColor: this.state.rxData.batteryCapStrokeColor || this.props.theme.palette.text.primary,
                 cornerRadius: this.state.rxData.batteryCapCornerRadius || undefined,
                 capToBodyRatio: this.state.rxData.batteryCapCapToBodyRatio || undefined,
             },
@@ -321,7 +332,7 @@ class BatteryGauge extends Generic {
                 interCellsGap: this.state.rxData.batteryMeterInterCellsGap || undefined,
             },
             readingText: {
-                lightContrastColor: this.state.rxData.readingTextLightContrastColor || undefined,
+                lightContrastColor: this.state.rxData.readingTextLightContrastColor || this.props.theme.palette.text.primary,
                 darkContrastColor: this.state.rxData.readingTextDarkContrastColor || undefined,
                 lowBatteryColor: this.state.rxData.readingTextLowBatteryColor || undefined,
                 fontFamily: this.state.rxData.readingTextFontFamily || undefined,
@@ -346,7 +357,12 @@ class BatteryGauge extends Generic {
             }
         }
 
-        const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
+        const content = <div
+            ref={this.refCardContent}
+            style={{
+                flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden',
+            }}
+        >
             {size ? <ReactBatteryGauge
                 value={((value - min) / (max - min)) * 100}
                 orientation={this.state.rxData.orientation || undefined}

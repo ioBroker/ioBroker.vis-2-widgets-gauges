@@ -203,20 +203,25 @@ class ColorGauge extends Generic {
             setTimeout(() => this.forceUpdate(), 50);
         } else {
             size = this.refCardContent.current.offsetWidth;
-            if (size > (this.refCardContent.current.offsetHeight - 20) * 2) {
-                size = (this.refCardContent.current.offsetHeight - 20) * 2;
+            if (size > (this.refCardContent.current.offsetHeight) * 2) {
+                size = (this.refCardContent.current.offsetHeight) * 2;
             }
         }
 
-        const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
+        const content = <div
+            ref={this.refCardContent}
+            style={{
+                flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden',
+            }}
+        >
             {size ? <GaugeChart
                 percent={(value - min) / (max - min)}
                 formatTextValue={() => `${value}${this.state.rxData.unit || '%'}`}
                 nrOfLevels={this.state.rxData.levelsCount || undefined}
                 colors={colors.length ? colors : undefined}
                 arcsLength={ranges.length ? ranges : undefined}
-                needleColor={this.state.rxData.needleColor || undefined}
-                needleBaseColor={this.state.rxData.needleBaseColor || undefined}
+                needleColor={this.state.rxData.needleColor || this.props.theme.palette.text.primary}
+                needleBaseColor={this.state.rxData.needleBaseColor || this.props.theme.palette.text.primary}
                 animate={!!this.state.rxData.animate}
                 marginInPercent={this.state.rxData.marginInPercent || undefined}
                 cornerRadius={this.state.rxData.cornerRadius || undefined}

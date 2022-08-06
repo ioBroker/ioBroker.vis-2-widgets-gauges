@@ -268,13 +268,21 @@ class WaterGauge extends Generic {
                 setTimeout(() => this.forceUpdate(), 50);
             } else {
                 size = this.refCardContent.current.offsetWidth;
-                if (size > this.refCardContent.current.offsetHeight - 20) {
-                    size = this.refCardContent.current.offsetHeight - 20;
+                if (size > this.refCardContent.current.offsetHeight) {
+                    size = this.refCardContent.current.offsetHeight;
                 }
+            }
+            if (size) {
+                size -= 10;
             }
         }
 
-        const content = <div ref={this.refCardContent} style={{ width: '100%', height: '100%' }}>
+        const content = <div
+            ref={this.refCardContent}
+            style={{
+                flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden',
+            }}
+        >
             {size ? <LiquidFillGauge
                 value={((value - min) / (max - min)) * 100}
                 textRenderer={textProps => {
@@ -311,7 +319,7 @@ class WaterGauge extends Generic {
                 innerRadius={this.state.rxData.innerRadius || undefined}
                 outerRadius={this.state.rxData.outerRadius || undefined}
                 margin={this.state.rxData.margin || undefined}
-                gradient={this.state.rxData.gradient || undefined}
+                gradient={!!(this.state.rxData.gradient && gradientStops.length) || undefined}
                 gradientStops={gradientStops}
                 textStyle={{ fill: this.props.theme.palette.text.primary }}
                 waveTextStyle={{ fill: this.props.theme.palette.primary.contrastText }}
