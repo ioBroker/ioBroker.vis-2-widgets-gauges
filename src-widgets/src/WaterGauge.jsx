@@ -182,12 +182,15 @@ class WaterGauge extends Generic {
                         name: 'levelsCount',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_levels_count',
+                        hidden: data => !data.gradient,
                     },
                 ],
             }, {
                 name: 'level',
+                label: 'vis_2_widgets_gauges_group_level',
                 indexFrom: 1,
                 indexTo: 'levelsCount',
+                hidden: data => !data.gradient,
                 fields: [
                     {
                         name: 'stopColor',
@@ -198,13 +201,15 @@ class WaterGauge extends Generic {
                         name: 'stopOpacity',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_level_stop_opacity',
+                        tooltip: 'vis_2_widgets_gauges_level_stop_opacity_tooltip',
                     },
                     {
                         name: 'levelThreshold',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_level_threshold',
+                        tooltip: 'vis_2_widgets_gauges_level_threshold_tooltip',
                         hidden(data, index) {
-                            return index === data.levelsCount;
+                            return index === 1 || index === data.levelsCount;
                         },
                     },
                 ],
@@ -219,9 +224,12 @@ class WaterGauge extends Generic {
     }
 
     async propertiesUpdate() {
-        if (this.state.rxData.oid && this.state.rxData.oid !== 'nothing_selected') {
-            const obj = await this.props.socket.getObject(this.state.rxData.oid);
-            this.setState({ object: obj });
+        if (this.state.rxData.oid &&
+            this.state.rxData.oid !== 'nothing_selected' &&
+            (!this.state.object || this.state.rxData.oid !== this.state.object._id)
+        ) {
+            const object = await this.props.socket.getObject(this.state.rxData.oid);
+            this.setState({ object });
         }
     }
 
@@ -251,9 +259,10 @@ class WaterGauge extends Generic {
         const max = this.state.rxData.max || 100;
 
         for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
-            const levelThreshold = i === 0
-                ? 0
-                : Math.round((this.state.rxData[`levelThreshold${i - 1}`] - min) / (max - min) * 100);
+            let threshold = this.state.rxData[`levelThreshold${i}`];
+            threshold = threshold === null || threshold === undefined ? max : threshold;
+            const levelThreshold = i === 1 ? 0 : Math.round(((threshold - min) / (max - min)) * 100);
+
             gradientStops.push({
                 key: `${levelThreshold}%`,
                 stopColor: this.state.rxData[`stopColor${i}`],

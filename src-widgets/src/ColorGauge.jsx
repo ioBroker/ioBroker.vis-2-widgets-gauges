@@ -154,9 +154,12 @@ class ColorGauge extends Generic {
     }
 
     async propertiesUpdate() {
-        if (this.state.rxData.oid && this.state.rxData.oid !== 'nothing_selected') {
-            const obj = await this.props.socket.getObject(this.state.rxData.oid);
-            this.setState({ object: obj });
+        if (this.state.rxData.oid &&
+            this.state.rxData.oid !== 'nothing_selected' &&
+            (!this.state.object || this.state.rxData.oid !== this.state.object._id)
+        ) {
+            const object = await this.props.socket.getObject(this.state.rxData.oid);
+            this.setState({ object });
         }
     }
 

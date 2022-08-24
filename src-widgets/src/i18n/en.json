@@ -85,5 +85,10 @@
   "vis_2_widgets_gauges_wave_animation_easing": "Wave animation easing",
   "vis_2_widgets_gauges_inner_radius": "Inner radius",
   "vis_2_widgets_gauges_outer_radius": "Outer radius",
-  "vis_2_widgets_gauges_margin": "Margin"
+  "vis_2_widgets_gauges_margin": "Margin",
+  "vis_2_widgets_gauges_level_stop_opacity_tooltip": "Value from 0 to 1, 0 is transparent, 1 is opaque",
+  "vis_2_widgets_gauges_level_threshold_tooltip": "Absolute value of the level threshold. First level is 0, last is MAX",
+  "vis_2_widgets_gauges_group_level": "Level",
+  "vis_2_widgets_gauges_percent_threshold": "Percent threshold",
+  "vis_2_widgets_gauges_animation_duration_tooltip": "In milliseconds. Default is 1000ms"
 }

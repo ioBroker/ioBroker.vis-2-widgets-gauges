@@ -5,7 +5,14 @@ import ReactBatteryGauge from 'react-battery-gauge';
 import Generic from './Generic';
 
 const styles = () => ({
-
+    root: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        overflow: 'hidden',
+    },
 });
 
 class BatteryGauge extends Generic {
@@ -82,11 +89,6 @@ class BatteryGauge extends Generic {
                         name: 'animated',
                         type: 'checkbox',
                         label: 'vis_2_widgets_gauges_animated',
-                    },
-                    {
-                        name: 'charging',
-                        type: 'checkbox',
-                        label: 'vis_2_widgets_gauges_charging',
                     },
                 ],
             },
@@ -212,16 +214,19 @@ class BatteryGauge extends Generic {
                         type: 'number',
                         label: 'vis_2_widgets_gauges_font_size',
                     },
+                    /*
                     {
                         name: 'readingTextShowPercentage',
                         type: 'checkbox',
                         label: 'vis_2_widgets_gauges_show_percentage',
                     },
+                    */
                 ],
             },
             {
                 name: 'chargingFlash',
                 label: 'vis_2_widgets_gauges_charging_flash',
+                hidden: data => !data['charging-oid'],
                 fields: [
                     {
                         name: 'chargingFlashScale',
@@ -242,6 +247,8 @@ class BatteryGauge extends Generic {
                         name: 'chargingFlashAnimationDuration',
                         type: 'number',
                         label: 'vis_2_widgets_gauges_animation_duration',
+                        tooltip: 'vis_2_widgets_gauges_animation_duration_tooltip',
+                        hidden: data => !data.chargingFlashAnimated,
                     },
                 ],
             }],
@@ -255,9 +262,12 @@ class BatteryGauge extends Generic {
     }
 
     async propertiesUpdate() {
-        if (this.state.rxData.oid && this.state.rxData.oid !== 'nothing_selected') {
-            const obj = await this.props.socket.getObject(this.state.rxData.oid);
-            this.setState({ object: obj });
+        if (this.state.rxData.oid &&
+            this.state.rxData.oid !== 'nothing_selected' &&
+            (!this.state.object || this.state.rxData.oid !== this.state.object._id)
+        ) {
+            const object = await this.props.socket.getObject(this.state.rxData.oid);
+            this.setState({ object });
         }
     }
 
@@ -309,6 +319,11 @@ class BatteryGauge extends Generic {
             }
         }
 
+        let batteryMeterLowBatteryValue;
+        if (this.state.rxData.batteryMeterLowBatteryValue !== null && this.state.rxData.batteryMeterLowBatteryValue !== undefined) {
+            batteryMeterLowBatteryValue = ((this.state.rxData.batteryMeterLowBatteryValue - min) / (max - min)) * 100;
+        }
+
         const customizationSource = {
             batteryBody: {
                 strokeWidth: this.state.rxData.batteryBodyStrokeWidth || undefined,
@@ -325,7 +340,7 @@ class BatteryGauge extends Generic {
             },
             batteryMeter: {
                 fill: this.state.rxData.batteryMeterFill || undefined,
-                lowBatteryValue: this.state.rxData.batteryMeterLowBatteryValue || undefined,
+                lowBatteryValue: batteryMeterLowBatteryValue,
                 lowBatteryFill: this.state.rxData.batteryMeterLowBatteryFill || undefined,
                 outerGap: this.state.rxData.batteryMeterOuterGap || undefined,
                 noOfCells: this.state.rxData.batteryMeterNoOfCells || undefined,
@@ -347,11 +362,12 @@ class BatteryGauge extends Generic {
             },
         };
 
+        // remove "undefined" from structure
         const customization = {};
         for (const key in customizationSource) {
-            customization[key] = {};
             for (const subKey in customizationSource[key]) {
-                if (customizationSource[key][subKey]) {
+                if (customizationSource[key][subKey] !== undefined) {
+                    customization[key] = customization[key] || {};
                     customization[key][subKey] = customizationSource[key][subKey];
                 }
             }
@@ -359,9 +375,7 @@ class BatteryGauge extends Generic {
 
         const content = <div
             ref={this.refCardContent}
-            style={{
-                flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden',
-            }}
+            className={this.props.classes.root}
         >
             {size ? <ReactBatteryGauge
                 value={((value - min) / (max - min)) * 100}
