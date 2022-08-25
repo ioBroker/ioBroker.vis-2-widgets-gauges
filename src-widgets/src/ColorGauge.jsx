@@ -102,7 +102,7 @@ class ColorGauge extends Generic {
                 ],
             },
             {
-                name: 'anumation',
+                name: 'animation',
                 label: 'vis_2_widgets_gauges_animation',
                 fields: [
                     {
