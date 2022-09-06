@@ -238,8 +238,7 @@ class WaterGauge extends Generic {
         this.propertiesUpdate();
     }
 
-    onPropertiesUpdated() {
-        super.onPropertiesUpdated();
+    onRxDataChanged() {
         this.propertiesUpdate();
     }
 
