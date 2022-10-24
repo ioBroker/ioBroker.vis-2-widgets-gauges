@@ -22,7 +22,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.1.1 (2022-10-24)
 * (bluefox) initial commit
 
 ## License
