@@ -123,6 +123,7 @@ class WaterGauge extends Generic {
                         name: 'riseAnimationEasing',
                         type: 'select',
                         options: ease,
+                        noTranslation: true,
                         label: 'vis_2_widgets_gauges_rise_animation_easing',
                     },
                     {
@@ -141,6 +142,7 @@ class WaterGauge extends Generic {
                         name: 'waveAnimationEasing',
                         type: 'select',
                         options: ease,
+                        noTranslation: true,
                         label: 'vis_2_widgets_gauges_wave_animation_easing',
                     },
                     {
