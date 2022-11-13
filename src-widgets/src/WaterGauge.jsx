@@ -298,7 +298,7 @@ class WaterGauge extends Generic {
                 value={((value - min) / (max - min)) * 100}
                 textRenderer={textProps => {
                     const radius = Math.min(textProps.height / 2, textProps.width / 2);
-                    const textPixels = (textProps.textSize * radius / 2);
+                    const textPixels = (textProps.textSize * radius) / 2;
                     const valueStyle = {
                         fontSize: textPixels,
                     };

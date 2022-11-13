@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-    Card, CardContent,
+    Card,
 } from '@mui/material';
 
 import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
