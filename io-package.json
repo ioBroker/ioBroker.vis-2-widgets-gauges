@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "initial commit",
+        "de": "erster auftrag",
+        "ru": "первоначальный коммит",
+        "pt": "commit inicial",
+        "nl": ".",
+        "fr": "initial commit",
+        "it": "commit iniziale",
+        "es": "inicial",
+        "pl": "wstępny proces",
+        "uk": "початкова комісія",
+        "zh-cn": "初步承诺"
+      },
       "0.1.1": {
         "en": "initial commit",
         "de": "erster auftrag",
@@ -70,7 +83,8 @@
       }
     },
     "restartAdapters": [
-      "vis", "vis-2-beta"
+      "vis",
+      "vis-2-beta"
     ]
   },
   "native": {},
