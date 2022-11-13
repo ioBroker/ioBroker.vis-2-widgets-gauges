@@ -16,13 +16,12 @@
 ### Battery gauge
 ![Battery gauge](img/battery-gauge.png)
 
-
 <!--
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### 0.1.1 (2022-10-24)
+### **WORK IN PROGRESS**
 * (bluefox) initial commit
 
 ## License
