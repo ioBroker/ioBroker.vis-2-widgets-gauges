@@ -22,7 +22,7 @@
         "react-battery-gauge": "^1.0.3",
         "react-circular-slider-svg": "^0.2.0",
         "react-dom": "^18.2.0",
-        "react-gauge-chart": "^0.4.0",
+        "react-gauge-chart": "^0.4.1",
         "react-liquid-gauge": "^1.2.4",
         "react-scripts": "^5.0.1",
         "@craco/craco": "^7.0.0",
