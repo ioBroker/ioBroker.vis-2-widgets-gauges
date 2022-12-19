@@ -41,6 +41,7 @@
     "adminUI": {
       "config": "none"
     },
+    "nogit": true,
     "onlyWWW": true,
     "type": "visualization-widgets",
     "connectionType": "cloud",
