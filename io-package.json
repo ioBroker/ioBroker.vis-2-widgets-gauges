@@ -42,6 +42,7 @@
       "config": "none"
     },
     "nogit": true,
+    "singleton": true,
     "onlyWWW": true,
     "type": "visualization-widgets",
     "connectionType": "cloud",
