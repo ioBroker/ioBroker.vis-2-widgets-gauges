@@ -46,6 +46,7 @@
     "admin/",
     "img/",
     "io-package.json",
+    "widgets/",
     "LICENSE"
   ],
   "scripts": {

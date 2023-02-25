@@ -42,8 +42,7 @@ function npmInstall() {
 
         // System call used for update of js-controller itself,
         // because during installation npm packet will be deleted too, but some files must be loaded even during the install process.
-        const exec = cp.exec;
-        const child = exec(cmd, {cwd});
+        const child = cp.exec(cmd, {cwd});
 
         child.stderr.pipe(process.stderr);
         child.stdout.pipe(process.stdout);
