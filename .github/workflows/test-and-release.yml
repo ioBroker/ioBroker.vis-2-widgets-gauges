@@ -76,7 +76,8 @@ jobs:
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm whoami
-          npm publish
+          echo "Publish does not work yet"
+        # npm publish
 
       - name: Create Github Release
         uses: actions/create-release@v1
