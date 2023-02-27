@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: 14
       - run: npm i
-      - run: NODE_OPTIONS=--max_old_space_size=4096 npm run build
+      - run: npm run build
 
   # Deploys the final package to NPM
   deploy:
@@ -68,6 +68,9 @@ jobs:
           BODY="${BODY//$'\n'/'%0A'}"
           BODY="${BODY//$'\r'/'%0D'}"
           echo "::set-output name=BODY::$BODY"
+
+      - run: npm i
+      - run: npm run build
 
       - name: Publish package to npm
         run: |
