@@ -81,9 +81,9 @@ function buildWidgets() {
         const options = {
             stdio: 'pipe',
             cwd: src,
-            env: {
+            /*env: {
                 CI: 'true',
-            }
+            }*/
         };
 
         console.log(options.cwd);
