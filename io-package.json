@@ -3,19 +3,6 @@
     "name": "vis-2-widgets-gauges",
     "version": "0.1.8",
     "news": {
-      "0.1.8": {
-        "en": "Packages were updated",
-        "de": "Pakete wurden aktualisiert",
-        "ru": "Пакеты были обновлены",
-        "pt": "Pacotes foram atualizados",
-        "nl": "Packages werden geüpload",
-        "fr": "Les paquets ont été mis à jour",
-        "it": "I pacchetti sono stati aggiornati",
-        "es": "Se actualizaron los paquetes",
-        "pl": "Pakiety zostały zaktualizowane",
-        "uk": "Пакети оновлено",
-        "zh-cn": "包装更新"
-      },
       "0.1.7": {
         "en": "Packages were updated",
         "de": "Pakete wurden aktualisiert",
