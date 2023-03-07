@@ -249,6 +249,7 @@ gulp.task('widget-3-copy', () => Promise.all([
     ]).pipe(gulp.dest(`widgets/${adapterName}/static`)),
     gulp.src([
         `${SRC}build/static/js/vendors-node_modules_d3-array_src_index_js-node_modules_d3-collection_src_index_js-*.chunk.*`,
+        `${SRC}build/static/js/vendors-node_modules_iobroker_vis-2-widgets-react-dev_index_jsx*.*`,
         `${SRC}build/static/js/vendors-node_modules_react-battery-gauge_dist_react-battery-gauge*.*`,
         `${SRC}build/static/js/vendors-node_modules_react-gauge-chart*.*`,
         `${SRC}build/static/js/vendors-node_modules_react-liquid-gauge*.*`,
