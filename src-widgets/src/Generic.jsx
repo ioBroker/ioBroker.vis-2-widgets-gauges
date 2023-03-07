@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-    Card,
+    Card, CardContent,
 } from '@mui/material';
 
 import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
@@ -26,41 +26,8 @@ class Generic extends (window.visRxWidget || VisRxWidget) {
         return value === undefined || value === null ? '' : value.toString();
     }
 
-    // eslint-disable-next-line class-methods-use-this
     wrapContent(content, addToHeader, cardContentStyle, headerStyle, onCardClick) {
-        return <Card style={{ width: 'calc(100% - 8px)', height: 'calc(100% - 8px)', margin: 4 }} onClick={onCardClick}>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    height: '100%',
-                    position: 'relative',
-                    ...cardContentStyle,
-                }}
-            >
-                {this.state.rxData.name ? <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                    alignItems: 'center',
-                }}
-                >
-                    <div
-                        style={{
-                            fontSize: 24,
-                            paddingTop: 0,
-                            paddingBottom: 4,
-                            ...headerStyle,
-                        }}
-                    >
-                        {this.state.rxData.name}
-                    </div>
-                    {addToHeader || null}
-                </div> : (addToHeader || null)}
-                {content}
-            </div>
-        </Card>;
+        return super.wrapContent(content, addToHeader, cardContentStyle, headerStyle, onCardClick, { Card, CardContent });
     }
 }
 
