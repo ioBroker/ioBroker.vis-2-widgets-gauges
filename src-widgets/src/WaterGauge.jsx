@@ -230,7 +230,7 @@ class WaterGauge extends Generic {
             this.state.rxData.oid !== 'nothing_selected' &&
             (!this.state.object || this.state.rxData.oid !== this.state.object._id)
         ) {
-            const object = await this.props.socket.getObject(this.state.rxData.oid);
+            const object = await this.props.context.socket.getObject(this.state.rxData.oid);
             this.setState({ object });
         }
     }
