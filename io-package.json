@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "news": {
+      "0.1.13": {
+        "en": "Better compatibility",
+        "de": "Bessere Kompatibilität",
+        "ru": "Лучшая совместимость",
+        "pt": "Melhor compatibilidade",
+        "nl": "Beter compatibiliteit",
+        "fr": "Meilleure compatibilité",
+        "it": "Migliore compatibilità",
+        "es": "Mejor compatibilidad",
+        "pl": "Lepsza kompatybilność",
+        "uk": "Краще сумісність",
+        "zh-cn": "更好的兼容性"
+      },
       "0.1.12": {
         "en": "update packages",
         "de": "update-pakete",
@@ -80,19 +93,6 @@
         "pl": "Pakiety zostały zaktualizowane",
         "uk": "Пакети оновлено",
         "zh-cn": "包装更新"
-      },
-      "0.1.4": {
-        "en": "initial commit",
-        "de": "erster auftrag",
-        "ru": "первоначальный коммит",
-        "pt": "commit inicial",
-        "nl": ".",
-        "fr": "initial commit",
-        "it": "commit iniziale",
-        "es": "inicial",
-        "pl": "wstępny proces",
-        "uk": "початкова комісія",
-        "zh-cn": "初步承诺"
       }
     },
     "title": "Vis 2 Widgets Gauge",

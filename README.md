@@ -21,7 +21,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.1.13 (2023-06-28)
 * (bluefox) Better compatibility
 
 ### 0.1.12 (2023-03-22)
