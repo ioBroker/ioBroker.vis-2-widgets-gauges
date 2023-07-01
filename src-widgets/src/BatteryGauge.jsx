@@ -388,7 +388,7 @@ class BatteryGauge extends Generic {
             /> : null}
         </div>;
 
-        return this.wrapContent(content, null, { textAlign: 'center' });
+        return this.wrapContent(content, null, { textAlign: 'center', height: '100%' });
     }
 }
 
