@@ -126,8 +126,8 @@
     "connectionType": "cloud",
     "dataSource": "poll",
     "visWidgets": {
-      "i18n": "component",
-      "vis2gaugeWidgets": {
+       "vis2gaugeWidgets": {
+        "i18n": "component",
         "name": "vis2gaugeWidgets",
         "url": "vis-2-widgets-gauges/customWidgets.js",
         "components": [
