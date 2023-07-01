@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "0.1.13",
+    "version": "0.1.14",
     "news": {
+      "0.1.14": {
+        "en": "Changed layout of widgets",
+        "de": "Änderung des Layouts von Widgets",
+        "ru": "Изменен макет виджетов",
+        "pt": "Layout alterado de widgets",
+        "nl": "Verandering van widgets",
+        "fr": "Mise en page modifiée des widgets",
+        "it": "Modificato il layout dei widget",
+        "es": "Diseño cambiado de widgets",
+        "pl": "Zmienny układ widgetów",
+        "uk": "Змінено макет віджетів",
+        "zh-cn": "B. 改变成见"
+      },
       "0.1.13": {
         "en": "Better compatibility",
         "de": "Bessere Kompatibilität",
@@ -80,19 +93,6 @@
         "pl": "Pakiety zostały zaktualizowane",
         "uk": "Пакети оновлено",
         "zh-cn": "包装更新"
-      },
-      "0.1.5": {
-        "en": "Packages were updated",
-        "de": "Pakete wurden aktualisiert",
-        "ru": "Пакеты были обновлены",
-        "pt": "Pacotes foram atualizados",
-        "nl": "Packages werden geüpload",
-        "fr": "Les paquets ont été mis à jour",
-        "it": "I pacchetti sono stati aggiornati",
-        "es": "Se actualizaron los paquetes",
-        "pl": "Pakiety zostały zaktualizowane",
-        "uk": "Пакети оновлено",
-        "zh-cn": "包装更新"
       }
     },
     "title": "Vis 2 Widgets Gauge",
@@ -126,7 +126,7 @@
     "connectionType": "cloud",
     "dataSource": "poll",
     "visWidgets": {
-       "vis2gaugeWidgets": {
+      "vis2gaugeWidgets": {
         "i18n": "component",
         "name": "vis2gaugeWidgets",
         "url": "vis-2-widgets-gauges/customWidgets.js",
