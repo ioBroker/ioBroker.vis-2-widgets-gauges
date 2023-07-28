@@ -18,8 +18,9 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: [
-        'only-warn',
         'react',
+        'only-warn',
+        'react-hooks',
     ],
     rules: {
         'arrow-parens': [1, 'as-needed'],
@@ -68,9 +69,9 @@ module.exports = {
         'no-loop-func': 'off',
         'no-continue': 'off',
         'implicit-arrow-linebreak': 'off',
+        'react/function-component-definition': 'off',
         radix: 'off',
         indent: ['error', 4, { SwitchCase: 1 }],
         'no-alert': 'off',
-        'react/function-component-definition': 'off',
     },
 };

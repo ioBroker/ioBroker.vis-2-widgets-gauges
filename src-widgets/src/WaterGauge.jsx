@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, withTheme } from '@mui/styles';
+import { withTheme } from '@mui/styles';
 import LiquidFillGauge from 'react-liquid-gauge';
+
 import Generic from './Generic';
 
 const ease = ['linear',
@@ -31,11 +32,8 @@ const ease = ['linear',
     'backInOut',
     'elasticIn',
     'elasticOut',
-    'elasticInOut'];
-
-const styles = () => ({
-
-});
+    'elasticInOut',
+];
 
 class WaterGauge extends Generic {
     constructor(props) {
@@ -47,21 +45,27 @@ class WaterGauge extends Generic {
         return {
             id: 'tplGauge2Water',
             visSet: 'vis-2-widgets-gauges',
-            visSetLabel: 'vis_2_widgets_gauges_set_label',
+            visSetLabel: 'set_label',
             visSetColor: '#334455',
-            visWidgetLabel: 'vis_2_widgets_gauges_water',  // Label of widget
+            visWidgetLabel: 'water',  // Label of widget
             visName: 'Water gauge',
             visAttrs: [{
                 name: 'common',
                 fields: [
                     {
-                        name: 'name',
-                        label: 'vis_2_widgets_gauges_name',
+                        name: 'noCard',
+                        label: 'without_card',
+                        type: 'checkbox',
+                    },
+                    {
+                        name: 'widgetTitle',
+                        label: 'name',
+                        hidden: '!!data.noCard',
                     },
                     {
                         name: 'oid',
                         type: 'id',
-                        label: 'vis_2_widgets_gauges_oid',
+                        label: 'oid',
                         onChange: async (field, data, changeData, socket) => {
                             const object = await socket.getObject(data.oid);
                             if (object && object.common) {
@@ -75,121 +79,148 @@ class WaterGauge extends Generic {
                     {
                         name: 'min',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_min',
+                        label: 'min',
                     },
                     {
                         name: 'max',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_max',
+                        label: 'max',
                     },
                     {
                         name: 'size',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_size',
+                        label: 'size',
                     },
                     {
                         name: 'unit',
-                        label: 'vis_2_widgets_gauges_unit',
+                        label: 'unit',
                     },
                     {
                         name: 'textSize',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_text_size',
-                        tooltip: 'vis_2_widgets_gauges_text_size_tooltip',
+                        type: 'slider',
+                        min: 0,
+                        max: 2,
+                        step: 0.1,
+                        label: 'text_size',
+                        tooltip: 'text_size_tooltip',
                     },
                     {
                         name: 'textOffsetX',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_text_offset_x',
+                        label: 'text_offset_x',
                     },
                     {
                         name: 'textOffsetY',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_text_offset_y',
+                        label: 'text_offset_y',
                     },
                     {
                         name: 'riseAnimation',
                         type: 'checkbox',
                         default: true,
-                        label: 'vis_2_widgets_gauges_rise_animation',
+                        label: 'rise_animation',
                     },
                     {
                         name: 'riseAnimationTime',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_rise_animation_time',
-                        tooltip: 'vis_2_widgets_gauges_rise_animation_time_tooltip',
+                        label: 'rise_animation_time',
+                        tooltip: 'rise_animation_time_tooltip',
                     },
                     {
                         name: 'riseAnimationEasing',
                         type: 'select',
                         options: ease,
                         noTranslation: true,
-                        label: 'vis_2_widgets_gauges_rise_animation_easing',
+                        label: 'rise_animation_easing',
                     },
                     {
                         name: 'waveAnimation',
                         type: 'checkbox',
                         default: true,
-                        label: 'vis_2_widgets_gauges_wave_animation',
+                        label: 'wave_animation',
                     },
                     {
                         name: 'waveAnimationTime',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_wave_animation_time',
-                        tooltip: 'vis_2_widgets_gauges_wave_animation_time_tooltip',
+                        label: 'wave_animation_time',
+                        tooltip: 'wave_animation_time_tooltip',
                     },
                     {
                         name: 'waveAnimationEasing',
                         type: 'select',
                         options: ease,
                         noTranslation: true,
-                        label: 'vis_2_widgets_gauges_wave_animation_easing',
+                        label: 'wave_animation_easing',
                     },
                     {
                         name: 'waveFrequency',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_wave_frequency',
-                        tooltip: 'vis_2_widgets_gauges_wave_frequency_tooltip',
+                        label: 'wave_frequency',
+                        tooltip: 'wave_frequency_tooltip',
                     },
                     {
                         name: 'waveAmplitude',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_wave_amplitude',
-                        tooltip: 'vis_2_widgets_gauges_wave_amplitude_tooltip',
+                        label: 'wave_amplitude',
+                        tooltip: 'wave_amplitude_tooltip',
                     },
                     {
                         name: 'innerRadius',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_inner_radius',
-                        tooltip: 'vis_2_widgets_gauges_inner_radius_tooltip',
+                        type: 'slider',
+                        min: 0.1,
+                        max: 1,
+                        step: 0.1,
+                        label: 'inner_radius',
+                        tooltip: 'inner_radius_tooltip',
                     },
                     {
                         name: 'outerRadius',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_outer_radius',
-                        tooltip: 'vis_2_widgets_gauges_outer_radius_tooltip',
+                        type: 'slider',
+                        min: 0.1,
+                        max: 1,
+                        step: 0.1,
+                        label: 'outer_radius',
+                        tooltip: 'outer_radius_tooltip',
                     },
                     {
                         name: 'margin',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_margin',
-                        tooltip: 'vis_2_widgets_gauges_margin_tooltip',
+                        type: 'slider',
+                        min: 0,
+                        max: 0.5,
+                        step: 0.005,
+                        label: 'margin',
+                        tooltip: 'margin_tooltip',
+                    },
+                    {
+                        name: 'textColor',
+                        type: 'color',
+                        label: 'text_color',
+                    },
+                    {
+                        name: 'textWaveColor',
+                        type: 'color',
+                        label: 'text_overlapped_color',
+                    },
+                    {
+                        name: 'circleColor',
+                        type: 'color',
+                        label: 'circle_color',
                     },
                     {
                         name: 'gradient',
                         type: 'checkbox',
-                        label: 'vis_2_widgets_gauges_gradient',
+                        label: 'gradient',
                     },
                     {
                         name: 'levelsCount',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_levels_count',
+                        label: 'levels_count',
                         hidden: data => !data.gradient,
                     },
                 ],
             }, {
                 name: 'level',
-                label: 'vis_2_widgets_gauges_group_level',
+                label: 'group_level',
                 indexFrom: 1,
                 indexTo: 'levelsCount',
                 hidden: data => !data.gradient,
@@ -197,19 +228,22 @@ class WaterGauge extends Generic {
                     {
                         name: 'stopColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauges_level_stop_color',
+                        label: 'level_stop_color',
                     },
                     {
                         name: 'stopOpacity',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_level_stop_opacity',
-                        tooltip: 'vis_2_widgets_gauges_level_stop_opacity_tooltip',
+                        type: 'slider',
+                        min: 0,
+                        max: 1,
+                        step: 0.05,
+                        label: 'level_stop_opacity',
+                        tooltip: 'level_stop_opacity_tooltip',
                     },
                     {
                         name: 'levelThreshold',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_level_threshold',
-                        tooltip: 'vis_2_widgets_gauges_level_threshold_tooltip',
+                        label: 'level_threshold',
+                        tooltip: 'level_threshold_tooltip',
                         hidden(data, index) {
                             return index === 1 || index === data.levelsCount;
                         },
@@ -291,7 +325,13 @@ class WaterGauge extends Generic {
         const content = <div
             ref={this.refCardContent}
             style={{
-                flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden',
+                flex: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                overflow: 'hidden',
+                height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined,
             }}
         >
             {size ? <LiquidFillGauge
@@ -332,12 +372,17 @@ class WaterGauge extends Generic {
                 margin={this.state.rxData.margin || undefined}
                 gradient={!!(this.state.rxData.gradient && gradientStops.length) || undefined}
                 gradientStops={gradientStops}
-                textStyle={{ fill: this.props.theme.palette.text.primary }}
-                waveTextStyle={{ fill: this.props.theme.palette.primary.contrastText }}
+                circleStyle={{ fill: this.state.rxData.circleColor || undefined }}
+                textStyle={{ fill: this.state.rxData.textColor || this.state.rxStyle.color || this.props.theme.palette.text.primary }}
+                waveTextStyle={{ fill: this.state.rxData.textWaveColor || this.state.rxStyle.color || this.props.theme.palette.primary.contrastText }}
             /> : null}
         </div>;
 
-        return this.wrapContent(content, null, { textAlign: 'center', height: '100%' });
+        if (this.state.rxData.noCard || props.widget.usedInWidget) {
+            return content;
+        }
+
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 
@@ -349,4 +394,4 @@ WaterGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(WaterGauge));
+export default withTheme(WaterGauge);

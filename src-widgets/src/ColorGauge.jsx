@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, withTheme } from '@mui/styles';
+import { withTheme } from '@mui/styles';
 import GaugeChart from 'react-gauge-chart';
+
 import Generic from './Generic';
-
-const styles = () => ({
-
-});
 
 class ColorGauge extends Generic {
     constructor(props) {
@@ -18,19 +15,25 @@ class ColorGauge extends Generic {
         return {
             id: 'tplGauge2Color',
             visSet: 'vis-2-widgets-gauges',
-            visWidgetLabel: 'vis_2_widgets_gauges_color',  // Label of widget
+            visWidgetLabel: 'color',  // Label of widget
             visName: 'Color gauge',
             visAttrs: [{
                 name: 'common',
                 fields: [
                     {
-                        name: 'name',
-                        label: 'vis_2_widgets_gauges_name',
+                        name: 'noCard',
+                        label: 'without_card',
+                        type: 'checkbox',
+                    },
+                    {
+                        name: 'widgetTitle',
+                        label: 'name',
+                        hidden: '!!data.noCard',
                     },
                     {
                         name: 'oid',
                         type: 'id',
-                        label: 'vis_2_widgets_gauges_oid',
+                        label: 'oid',
                         onChange: async (field, data, changeData, socket) => {
                             const object = await socket.getObject(data.oid);
                             if (object && object.common) {
@@ -44,102 +47,125 @@ class ColorGauge extends Generic {
                     {
                         name: 'min',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_min',
+                        label: 'min',
                     },
                     {
                         name: 'max',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_max',
+                        label: 'max',
                     },
                     {
                         name: 'unit',
-                        label: 'vis_2_widgets_gauges_unit',
+                        label: 'unit',
                     },
                     {
                         name: 'levelsCount',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_levels_count',
+                        label: 'levels_count',
                     },
                 ],
             },
             {
                 name: 'visual',
-                label: 'vis_2_widgets_gauges_visual',
+                label: 'visual',
                 fields: [
                     {
                         name: 'needleColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauges_needle_color',
+                        label: 'needle_color',
                     },
                     {
                         name: 'needleBaseColor',
                         type: 'color',
-                        label: 'vis_2_widgets_gauges_needle_base_color',
+                        label: 'needle_base_color',
                     },
                     {
                         name: 'marginInPercent',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_margin_in_percent',
-                        tooltip: 'vis_2_widgets_gauges_margin_in_percent_tooltip',
+                        type: 'slider',
+                        min: 0,
+                        max: 0.2,
+                        step: 0.01,
+                        label: 'margin_in_percent',
+                        tooltip: 'margin_in_percent_tooltip',
                     },
                     {
                         name: 'cornerRadius',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_corner_radius',
+                        label: 'corner_radius',
                     },
                     {
                         name: 'arcPadding',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_arc_padding',
-                        tooltip: 'vis_2_widgets_gauges_arc_padding_title',
+                        type: 'slider',
+                        min: 0,
+                        max: 0.2,
+                        step: 0.01,
+                        label: 'arc_padding',
+                        tooltip: 'arc_padding_title',
                     },
                     {
                         name: 'arcWidth',
-                        type: 'number',
-                        label: 'vis_2_widgets_gauges_arc_width',
-                        tooltip: 'vis_2_widgets_gauges_arc_tooltip',
+                        type: 'slider',
+                        min: 0.01,
+                        max: 1,
+                        step: 0.01,
+                        label: 'arc_width',
+                        tooltip: 'arc_tooltip',
+                    },
+                    {
+                        name: 'hideText',
+                        type: 'checkbox',
+                        label: 'hide_value',
+                    },
+                    {
+                        name: 'needleScale',
+                        type: 'slider',
+                        min: 0.01,
+                        max: 1,
+                        step: 0.01,
+                        label: 'needle_size',
+                        hidden: 'true', // does not work
                     },
                 ],
             },
             {
                 name: 'animation',
-                label: 'vis_2_widgets_gauges_animation',
+                label: 'animation',
                 fields: [
                     {
                         name: 'animate',
                         type: 'checkbox',
                         default: true,
-                        label: 'vis_2_widgets_gauges_animate',
+                        label: 'animate',
                     },
                     {
                         name: 'animDelay',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_anim_delay',
-                        tooltip: 'vis_2_widgets_gauges_anim_delay_tooltip',
+                        label: 'anim_delay',
+                        tooltip: 'anim_delay_tooltip',
                     },
                     {
                         name: 'animateDuration',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_animate_duration',
-                        tooltip: 'vis_2_widgets_gauges_animate_duration_tooltip',
+                        label: 'animate_duration',
+                        tooltip: 'animate_duration_tooltip',
                     },
                 ],
             },
             {
                 name: 'level',
-                label: 'vis_2_widgets_gauges_level',
+                label: 'level',
                 indexFrom: 1,
                 indexTo: 'levelsCount',
                 fields: [
                     {
                         name: 'color',
                         type: 'color',
-                        label: 'vis_2_widgets_gauges_color',
+                        label: 'color',
                     },
                     {
                         name: 'levelThreshold',
                         type: 'number',
-                        label: 'vis_2_widgets_gauges_level_threshold',
+                        label: 'level_threshold',
                         hidden: (data, index) => index === data.levelsCount,
                     },
                 ],
@@ -213,7 +239,13 @@ class ColorGauge extends Generic {
         const content = <div
             ref={this.refCardContent}
             style={{
-                flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden',
+                flex: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                overflow: 'hidden',
+                height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined,
             }}
         >
             {size ? <GaugeChart
@@ -222,23 +254,29 @@ class ColorGauge extends Generic {
                 nrOfLevels={this.state.rxData.levelsCount || undefined}
                 colors={colors.length ? colors : undefined}
                 arcsLength={ranges.length ? ranges : undefined}
+                hideText={!!this.state.rxData.hideText}
                 needleColor={this.state.rxData.needleColor || this.props.theme.palette.text.primary}
                 needleBaseColor={this.state.rxData.needleBaseColor || this.props.theme.palette.text.primary}
                 animate={!!this.state.rxData.animate}
+                needleScale={this.state.rxData.needleScale || undefined}
                 marginInPercent={this.state.rxData.marginInPercent || undefined}
                 cornerRadius={this.state.rxData.cornerRadius || undefined}
                 arcPadding={this.state.rxData.arcPadding || undefined}
                 arcWidth={this.state.rxData.arcWidth || undefined}
                 animDelay={this.state.rxData.animDelay || undefined}
                 animateDuration={this.state.rxData.animateDuration || undefined}
-                textColor={this.props.theme.palette.text.primary}
+                textColor={this.state.rxStyle.color || this.props.theme.palette.text.primary}
                 style={{
                     width: `${size}px`,
                 }}
             /> : null}
         </div>;
 
-        return this.wrapContent(content, null, { textAlign: 'center', height: '100%' });
+        if (this.state.rxData.noCard || props.widget.usedInWidget) {
+            return content;
+        }
+
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 
@@ -250,4 +288,4 @@ ColorGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(ColorGauge));
+export default withTheme(ColorGauge);
