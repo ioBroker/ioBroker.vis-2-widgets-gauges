@@ -138,8 +138,7 @@
       }
     },
     "restartAdapters": [
-      "vis",
-      "vis-2-beta"
+      "vis-2"
     ]
   },
   "native": {},
