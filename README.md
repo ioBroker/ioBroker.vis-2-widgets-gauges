@@ -21,7 +21,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.2.1 (2023-11-10)
 * (bluefox) update packages
 
 ### 0.2.0 (2023-07-28)

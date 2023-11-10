@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "news": {
+      "0.2.1": {
+        "en": "update packages",
+        "de": "update-pakete",
+        "ru": "обновление пакетов",
+        "pt": "pacotes de atualização",
+        "nl": "vertaling:",
+        "fr": "mettre à jour les paquets",
+        "it": "pacchetti di aggiornamento",
+        "es": "actualizar paquetes",
+        "pl": "pakiet aktualizacji",
+        "uk": "оновлення пакетів",
+        "zh-cn": "更新包"
+      },
       "0.2.0": {
         "en": "Changed layout of widgets\nAdded text color settings to water widget",
         "de": "Änderung des Layouts von Widgets\nHinzufügen von Text Farbeinstellungen zu Wasser Widget",
@@ -80,19 +93,6 @@
         "pl": "pakiet aktualizacji",
         "uk": "оновлення пакетів",
         "zh-cn": "更新包"
-      },
-      "0.1.9": {
-        "en": "Packages were updated",
-        "de": "Pakete wurden aktualisiert",
-        "ru": "Пакеты были обновлены",
-        "pt": "Pacotes foram atualizados",
-        "nl": "Packages werden geüpload",
-        "fr": "Les paquets ont été mis à jour",
-        "it": "I pacchetti sono stati aggiornati",
-        "es": "Se actualizaron los paquetes",
-        "pl": "Pakiety zostały zaktualizowane",
-        "uk": "Пакети оновлено",
-        "zh-cn": "包装更新"
       }
     },
     "title": "Vis 2 Widgets Gauge",
