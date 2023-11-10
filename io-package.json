@@ -3,19 +3,6 @@
     "name": "vis-2-widgets-gauges",
     "version": "0.2.1",
     "news": {
-      "0.2.1": {
-        "en": "update packages",
-        "de": "update-pakete",
-        "ru": "обновление пакетов",
-        "pt": "pacotes de atualização",
-        "nl": "vertaling:",
-        "fr": "mettre à jour les paquets",
-        "it": "pacchetti di aggiornamento",
-        "es": "actualizar paquetes",
-        "pl": "pakiet aktualizacji",
-        "uk": "оновлення пакетів",
-        "zh-cn": "更新包"
-      },
       "0.2.0": {
         "en": "Changed layout of widgets\nAdded text color settings to water widget",
         "de": "Änderung des Layouts von Widgets\nHinzufügen von Text Farbeinstellungen zu Wasser Widget",
