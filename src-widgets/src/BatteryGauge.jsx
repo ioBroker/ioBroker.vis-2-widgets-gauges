@@ -383,13 +383,44 @@ class BatteryGauge extends Generic {
             }
         }
 
+        let showValue;
+        let showText = null;
+        // eslint-disable-next-line no-restricted-properties
+        if (!window.isFinite(value)) {
+            showValue = null;
+            showText = value;
+            customization.readingText = {
+                display: 'none',
+            };
+        } else {
+            showValue = ((value - min) / (max - min)) * 100;
+        }
+
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.root}
             style={{ height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined }}
         >
+            {showText ? <div
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: '10%',
+                    fontSize: size / 10,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                }}
+            >
+                {showText}
+            </div> : null}
             {size ? <ReactBatteryGauge
-                value={((value - min) / (max - min)) * 100}
+                value={showValue || 0}
                 orientation={this.state.rxData.orientation || undefined}
                 padding={this.state.rxData.padding || undefined}
                 size={size}

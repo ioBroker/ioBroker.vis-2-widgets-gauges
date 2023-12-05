@@ -23,6 +23,7 @@
 ## Changelog
 ### **WORK IN PROGRESS**
 * (bluefox) updated packages
+* (bluefox) Allowed showing text on battery
 
 ### 0.2.2 (2023-11-10)
 * (bluefox) update packages

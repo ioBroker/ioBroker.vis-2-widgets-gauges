@@ -41,11 +41,13 @@ class App extends WidgetDemoApp {
     renderWidget() {
         return <div className={this.props.classes.app}>
             <ColorGauge
-                socket={this.socket}
                 themeType={this.state.themeType}
                 style={{
                     width: 600,
                     height: 650,
+                }}
+                context={{
+                    socket: this.socket,
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
@@ -72,6 +74,9 @@ class App extends WidgetDemoApp {
                     width: 600,
                     height: 650,
                 }}
+                context={{
+                    socket: this.socket,
+                }}
                 systemConfig={this.state.systemConfig}
                 data={{
                     name: 'Water gauge',
@@ -97,10 +102,13 @@ class App extends WidgetDemoApp {
                     width: 600,
                     height: 650,
                 }}
+                context={{
+                    socket: this.socket,
+                }}
                 systemConfig={this.state.systemConfig}
                 data={{
                     name: 'Battery gauge',
-                    oid: 'javascript.0.temperatureActual',
+                    oid: 'javascript.0.blinds',
                     levelsCount: 3,
                     color1: 'rgba(155,211,134,1)',
                     range1: 10,
