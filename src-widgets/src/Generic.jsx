@@ -1,7 +1,7 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
-import React from "react";
 
 class Generic extends (window.visRxWidget || VisRxWidget) {
     // eslint-disable-next-line class-methods-use-this
@@ -55,7 +55,7 @@ class Generic extends (window.visRxWidget || VisRxWidget) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginRight: marginRight,
+                marginRight,
                 fontSize,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
