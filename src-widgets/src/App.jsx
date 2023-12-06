@@ -52,7 +52,7 @@ class App extends WidgetDemoApp {
                 systemConfig={this.state.systemConfig}
                 data={{
                     name: 'Color gauge',
-                    oid: 'javascript.0.temperatureActual',
+                    oid: 'Energiesparmodus',
                     levelsCount: 3,
                     color1: 'rgba(155,211,134,1)',
                     range1: 10,
@@ -80,7 +80,7 @@ class App extends WidgetDemoApp {
                 systemConfig={this.state.systemConfig}
                 data={{
                     name: 'Water gauge',
-                    oid: 'javascript.0.temperatureActual',
+                    oid: 'Energiesparmodus',
                     levelsCount: 3,
                     color1: 'rgba(155,211,134,1)',
                     range1: 10,
@@ -107,8 +107,9 @@ class App extends WidgetDemoApp {
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
+                    widgetTitle: 'Battery gauge',
                     name: 'Battery gauge',
-                    oid: 'javascript.0.blinds',
+                    oid: 'Energiesparmodus',
                     levelsCount: 3,
                     color1: 'rgba(155,211,134,1)',
                     range1: 10,

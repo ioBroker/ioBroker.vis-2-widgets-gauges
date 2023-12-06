@@ -286,7 +286,7 @@ class WaterGauge extends Generic {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        const value = this.state.values[`${this.state.object?._id}.val`];
+        const value = this.getValue();
 
         const gradientStops = [];
 
@@ -322,6 +322,21 @@ class WaterGauge extends Generic {
             }
         }
 
+        let showValue;
+        let showText = null;
+        const textStyle = { fill: this.state.rxData.textColor || this.state.rxStyle.color || this.props.theme.palette.text.primary };
+        const waveTextStyle = { fill: this.state.rxData.textWaveColor || this.state.rxStyle.color || this.props.theme.palette.primary.contrastText };
+
+        // eslint-disable-next-line no-restricted-properties
+        if (!window.isFinite(value)) {
+            showValue = null;
+            showText = value;
+            textStyle.display = 'none';
+            waveTextStyle.display = 'none';
+        } else {
+            showValue = ((value - min) / (max - min)) * 100;
+        }
+
         const content = <div
             ref={this.refCardContent}
             style={{
@@ -331,11 +346,13 @@ class WaterGauge extends Generic {
                 alignItems: 'center',
                 width: '100%',
                 overflow: 'hidden',
+                position: 'relative',
                 height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined,
             }}
         >
+            {this.renderCustomText(showText)}
             {size ? <LiquidFillGauge
-                value={((value - min) / (max - min)) * 100}
+                value={showValue}
                 textRenderer={textProps => {
                     const radius = Math.min(textProps.height / 2, textProps.width / 2);
                     const textPixels = (textProps.textSize * radius) / 2;
@@ -346,12 +363,10 @@ class WaterGauge extends Generic {
                         fontSize: textPixels * 0.6,
                     };
 
-                    return (
-                        <tspan>
-                            <tspan className="value" style={valueStyle}>{value}</tspan>
-                            <tspan style={percentStyle}>{textProps.percent}</tspan>
-                        </tspan>
-                    );
+                    return <tspan>
+                        <tspan className="value" style={valueStyle}>{value}</tspan>
+                        <tspan style={percentStyle}>{textProps.percent}</tspan>
+                    </tspan>;
                 }}
                 percent={this.state.rxData.unit || undefined}
                 width={size}
@@ -373,8 +388,8 @@ class WaterGauge extends Generic {
                 gradient={!!(this.state.rxData.gradient && gradientStops.length) || undefined}
                 gradientStops={gradientStops}
                 circleStyle={{ fill: this.state.rxData.circleColor || undefined }}
-                textStyle={{ fill: this.state.rxData.textColor || this.state.rxStyle.color || this.props.theme.palette.text.primary }}
-                waveTextStyle={{ fill: this.state.rxData.textWaveColor || this.state.rxStyle.color || this.props.theme.palette.primary.contrastText }}
+                textStyle={textStyle}
+                waveTextStyle={waveTextStyle}
             /> : null}
         </div>;
 

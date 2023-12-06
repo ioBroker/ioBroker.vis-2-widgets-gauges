@@ -13,6 +13,7 @@ const styles = () => ({
         alignItems: 'center',
         width: '100%',
         overflow: 'hidden',
+        position: 'relative',
     },
 });
 
@@ -299,7 +300,8 @@ class BatteryGauge extends Generic {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        const value = this.state.values[`${this.state.object?._id}.val`] || 0;
+        const value = this.getValue();
+
         const charging = !!this.state.values[`${this.state.data['charging-oid']}.val`];
 
         const min = this.state.rxData.min || 0;
@@ -401,24 +403,7 @@ class BatteryGauge extends Generic {
             className={this.props.classes.root}
             style={{ height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined }}
         >
-            {showText ? <div
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginRight: '10%',
-                    fontSize: size / 10,
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                }}
-            >
-                {showText}
-            </div> : null}
+            {this.renderCustomText(showText, '10%')}
             {size ? <ReactBatteryGauge
                 value={showValue || 0}
                 orientation={this.state.rxData.orientation || undefined}

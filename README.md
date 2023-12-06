@@ -21,6 +21,9 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Allowed showing text in every widget
+
 ### 1.0.0 (2023-12-05)
 * (bluefox) updated packages
 * (bluefox) Allowed showing text on battery

@@ -206,7 +206,7 @@ class ColorGauge extends Generic {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        const value = this.state.values[`${this.state.object?._id}.val`] || 0;
+        const value = this.getValue();
 
         const colors = [];
         const ranges = [];
@@ -236,6 +236,20 @@ class ColorGauge extends Generic {
             }
         }
 
+        let showValue;
+        let showText = null;
+        const textStyle = {
+            width: `${size}px`,
+        };
+
+        // eslint-disable-next-line no-restricted-properties
+        if (!window.isFinite(value)) {
+            showValue = null;
+            showText = value;
+        } else {
+            showValue = (value - min) / (max - min);
+        }
+
         const content = <div
             ref={this.refCardContent}
             style={{
@@ -249,8 +263,8 @@ class ColorGauge extends Generic {
             }}
         >
             {size ? <GaugeChart
-                percent={(value - min) / (max - min)}
-                formatTextValue={() => `${value}${this.state.rxData.unit || '%'}`}
+                percent={showValue}
+                formatTextValue={() => showText || `${value}${this.state.rxData.unit || '%'}`}
                 nrOfLevels={this.state.rxData.levelsCount || undefined}
                 colors={colors.length ? colors : undefined}
                 arcsLength={ranges.length ? ranges : undefined}
@@ -266,9 +280,7 @@ class ColorGauge extends Generic {
                 animDelay={this.state.rxData.animDelay || undefined}
                 animateDuration={this.state.rxData.animateDuration || undefined}
                 textColor={this.state.rxStyle.color || this.props.theme.palette.text.primary}
-                style={{
-                    width: `${size}px`,
-                }}
+                style={textStyle}
             /> : null}
         </div>;
 
