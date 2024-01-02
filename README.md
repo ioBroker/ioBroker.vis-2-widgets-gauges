@@ -21,7 +21,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### 1.0.1 (2023-12-06)
+### **WORK IN PROGRESS**
 * (bluefox) Allowed showing text in every widget
 
 ### 1.0.0 (2023-12-05)
