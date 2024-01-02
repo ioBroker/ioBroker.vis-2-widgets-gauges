@@ -32,7 +32,6 @@
     "gulp": "^4.0.2",
     "mocha": "^10.2.0"
   },
-  "main": "main.js",
   "files": [
     "admin/",
     "img/",
