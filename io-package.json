@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "news": {
+      "1.0.2": {
+        "en": "Allowed showing text in every widget",
+        "de": "Erlaubt, Text in jedem Widget anzeigen",
+        "ru": "Разрешено показывать текст в каждом виджете",
+        "pt": "Permitido mostrando texto em cada widget",
+        "nl": "Genoemd in elke wedget",
+        "fr": "Permet de montrer du texte dans chaque widget",
+        "it": "Consente di visualizzare il testo in ogni widget",
+        "es": "Permitido mostrar texto en cada widget",
+        "pl": "Wszystko przedstawia tekst we wszystkich widgetach",
+        "uk": "Допускається відображення тексту в кожному віджеті",
+        "zh-cn": "允许在每一令人信服的发言稿"
+      },
       "1.0.0": {
         "en": "updated packages\nAllowed showing text on battery",
         "de": "aktualisierte pakete\nErlaubt Text auf Batterie anzeigen",
