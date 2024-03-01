@@ -34,7 +34,7 @@
         "react-gauge-chart": "^0.4.1",
         "react-liquid-gauge": "^1.2.4",
         "react-scripts": "^5.0.1",
-        "sass": "^1.71.0"
+        "sass": "^1.71.1"
     },
     "scripts": {
         "start": "set PORT=4173 && craco start",
