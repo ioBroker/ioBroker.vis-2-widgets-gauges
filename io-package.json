@@ -108,7 +108,6 @@
     "keywords": [
       "vis-2-widgets-gauges"
     ],
-    "license": "MIT",
     "platform": "Javascript/Node.js",
     "icon": "vis-2-widgets-gauges.png",
     "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-gauges/master/admin/vis-2-widgets-gauges.png",
@@ -144,6 +143,7 @@
     "tier": 3,
     "licenseInformation": {
       "type": "free",
+      "license": "MIT",
       "link": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges/blob/master/LICENSE"
     }
   },
