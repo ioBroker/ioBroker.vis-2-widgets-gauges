@@ -31,7 +31,7 @@
         "react-battery-gauge": "^1.0.7",
         "react-circular-slider-svg": "^0.3.0",
         "react-dom": "^18.2.0",
-        "react-gauge-chart": "^0.4.1",
+        "react-gauge-chart": "^0.5.1",
         "react-liquid-gauge": "^1.2.4",
         "react-scripts": "^5.0.1",
         "sass": "^1.71.1"
