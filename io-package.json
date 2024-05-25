@@ -144,7 +144,7 @@
     "tier": 3,
     "licenseInformation": {
       "type": "free",
-      "link": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges/blob/master/LICENSE"
+      "license": "MIT"
     }
   },
   "native": {},
