@@ -254,6 +254,7 @@ class WaterGauge extends Generic {
                 width: '100%',
                 height: 120,
                 position: 'relative',
+                absoluteWidth: 120,
             },
             visPrev: 'widgets/vis-2-widgets-gauges/img/prev_water_gauge.png',
         };

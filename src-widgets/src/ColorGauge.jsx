@@ -174,6 +174,7 @@ class ColorGauge extends Generic {
                 width: '100%',
                 height: 182,
                 position: 'relative',
+                absoluteWidth: 182,
             },
             visPrev: 'widgets/vis-2-widgets-gauges/img/prev_color_gauge.png',
         };
