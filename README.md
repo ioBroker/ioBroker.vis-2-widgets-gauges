@@ -21,7 +21,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 1.0.4 (2024-05-26)
 * (bluefox) updated packages
 
 ### 1.0.3 (2024-03-13)
