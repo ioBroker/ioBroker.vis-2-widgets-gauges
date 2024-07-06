@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTheme } from '@mui/styles';
 import GaugeChart from 'react-gauge-chart';
 
 import Generic from './Generic';
@@ -301,4 +300,4 @@ ColorGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withTheme(ColorGauge);
+export default ColorGauge;

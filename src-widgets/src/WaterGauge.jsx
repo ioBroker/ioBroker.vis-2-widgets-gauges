@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTheme } from '@mui/styles';
 import LiquidFillGauge from 'react-liquid-gauge';
 
 import Generic from './Generic';
@@ -410,4 +409,4 @@ WaterGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withTheme(WaterGauge);
+export default WaterGauge;

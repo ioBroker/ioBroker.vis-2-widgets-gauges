@@ -1,5 +1,6 @@
 import React from 'react';
-import { withStyles } from '@mui/styles';
+
+import { Box } from '@mui/material';
 
 import WidgetDemoApp from '@iobroker/vis-2-widgets-react-dev/widgetDemoApp';
 import { i18n as I18n } from '@iobroker/adapter-react-v5';
@@ -39,7 +40,7 @@ class App extends WidgetDemoApp {
     };
 
     renderWidget() {
-        return <div className={this.props.classes.app}>
+        return <Box sx={styles.app}>
             <ColorGauge
                 themeType={this.state.themeType}
                 style={{
@@ -124,8 +125,8 @@ class App extends WidgetDemoApp {
                     min: 12,
                 }}
             />
-        </div>;
+        </Box>;
     }
 }
 
-export default withStyles(styles)(App);
+export default App;

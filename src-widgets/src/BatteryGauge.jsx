@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, withTheme } from '@mui/styles';
 import ReactBatteryGauge from 'react-battery-gauge';
 
 import Generic from './Generic';
 
-const styles = () => ({
+const styles = {
     root: {
         flex: 1,
         display: 'flex',
@@ -15,7 +14,7 @@ const styles = () => ({
         overflow: 'hidden',
         position: 'relative',
     },
-});
+};
 
 class BatteryGauge extends Generic {
     constructor(props) {
@@ -401,8 +400,7 @@ class BatteryGauge extends Generic {
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.root}
-            style={{ height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined }}
+            style={{ ...styles.root, height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined }}
         >
             {this.renderCustomText(showText, '10%')}
             {size ? <ReactBatteryGauge
@@ -433,4 +431,4 @@ BatteryGauge.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(BatteryGauge));
+export default BatteryGauge;
