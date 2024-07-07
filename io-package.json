@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "news": {
+      "1.1.0": {
+        "en": "Removed withStyles package",
+        "de": "MitStyles-Paket entfernt",
+        "ru": "Удаленный пакет со Стайлз",
+        "pt": "Removido com pacote Estilos",
+        "nl": "Verwijderd metStyles pakket",
+        "fr": "Enlever avec le paquetStyles",
+        "it": "Rimosso con pacchettoStyles",
+        "es": "Retire el paquete de estilos",
+        "pl": "Usunięty z pakietem Styles",
+        "uk": "Видаліть пакет \"Стиль\"",
+        "zh-cn": "用 Styles 软件包删除"
+      },
       "1.0.4": {
         "en": "updated packages",
         "de": "aktualisierte pakete",
@@ -80,19 +93,6 @@
         "pl": "Zmienny układ widgetów\nDodrukowane kolory tekstowe do widgetowania wody",
         "uk": "Змінено макет віджетів\nДодано параметри кольору тексту в водяний віджет",
         "zh-cn": "B. 改变成见\n增加供水用的纺织场"
-      },
-      "0.1.14": {
-        "en": "Changed layout of widgets",
-        "de": "Änderung des Layouts von Widgets",
-        "ru": "Изменен макет виджетов",
-        "pt": "Layout alterado de widgets",
-        "nl": "Verandering van widgets",
-        "fr": "Mise en page modifiée des widgets",
-        "it": "Modificato il layout dei widget",
-        "es": "Diseño cambiado de widgets",
-        "pl": "Zmienny układ widgetów",
-        "uk": "Змінено макет віджетів",
-        "zh-cn": "B. 改变成见"
       }
     },
     "title": "Vis 2 Widgets Gauge",
