@@ -341,12 +341,12 @@ class BatteryGauge extends Generic {
                 strokeWidth: this.state.rxData.batteryBodyStrokeWidth || undefined,
                 cornerRadius: this.state.rxData.batteryBodyCornerRadius || undefined,
                 fill: this.state.rxData.batteryBodyFill || undefined,
-                strokeColor: this.state.rxData.batteryBodyStrokeColor || this.props.theme.palette.text.primary,
+                strokeColor: this.state.rxData.batteryBodyStrokeColor || this.props.context.theme.palette.text.primary,
             },
             batteryCap: {
                 fill: this.state.rxData.batteryCapFill || undefined,
                 strokeWidth: this.state.rxData.batteryCapStrokeWidth || undefined,
-                strokeColor: this.state.rxData.batteryCapStrokeColor || this.props.theme.palette.text.primary,
+                strokeColor: this.state.rxData.batteryCapStrokeColor || this.props.context.theme.palette.text.primary,
                 cornerRadius: this.state.rxData.batteryCapCornerRadius || undefined,
                 capToBodyRatio: this.state.rxData.batteryCapCapToBodyRatio || undefined,
             },
@@ -359,7 +359,7 @@ class BatteryGauge extends Generic {
                 interCellsGap: this.state.rxData.batteryMeterInterCellsGap || undefined,
             },
             readingText: {
-                lightContrastColor: this.state.rxData.readingTextLightContrastColor || this.props.theme.palette.text.primary,
+                lightContrastColor: this.state.rxData.readingTextLightContrastColor || this.props.context.theme.palette.text.primary,
                 darkContrastColor: this.state.rxData.readingTextDarkContrastColor || undefined,
                 lowBatteryColor: this.state.rxData.readingTextLowBatteryColor || undefined,
                 fontFamily: this.state.rxData.readingTextFontFamily || undefined,

@@ -250,6 +250,28 @@ class ColorGauge extends Generic {
             showValue = (value - min) / (max - min);
         }
 
+        const defaultProps = {
+            marginInPercent: 0.05,
+            cornerRadius: 6,
+            nrOfLevels: 3,
+            percent: 0.4,
+            arcPadding: 0.05,
+            arcWidth: 0.2,
+            colors: ['#00FF00', '#FF0000'],
+            textColor: '#fff',
+            needleColor: '#464A4F',
+            needleBaseColor: '#464A4F',
+            hideText: false,
+            animate: true,
+            animDelay: 500,
+            formatTextValue: null,
+            fontSize: null,
+            animateDuration: 3000,
+            textComponent: undefined,
+            needleScale: 0.55,
+            customNeedleComponent: null,
+        };
+
         const content = <div
             ref={this.refCardContent}
             style={{
@@ -265,21 +287,25 @@ class ColorGauge extends Generic {
             {size ? <GaugeChart
                 percent={showValue}
                 formatTextValue={() => showText || `${value}${this.state.rxData.unit || '%'}`}
-                nrOfLevels={this.state.rxData.levelsCount || undefined}
-                colors={colors.length ? colors : undefined}
-                arcsLength={ranges.length ? ranges : undefined}
+                nrOfLevels={this.state.rxData.levelsCount || defaultProps.nrOfLevels}
+                colors={colors.length ? colors : defaultProps.colors}
+                arcsLength={ranges.length ? ranges : defaultProps.arcsLength}
                 hideText={!!this.state.rxData.hideText}
-                needleColor={this.state.rxData.needleColor || this.props.theme.palette.text.primary}
-                needleBaseColor={this.state.rxData.needleBaseColor || this.props.theme.palette.text.primary}
+                needleColor={this.state.rxData.needleColor || this.props.context.theme.palette.text.primary || defaultProps.needleColor}
+                needleBaseColor={
+                    this.state.rxData.needleBaseColor ||
+                    this.props.context.theme.palette.text.primary
+                    || defaultProps.needleBaseColor
+                }
                 animate={!!this.state.rxData.animate}
-                needleScale={this.state.rxData.needleScale || undefined}
-                marginInPercent={this.state.rxData.marginInPercent || undefined}
-                cornerRadius={this.state.rxData.cornerRadius || undefined}
-                arcPadding={this.state.rxData.arcPadding || undefined}
-                arcWidth={this.state.rxData.arcWidth || undefined}
-                animDelay={this.state.rxData.animDelay || undefined}
-                animateDuration={this.state.rxData.animateDuration || undefined}
-                textColor={this.state.rxStyle.color || this.props.theme.palette.text.primary}
+                needleScale={this.state.rxData.needleScale || defaultProps.needleScale}
+                marginInPercent={this.state.rxData.marginInPercent || defaultProps.marginInPercent}
+                cornerRadius={this.state.rxData.cornerRadius || defaultProps.cornerRadius}
+                arcPadding={this.state.rxData.arcPadding || defaultProps.arcPadding}
+                arcWidth={this.state.rxData.arcWidth || defaultProps.arcWidth}
+                animDelay={this.state.rxData.animDelay || defaultProps.animDelay}
+                animateDuration={this.state.rxData.animateDuration || defaultProps.animateDuration}
+                textColor={this.state.rxStyle.color || this.props.context.theme.palette.text.primary || defaultProps.textColor}
                 style={textStyle}
             /> : null}
         </div>;

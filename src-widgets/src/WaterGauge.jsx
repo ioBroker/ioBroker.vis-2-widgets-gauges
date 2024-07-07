@@ -324,8 +324,8 @@ class WaterGauge extends Generic {
 
         let showValue;
         let showText = null;
-        const textStyle = { fill: this.state.rxData.textColor || this.state.rxStyle.color || this.props.theme.palette.text.primary };
-        const waveTextStyle = { fill: this.state.rxData.textWaveColor || this.state.rxStyle.color || this.props.theme.palette.primary.contrastText };
+        const textStyle = { fill: this.state.rxData.textColor || this.state.rxStyle.color || this.props.context.theme.palette.text.primary };
+        const waveTextStyle = { fill: this.state.rxData.textWaveColor || this.state.rxStyle.color || this.props.context.theme.palette.primary.contrastText };
 
         // eslint-disable-next-line no-restricted-properties
         if (!window.isFinite(value)) {

@@ -3,7 +3,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 import WidgetDemoApp from '@iobroker/vis-2-widgets-react-dev/widgetDemoApp';
-import { i18n as I18n } from '@iobroker/adapter-react-v5';
+import { I18n } from '@iobroker/adapter-react-v5';
 
 import translations from './translations';
 
@@ -11,16 +11,16 @@ import ColorGauge from './ColorGauge';
 import WaterGauge from './WaterGauge';
 import BatteryGauge from './BatteryGauge';
 
-const styles = theme => ({
-    app: {
+const styles = {
+    app: theme => ({
         backgroundColor: theme?.palette?.background.default,
         color: theme?.palette?.text.primary,
         height: '100%',
         width: '100%',
         overflow: 'auto',
         display: 'flex',
-    },
-});
+    }),
+};
 
 class App extends WidgetDemoApp {
     constructor(props) {
@@ -49,11 +49,12 @@ class App extends WidgetDemoApp {
                 }}
                 context={{
                     socket: this.socket,
+                    theme: this.state.theme,
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
                     name: 'Color gauge',
-                    oid: 'Energiesparmodus',
+                    oid: 'javascript.0.thermostat.setPoint',
                     levelsCount: 3,
                     color1: 'rgba(155,211,134,1)',
                     range1: 10,
@@ -77,6 +78,7 @@ class App extends WidgetDemoApp {
                 }}
                 context={{
                     socket: this.socket,
+                    theme: this.state.theme,
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
@@ -105,6 +107,7 @@ class App extends WidgetDemoApp {
                 }}
                 context={{
                     socket: this.socket,
+                    theme: this.state.theme,
                 }}
                 systemConfig={this.state.systemConfig}
                 data={{
