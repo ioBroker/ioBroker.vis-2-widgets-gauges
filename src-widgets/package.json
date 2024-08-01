@@ -6,7 +6,7 @@
         "@craco/craco": "^7.1.0",
         "@iobroker/adapter-react-v5": "^6.0.13",
         "@iobroker/vis-2-widgets-react-dev": "^2.0.1",
-        "@mui/icons-material": "^5.16.0",
+        "@mui/icons-material": "^5.16.6",
         "@mui/material": "^5.16.0",
         "craco-esbuild": "^0.6.1",
         "craco-module-federation": "^1.1.0",
