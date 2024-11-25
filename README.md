@@ -21,6 +21,9 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Allowed to define digits after comma for the color gauge
+
 ### 1.1.0 (2024-07-07)
 * (bluefox) Removed withStyles package
 

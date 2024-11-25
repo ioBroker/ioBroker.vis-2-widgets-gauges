@@ -62,6 +62,14 @@ class ColorGauge extends Generic {
                         type: 'number',
                         label: 'levels_count',
                     },
+                    {
+                        name: 'digitsAfterComma',
+                        type: 'slider',
+                        label: 'digits_after_comma',
+                        min: 0,
+                        max: 10,
+                        default: 2,
+                    },
                 ],
             },
             {
@@ -206,7 +214,7 @@ class ColorGauge extends Generic {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        const value = this.getValue();
+        let value = this.getValue();
 
         const colors = [];
         const ranges = [];
@@ -248,6 +256,10 @@ class ColorGauge extends Generic {
             showText = value;
         } else {
             showValue = (value - min) / (max - min);
+            if (this.state.rxData.digitsAfterComma !== null && this.state.rxData.digitsAfterComma !== undefined) {
+                const p = 10 ** this.state.rxData.digitsAfterComma;
+                value = Math.round(value * p) / p;
+            }
         }
 
         const defaultProps = {
