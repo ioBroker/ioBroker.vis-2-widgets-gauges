@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
+      "1.1.1": {
+        "en": "Allowed to define digits after comma for the color gauge",
+        "de": "Erlaubt, die Ziffern nach dem Komma für den Farbmesser zu definieren",
+        "ru": "Позволяет определить цифры после запятой для цветовой манометрии",
+        "pt": "Permite definir dígitos após vírgula para o medidor de cor",
+        "nl": "Toegestaan om cijfers na komma voor de kleurmeter te definiëren",
+        "fr": "Permet de définir les chiffres après virgule pour la jauge de couleur",
+        "it": "Consentito di definire cifre dopo virgola per l'indicatore di colore",
+        "es": "Permitido definir dígitos después de coma para el medidor de color",
+        "pl": "Dozwolone zdefiniowanie cyfr po przecinku dla skrajni kolorów",
+        "uk": "Дозволено визначити цифри після коми для колірного манометра",
+        "zh-cn": "允许在逗号后定义颜色表的位数"
+      },
       "1.1.0": {
         "en": "Removed withStyles package",
         "de": "MitStyles-Paket entfernt",
@@ -80,19 +93,6 @@
         "pl": "pakiet aktualizacji",
         "uk": "оновлення пакетів",
         "zh-cn": "更新包"
-      },
-      "0.2.0": {
-        "en": "Changed layout of widgets\nAdded text color settings to water widget",
-        "de": "Änderung des Layouts von Widgets\nHinzufügen von Text Farbeinstellungen zu Wasser Widget",
-        "ru": "Изменен макет виджетов\nДобавлены настройки цвета текста в виджет воды",
-        "pt": "Layout alterado de widgets\nConfigurações de cor de texto adicionadas ao widget de água",
-        "nl": "Verandering van widgets\nGeadresseerde tekstkleursetingen aan water Widget",
-        "fr": "Mise en page modifiée des widgets\nAjout de paramètres de couleur de texte pour l'eau widget",
-        "it": "Modificato il layout dei widget\nAggiunte impostazioni di colore di testo per widget di acqua",
-        "es": "Diseño cambiado de widgets\nAjustes de color de texto añadidos al widget de agua",
-        "pl": "Zmienny układ widgetów\nDodrukowane kolory tekstowe do widgetowania wody",
-        "uk": "Змінено макет віджетів\nДодано параметри кольору тексту в водяний віджет",
-        "zh-cn": "B. 改变成见\n增加供水用的纺织场"
       }
     },
     "title": "Vis 2 Widgets Gauge",
