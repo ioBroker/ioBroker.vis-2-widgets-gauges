@@ -131,6 +131,7 @@
         "i18n": "component",
         "name": "vis2gaugeWidgets",
         "url": "vis-2-widgets-gauges/customWidgets.js",
+        "bundlerType": "module",
         "components": [
           "ColorGauge",
           "WaterGauge",

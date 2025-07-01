@@ -1,3 +1,5 @@
+export {};
+/*
 import React from 'react';
 
 import { Box } from '@mui/material';
@@ -133,3 +135,4 @@ class App extends WidgetDemoApp {
 }
 
 export default App;
+*/
