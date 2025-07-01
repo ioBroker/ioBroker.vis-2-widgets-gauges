@@ -28,7 +28,7 @@ interface ColorGaugeRxData {
     [key: `levelThreshold${number}`]: number;
 }
 
-class ColorGauge extends Generic<ColorGaugeRxData> {
+export default class ColorGauge extends Generic<ColorGaugeRxData> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
             id: 'tplGauge2Color',
@@ -254,7 +254,6 @@ class ColorGauge extends Generic<ColorGaugeRxData> {
             width: `${size}px`,
         };
 
-        // eslint-disable-next-line no-restricted-properties
         if (!window.isFinite(value)) {
             showValue = null;
             showText = value;
@@ -349,5 +348,3 @@ class ColorGauge extends Generic<ColorGaugeRxData> {
         return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
-
-export default ColorGauge;

@@ -7,7 +7,7 @@ export interface GaugesGenericState extends VisRxWidgetState {
     object?: ioBroker.Object | null;
 }
 
-class Generic<
+export default class Generic<
     RxData extends Record<string, any>,
     State extends Partial<GaugesGenericState> = GaugesGenericState,
 > extends (window.visRxWidget as typeof VisRxWidget)<RxData, State> {
@@ -125,5 +125,3 @@ class Generic<
         await this.propertiesUpdate();
     }
 }
-
-export default Generic;

@@ -56,7 +56,7 @@ interface BatteryGaugeRxData {
     fullScreen?: boolean;
 }
 
-class BatteryGauge extends Generic<BatteryGaugeRxData> {
+export default class BatteryGauge extends Generic<BatteryGaugeRxData> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
             id: 'tplGauge2Battery',
@@ -453,5 +453,3 @@ class BatteryGauge extends Generic<BatteryGaugeRxData> {
         return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
-
-export default BatteryGauge;

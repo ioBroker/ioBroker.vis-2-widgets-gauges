@@ -70,7 +70,7 @@ interface WaterGaugeRxData {
     [key: `stopOpacity${number}`]: number; // 0.5
 }
 
-class WaterGauge extends Generic<WaterGaugeRxData> {
+export default class WaterGauge extends Generic<WaterGaugeRxData> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
             id: 'tplGauge2Water',
@@ -440,5 +440,3 @@ class WaterGauge extends Generic<WaterGaugeRxData> {
         return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
-
-export default WaterGauge;
