@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "1.1.1",
+    "version": "2.0.0",
     "news": {
+      "2.0.0": {
+        "en": "Rewritten with TypeScript",
+        "de": "Neu geschrieben mit TypeScript",
+        "ru": "Переписано с помощью TypeScript",
+        "pt": "Reescrito com TypeScript",
+        "nl": "Herschreven met TypeScript",
+        "fr": "Réécrit avec TypeScript",
+        "it": "Rescritto con TypeScript",
+        "es": "Reescrito con TipoScript",
+        "pl": "Przepisane za pomocą TypeScript",
+        "uk": "Написання з TypeScript",
+        "zh-cn": "用类型脚本重写"
+      },
       "1.1.1": {
         "en": "Allowed to define digits after comma for the color gauge",
         "de": "Erlaubt, die Ziffern nach dem Komma für den Farbmesser zu definieren",
@@ -80,19 +93,6 @@
         "pl": "pakiet aktualizowany\nAllowe pokazują tekst na baterii",
         "uk": "оновлені пакети\nДопускається відображення тексту на акумуляторі",
         "zh-cn": "更新的一揽子方案\n允许说明关于电池的案文"
-      },
-      "0.2.2": {
-        "en": "update packages",
-        "de": "update-pakete",
-        "ru": "обновление пакетов",
-        "pt": "pacotes de atualização",
-        "nl": "vertaling:",
-        "fr": "mettre à jour les paquets",
-        "it": "pacchetti di aggiornamento",
-        "es": "actualizar paquetes",
-        "pl": "pakiet aktualizacji",
-        "uk": "оновлення пакетів",
-        "zh-cn": "更新包"
       }
     },
     "title": "Vis 2 Widgets Gauge",
