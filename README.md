@@ -21,7 +21,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.1 (2025-07-01)
 * (bluefox) Rewritten with TypeScript
 
 ### 1.1.1 (2024-11-25)

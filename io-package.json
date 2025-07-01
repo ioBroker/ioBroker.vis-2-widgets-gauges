@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "news": {
+      "2.0.1": {
+        "en": "Rewritten with TypeScript",
+        "de": "Neu geschrieben mit TypeScript",
+        "ru": "Переписано с помощью TypeScript",
+        "pt": "Reescrito com TypeScript",
+        "nl": "Herschreven met TypeScript",
+        "fr": "Réécrit avec TypeScript",
+        "it": "Rescritto con TypeScript",
+        "es": "Reescrito con TipoScript",
+        "pl": "Przepisane za pomocą TypeScript",
+        "uk": "Написання з TypeScript",
+        "zh-cn": "用类型脚本重写"
+      },
       "1.1.1": {
         "en": "Allowed to define digits after comma for the color gauge",
         "de": "Erlaubt, die Ziffern nach dem Komma für den Farbmesser zu definieren",
