@@ -9,7 +9,7 @@
         "@module-federation/runtime": "^0.15.0",
         "@module-federation/vite": "^1.5.1",
         "@mui/icons-material": "^6.4.12",
-        "@mui/material": "^6.4.12",
+        "@mui/material": "^7.2.0",
         "@types/react-gauge-chart": "^0.4.3",
         "@types/uuid": "^10.0.0",
         "@vitejs/plugin-react": "^4.6.0",
