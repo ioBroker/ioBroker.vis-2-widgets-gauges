@@ -20,7 +20,7 @@
         "react-dom": "^18.3.1",
         "react-gauge-chart": "^0.5.1",
         "react-liquid-gauge": "^1.2.4",
-        "typescript": "^5.8.3",
+        "typescript": "^5.9.2",
         "vite": "7.0.6",
         "vite-plugin-commonjs": "^0.10.4",
         "vite-plugin-svgr": "^4.3.0",
