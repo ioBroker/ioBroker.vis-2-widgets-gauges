@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "news": {
+      "2.0.2": {
+        "en": "Support for older Android devices",
+        "de": "Unterstützung für ältere Android-Geräte",
+        "ru": "Поддержка старых Android-устройств",
+        "pt": "Suporte para dispositivos Android mais antigos",
+        "nl": "Ondersteuning voor oudere Android-apparaten",
+        "fr": "Support pour les anciens appareils Android",
+        "it": "Supporto per dispositivi Android più vecchi",
+        "es": "Soporte para dispositivos Android más antiguos",
+        "pl": "Wsparcie dla starszych urządzeń Android",
+        "uk": "Підтримка старих пристроїв Android",
+        "zh-cn": "支持较老的Android设备"
+      },
       "2.0.1": {
         "en": "Rewritten with TypeScript",
         "de": "Neu geschrieben mit TypeScript",
@@ -80,19 +93,6 @@
         "pl": "Wszystko przedstawia tekst we wszystkich widgetach",
         "uk": "Допускається відображення тексту в кожному віджеті",
         "zh-cn": "允许在每一令人信服的发言稿"
-      },
-      "1.0.0": {
-        "en": "updated packages\nAllowed showing text on battery",
-        "de": "aktualisierte pakete\nErlaubt Text auf Batterie anzeigen",
-        "ru": "обновленные пакеты\nРазрешено показывать текст на аккумуляторе",
-        "pt": "pacotes atualizados\nPermitido mostrando texto na bateria",
-        "nl": "vertaling:\nVertaling:",
-        "fr": "paquets mis à jour\nPermet de montrer du texte sur la batterie",
-        "it": "pacchetti aggiornati\nConsente di visualizzare il testo sulla batteria",
-        "es": "paquetes actualizados\nPermitido mostrar texto sobre la batería",
-        "pl": "pakiet aktualizowany\nAllowe pokazują tekst na baterii",
-        "uk": "оновлені пакети\nДопускається відображення тексту на акумуляторі",
-        "zh-cn": "更新的一揽子方案\n允许说明关于电池的案文"
       }
     },
     "title": "Vis 2 Widgets Gauge",

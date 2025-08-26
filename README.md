@@ -21,7 +21,7 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.2 (2025-08-26)
 * (bluefox) Support for older Android devices
 
 ### 2.0.1 (2025-07-01)
