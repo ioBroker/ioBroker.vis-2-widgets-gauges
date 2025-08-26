@@ -21,6 +21,9 @@
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Support for older Android devices
+
 ### 2.0.1 (2025-07-01)
 * (bluefox) Rewritten with TypeScript
 
