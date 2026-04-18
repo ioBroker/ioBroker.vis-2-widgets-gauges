@@ -7,3 +7,5 @@
 /widgets
 /tmp
 *.tgz
+/src-widgets/.__mf__temp/
+/src-widgets/.mf/

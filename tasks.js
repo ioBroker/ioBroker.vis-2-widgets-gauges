@@ -16,9 +16,37 @@ function clean() {
 }
 
 function copyAllFiles() {
-    copyFiles([`${SRC}build/customWidgets.js`], `widgets/${adapterName}`);
-    copyFiles([`${SRC}build/assets/*.*`], `widgets/${adapterName}/assets`);
-    copyFiles([`${SRC}build/img/*`], `widgets/${adapterName}/img`);
+    copyFiles(
+        ['src-widgets/build/**/*', '!src-widgets/build/index.html', '!src-widgets/build/mf-manifest.json'],
+        `widgets/${adapterName}/`,
+        {
+            process: (fileData, fileName) => {
+                if (fileName.includes('installSVGRenderer')) {
+                    // zrender has an error. It uses isFunction before it is defined
+                    // here is a code:
+                    //    bind = protoFunction && isFunction(protoFunction.bind) ? protoFunction.call.bind(protoFunction.bind) : bindPolyfill;
+                    // and later comes the definition of isFunction:
+                    //   isFunction = function(value) {
+                    //     return typeof value === "function";
+                    //   };
+
+                    // Minified code looks like:
+                    //   ut = ra && Y(ra.bind)
+                    // Where Y is isFunction and ra is protoFunction
+                    fileData = fileData.toString();
+                    const match = fileData.match(/\w+\s*=\s*\w+\s*&&\s*(\w)\(\w+.bind\)/);
+                    if (match) {
+                        // place before match[0] the definition of isFunction
+                        fileData = fileData.replace(
+                            match[0],
+                            `${match[1]}=value=>typeof value === "function";${match[0]}`,
+                        ); // prevent error
+                    }
+                    return fileData;
+                }
+            },
+        },
+    );
 }
 
 if (process.argv.includes('--0-clean')) {

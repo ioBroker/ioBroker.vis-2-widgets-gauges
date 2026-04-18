@@ -22,11 +22,12 @@ const config = {
             },
             remotes: {},
             shared: moduleFederationShared(pack),
+            dts: false,
         }),
         topLevelAwait({
-            // The export name of top-level await promise for each chunk module
+            // The export name of top-level awaits promise for each chunk module
             promiseExportName: '__tla',
-            // The function to generate import names of top-level await promise in each chunk module
+            // The function to generate import names of top-level awaits promise in each chunk module
             promiseImportName: (i: number): string => `__tla_${i}`,
         }),
         react(),
