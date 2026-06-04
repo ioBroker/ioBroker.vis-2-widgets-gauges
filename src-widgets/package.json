@@ -10,7 +10,7 @@
         "@iobroker/types-vis-2": "^2.14.4",
         "@module-federation/runtime": "^0.18.3",
         "@module-federation/vite": "^1.7.2",
-        "@mui/icons-material": "^6.5.0",
+        "@mui/icons-material": "^7.3.4",
         "@mui/material": "^6.5.0",
         "@types/react-gauge-chart": "^0.5.0",
         "@vitejs/plugin-react": "^5.2.0",
