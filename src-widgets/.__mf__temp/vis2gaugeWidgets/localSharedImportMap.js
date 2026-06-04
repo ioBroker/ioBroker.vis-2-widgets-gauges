@@ -34,7 +34,7 @@
       
           "@iobroker/adapter-react-v5": {
             name: "@iobroker/adapter-react-v5",
-            version: "8.2.0",
+            version: "8.2.7",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2gaugeWidgets",
