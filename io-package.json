@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "news": {
+      "2.0.3": {
+        "en": "Updated packages",
+        "de": "Aktualisierte Pakete",
+        "ru": "Обновленные пакеты",
+        "pt": "Pacotes atualizados",
+        "nl": "Bijgewerkte pakketten",
+        "fr": "Paquets mis à jour",
+        "it": "Pacchetti aggiornati",
+        "es": "Paquetes actualizados",
+        "pl": "Aktualizacja pakietów",
+        "uk": "Оновлені пакети",
+        "zh-cn": "更新软件包"
+      },
       "2.0.2": {
         "en": "Support for older Android devices",
         "de": "Unterstützung für ältere Android-Geräte",
@@ -80,19 +93,6 @@
         "pl": "zaktualizowane pakiety",
         "uk": "оновлені пакети",
         "zh-cn": "更新软件包"
-      },
-      "1.0.2": {
-        "en": "Allowed showing text in every widget",
-        "de": "Erlaubt, Text in jedem Widget anzeigen",
-        "ru": "Разрешено показывать текст в каждом виджете",
-        "pt": "Permitido mostrando texto em cada widget",
-        "nl": "Genoemd in elke wedget",
-        "fr": "Permet de montrer du texte dans chaque widget",
-        "it": "Consente di visualizzare il testo in ogni widget",
-        "es": "Permitido mostrar texto en cada widget",
-        "pl": "Wszystko przedstawia tekst we wszystkich widgetach",
-        "uk": "Допускається відображення тексту в кожному віджеті",
-        "zh-cn": "允许在每一令人信服的发言稿"
       }
     },
     "title": "Vis 2 Widgets Gauge",
