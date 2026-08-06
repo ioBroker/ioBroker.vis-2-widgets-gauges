@@ -116,7 +116,6 @@
     "readme": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges/blob/master/README.md",
     "loglevel": "info",
     "mode": "none",
-    "noConfig": true,
     "adminUI": {
       "config": "none"
     },
