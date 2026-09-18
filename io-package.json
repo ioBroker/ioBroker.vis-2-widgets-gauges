@@ -95,23 +95,49 @@
         "zh-cn": "更新软件包"
       }
     },
-    "title": "Vis 2 Widgets Gauge",
+    "title": "Gauges for vis-2",
     "titleLang": {
-      "en": "Vis 2 Widgets Gauge"
+      "en": "Gauges for vis-2",
+      "de": "Messanzeigen für vis-2",
+      "ru": "Индикаторы для vis-2",
+      "pt": "Medidores para vis-2",
+      "nl": "Meters voor vis-2",
+      "fr": "Jauges pour vis-2",
+      "it": "Indicatori per vis-2",
+      "es": "Indicadores para vis-2",
+      "pl": "Wskaźniki dla vis-2",
+      "uk": "Індикатори для vis-2",
+      "zh-cn": "vis-2 仪表"
     },
     "desc": {
-      "en": "Vis 2 Widgets Gauge"
+      "en": "Gauge widgets for vis-2: color, water, battery, radial, arc, linear, thermometer, compass, tank and rings",
+      "de": "Anzeige-Widgets für vis-2: Farbskala, Flüssigkeit, Batterie, Rundinstrument, Bogen, Linear, Thermometer, Kompass, Tank und Ringe",
+      "ru": "Виджеты-индикаторы для vis-2: цветной, жидкость, батарея, круговой, дуговой, линейный, термометр, компас, бак и кольца",
+      "pt": "Widgets de medidores para vis-2: colorido, líquido, bateria, radial, arco, linear, termómetro, bússola, depósito e anéis",
+      "nl": "Meterwidgets voor vis-2: kleur, vloeistof, batterij, rond, boog, lineair, thermometer, kompas, tank en ringen",
+      "fr": "Widgets de jauges pour vis-2 : couleur, liquide, batterie, circulaire, arc, linéaire, thermomètre, boussole, réservoir et anneaux",
+      "it": "Widget indicatori per vis-2: colori, liquido, batteria, circolare, arco, lineare, termometro, bussola, serbatoio e anelli",
+      "es": "Widgets de indicadores para vis-2: color, líquido, batería, radial, arco, lineal, termómetro, brújula, depósito y anillos",
+      "pl": "Widżety wskaźników dla vis-2: kolorowy, ciecz, bateria, okrągły, łukowy, liniowy, termometr, kompas, zbiornik i pierścienie",
+      "uk": "Віджети-індикатори для vis-2: кольоровий, рідина, батарея, круговий, дуговий, лінійний, термометр, компас, бак і кільця",
+      "zh-cn": "vis-2 仪表小部件：彩色、液位、电池、圆形、弧形、线性、温度计、罗盘、水箱和圆环"
     },
     "authors": [
       "bluefox <dogafox@gmail.com>"
     ],
     "keywords": [
-      "vis-2-widgets-gauges"
+      "vis-2-widgets-gauges",
+      "gauge",
+      "meter",
+      "thermometer",
+      "compass",
+      "tank",
+      "battery",
+      "vis-2"
     ],
-    "license": "MIT",
     "platform": "Javascript/Node.js",
-    "icon": "vis-2-widgets-gauges.png",
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-gauges/master/admin/vis-2-widgets-gauges.png",
+    "icon": "vis-2-widgets-gauges.svg",
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.vis-2-widgets-gauges/master/admin/vis-2-widgets-gauges.svg",
     "enabled": true,
     "readme": "https://github.com/ioBroker/ioBroker.vis-2-widgets-gauges/blob/master/README.md",
     "loglevel": "info",
@@ -126,6 +152,47 @@
     "type": "visualization-widgets",
     "connectionType": "cloud",
     "dataSource": "poll",
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "!vis-2"
+          ]
+        },
+        "title": {
+          "en": "vis-2 not found",
+          "de": "vis-2 nicht gefunden",
+          "ru": "vis-2 не найден",
+          "pt": "vis-2 não encontrado",
+          "nl": "vis-2 niet gevonden",
+          "fr": "vis-2 introuvable",
+          "it": "vis-2 non trovato",
+          "es": "No se encontró vis-2",
+          "pl": "Nie znaleziono vis-2",
+          "uk": "vis-2 не знайдено",
+          "zh-cn": "未找到 vis-2"
+        },
+        "text": {
+          "en": "These widgets need the vis-2 adapter. Install it if you want to use them.",
+          "de": "Diese Widgets benötigen den Adapter vis-2. Installieren Sie ihn, wenn Sie sie verwenden möchten.",
+          "ru": "Для этих виджетов нужен адаптер vis-2. Установите его, если хотите их использовать.",
+          "pt": "Estes widgets precisam do adaptador vis-2. Instale-o se os quiser usar.",
+          "nl": "Deze widgets hebben de adapter vis-2 nodig. Installeer die als u ze wilt gebruiken.",
+          "fr": "Ces widgets nécessitent l’adaptateur vis-2. Installez-le si vous voulez les utiliser.",
+          "it": "Questi widget richiedono l’adattatore vis-2. Installalo se vuoi usarli.",
+          "es": "Estos widgets necesitan el adaptador vis-2. Instálelo si quiere usarlos.",
+          "pl": "Te widżety wymagają adaptera vis-2. Zainstaluj go, jeśli chcesz ich używać.",
+          "uk": "Цим віджетам потрібен адаптер vis-2. Встановіть його, якщо хочете їх використовувати.",
+          "zh-cn": "这些小部件需要 vis-2 适配器。如需使用，请安装它。"
+        },
+        "level": "info",
+        "buttons": [
+          "ok",
+          "cancel"
+        ]
+      }
+    ],
     "visWidgets": {
       "vis2gaugeWidgets": {
         "i18n": "component",
@@ -135,7 +202,14 @@
         "components": [
           "ColorGauge",
           "WaterGauge",
-          "BatteryGauge"
+          "BatteryGauge",
+          "RadialGauge",
+          "ArcGauge",
+          "LinearGauge",
+          "ThermometerGauge",
+          "CompassGauge",
+          "TankGauge",
+          "RingsGauge"
         ]
       }
     },

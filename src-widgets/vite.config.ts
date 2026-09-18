@@ -1,12 +1,14 @@
+// @ts-expect-error no types
 import react from '@vitejs/plugin-react';
-import commonjs from 'vite-plugin-commonjs';
-import vitetsConfigPaths from 'vite-tsconfig-paths';
 import { federation } from '@module-federation/vite';
 import { moduleFederationShared } from '@iobroker/types-vis-2/modulefederation.vis.config';
 import { readFileSync } from 'node:fs';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
-const pack = JSON.parse(readFileSync('./package.json').toString());
+// The shared modules come from @iobroker/types-vis-2, so react and the JSX runtime stay the singletons the vis-2
+// host provides instead of being bundled a second time. Passing package.json filters that list down to the
+// packages this widget set really uses.
+const pack = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
 
 const config = {
     plugins: [
@@ -18,43 +20,48 @@ const config = {
                 './ColorGauge': './src/ColorGauge',
                 './WaterGauge': './src/WaterGauge',
                 './BatteryGauge': './src/BatteryGauge',
-                './translations': './src/translations',
+                './RadialGauge': './src/RadialGauge',
+                './ArcGauge': './src/ArcGauge',
+                './LinearGauge': './src/LinearGauge',
+                './ThermometerGauge': './src/ThermometerGauge',
+                './CompassGauge': './src/CompassGauge',
+                './TankGauge': './src/TankGauge',
+                './RingsGauge': './src/RingsGauge',
+                './translations': './src/translations.ts',
             },
             remotes: {},
             shared: moduleFederationShared(pack),
             dts: false,
         }),
         topLevelAwait({
-            // The export name of top-level awaits promise for each chunk module
             promiseExportName: '__tla',
-            // The function to generate import names of top-level awaits promise in each chunk module
             promiseImportName: (i: number): string => `__tla_${i}`,
         }),
         react(),
-        vitetsConfigPaths(),
-        commonjs(),
     ],
     server: {
         port: 3000,
         proxy: {
             '/_socket': 'http://localhost:8082',
-            '/vis.0': 'http://localhost:8082',
+            '/vis-2': 'http://localhost:8082',
             '/adapter': 'http://localhost:8082',
-            '/habpanel': 'http://localhost:8082',
-            '/vis': 'http://localhost:8082',
-            '/widgets': 'http://localhost:8082/vis',
-            '/widgets.html': 'http://localhost:8082/vis',
+            '/widgets': 'http://localhost:8082/vis-2',
+            '/widgets.html': 'http://localhost:8082/vis-2',
             '/web': 'http://localhost:8082',
             '/state': 'http://localhost:8082',
         },
     },
     base: './',
+    resolve: {
+        tsconfigPaths: true,
+        // Same set as the shared modules above: the fallback copies inside the bundle must be unique too
+        dedupe: ['react', 'react-dom'],
+    },
     build: {
         target: 'chrome81',
         outDir: './build',
         rollupOptions: {
             onwarn(warning: { code: string }, warn: (warning: { code: string }) => void): void {
-                // Suppress "Module level directives cause errors when bundled" warnings
                 if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
                     return;
                 }

@@ -1,40 +1,13 @@
 import React from 'react';
-// @ts-expect-error No types for react-liquid-gauge
-import LiquidFillGauge from 'react-liquid-gauge';
 
-import Generic from './Generic';
 import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
 
-const ease = [
-    'linear',
-    'quadIn',
-    'quadOut',
-    'quadInOut',
-    'cubicIn',
-    'cubicOut',
-    'cubicInOut',
-    'polyIn',
-    'polyOut',
-    'polyInOut',
-    'sinIn',
-    'sinOut',
-    'sinInOut',
-    'expIn',
-    'expOut',
-    'expInOut',
-    'circleIn',
-    'circleOut',
-    'circleInOut',
-    'bounceIn',
-    'bounceOut',
-    'bounceInOut',
-    'backIn',
-    'backOut',
-    'backInOut',
-    'elasticIn',
-    'elasticOut',
-    'elasticInOut',
-];
+import Generic from './Generic';
+import GaugeFrame, { fitFontSize } from './Components/GaugeFrame';
+import { EASING_NAMES, getEasing } from './Components/easing';
+import { clamp, sectorPath, uniqueId } from './Components/geometry';
+import { animationsFrozen, useAnimatedValue } from './Components/hooks';
+import { formatNumber, isTrue, num, toNumber } from './Components/format';
 
 interface WaterGaugeRxData {
     oid?: string;
@@ -44,6 +17,7 @@ interface WaterGaugeRxData {
     max?: number;
     size?: number;
     unit?: string;
+    digitsAfterComma?: number;
     textSize?: number;
     textOffsetX?: number;
     textOffsetY?: number;
@@ -61,15 +35,189 @@ interface WaterGaugeRxData {
     textColor?: string;
     textWaveColor?: string;
     circleColor?: string;
+    waveColor?: string;
     gradient?: boolean;
     levelsCount: number;
 
     // Gradient levels
-    [key: `levelThreshold${number}`]: number | null; // 0%
-    [key: `stopColor${number}`]: string; // color
-    [key: `stopOpacity${number}`]: number; // 0.5
+    [key: `levelThreshold${number}`]: number | null;
+    [key: `stopColor${number}`]: string;
+    [key: `stopOpacity${number}`]: number;
 }
 
+/** Colour of react-liquid-gauge */
+const LIQUID_COLOR = 'rgb(23, 139, 202)';
+
+interface GradientStop {
+    offset: number;
+    color: string;
+    opacity: number;
+}
+
+interface DrawingProps {
+    /** Filling in percent, 0..100 */
+    percent: number;
+    /** Turns an animated percent value back into the text of the value */
+    formatValue: (percent: number) => string;
+    unit: string;
+    customText: string | null;
+    diameter: number;
+    textSize: number;
+    textOffsetX: number;
+    textOffsetY: number;
+    riseAnimation: boolean;
+    riseAnimationTime: number;
+    riseAnimationEasing: string;
+    waveAnimation: boolean;
+    waveAnimationTime: number;
+    waveAnimationEasing: string;
+    waveFrequency: number;
+    waveAmplitude: number;
+    innerRadius: number;
+    outerRadius: number;
+    margin: number;
+    textColor: string;
+    waveTextColor: string;
+    circleColor: string;
+    waveColor: string;
+    gradient: GradientStop[] | null;
+}
+
+function WaterDrawing(props: DrawingProps & { width: number; height: number }): React.JSX.Element {
+    const ids = React.useMemo(() => ({ clip: uniqueId('water-clip'), gradient: uniqueId('water-gradient') }), []);
+    const wavePath = React.useRef<SVGPathElement | null>(null);
+
+    const value = useAnimatedValue(props.percent, {
+        enabled: props.riseAnimation,
+        duration: props.riseAnimationTime,
+        easing: getEasing(props.riseAnimationEasing, 'cubicInOut'),
+        initial: 0,
+    });
+
+    const radius = props.diameter / 2;
+    const fillRadius = radius * (props.innerRadius - props.margin);
+
+    // The wave scrolls one width of the filling per cycle - that is a whole number of wave lengths, so the loop
+    // has no visible seam
+    React.useEffect(() => {
+        const path = wavePath.current;
+        if (!path) {
+            return undefined;
+        }
+        if (!props.waveAnimation || props.waveAnimationTime <= 0 || animationsFrozen()) {
+            path.removeAttribute('transform');
+            return undefined;
+        }
+        const ease = getEasing(props.waveAnimationEasing, 'linear');
+        let frame = 0;
+        let start: number | null = null;
+        const step = (now: number): void => {
+            if (start === null) {
+                start = now;
+            }
+            const t = ((now - start) % props.waveAnimationTime) / props.waveAnimationTime;
+            path.setAttribute('transform', `translate(${-fillRadius + 2 * fillRadius * ease(t)}, 0)`);
+            frame = requestAnimationFrame(step);
+        };
+        frame = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(frame);
+    }, [props.waveAnimation, props.waveAnimationTime, props.waveAnimationEasing, fillRadius]);
+
+    // The area under the wave, twice as wide as the filling so it can scroll
+    const samples = Math.max(2, Math.round(40 * props.waveFrequency));
+    const waveHeight = props.waveAmplitude * (1 - Math.abs(clamp(value, 0, 100) - 50) / 50);
+    const level = (v: number): number => fillRadius - (v / 100) * 2 * fillRadius;
+    let d = '';
+    for (let i = 0; i <= samples; i++) {
+        const x = -2 * fillRadius + (4 * fillRadius * i) / samples;
+        const radians = Math.PI * 2 * ((i / 40) * 2);
+        const y = level(waveHeight * Math.sin(radians) + value);
+        d += `${i ? 'L' : 'M'} ${x.toFixed(2)} ${y.toFixed(2)} `;
+    }
+    d += `L ${(2 * fillRadius).toFixed(2)} ${radius} L ${(-2 * fillRadius).toFixed(2)} ${radius} Z`;
+
+    const textPixels = (props.textSize * radius) / 2;
+    const text =
+        props.customText === null ? (
+            <>
+                <tspan fontSize={textPixels}>{props.formatValue(value)}</tspan>
+                {props.unit ? <tspan fontSize={textPixels * 0.6}>{props.unit}</tspan> : null}
+            </>
+        ) : null;
+    const textTransform = `translate(${props.textOffsetX}, ${props.textOffsetY})`;
+
+    return (
+        <g transform={`translate(${props.width / 2}, ${props.height / 2})`}>
+            <defs>
+                <clipPath id={ids.clip}>
+                    <path
+                        ref={wavePath}
+                        d={d}
+                    />
+                </clipPath>
+                {props.gradient ? (
+                    <linearGradient
+                        id={ids.gradient}
+                        x1="0%"
+                        x2="0%"
+                        y1="100%"
+                        y2="0%"
+                    >
+                        {props.gradient.map((stop, i) => (
+                            <stop
+                                key={i}
+                                offset={`${stop.offset}%`}
+                                stopColor={stop.color}
+                                stopOpacity={stop.opacity}
+                            />
+                        ))}
+                    </linearGradient>
+                ) : null}
+            </defs>
+            <text
+                textAnchor="middle"
+                transform={textTransform}
+                fill={props.textColor}
+            >
+                {text}
+            </text>
+            <g clipPath={`url(#${ids.clip})`}>
+                <circle
+                    r={fillRadius}
+                    fill={props.gradient ? `url(#${ids.gradient})` : props.waveColor}
+                />
+                <text
+                    textAnchor="middle"
+                    transform={textTransform}
+                    fill={props.waveTextColor}
+                >
+                    {text}
+                </text>
+            </g>
+            <path
+                d={sectorPath(0, 0, props.outerRadius * radius, props.innerRadius * radius, 0, 360)}
+                fill={props.circleColor}
+            />
+            {props.customText !== null ? (
+                <text
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={fitFontSize(props.customText, radius * 0.5, fillRadius * 1.8)}
+                    fill={props.textColor}
+                >
+                    {props.customText}
+                </text>
+            ) : null}
+        </g>
+    );
+}
+
+/**
+ * `tplGauge2Water` - a circle that fills with a wavy liquid.
+ *
+ * The first version drew it with react-liquid-gauge (d3). This one draws the same picture with plain SVG and its
+ * own animation; the settings, their names and their defaults are the same.
+ */
 export default class WaterGauge extends Generic<WaterGaugeRxData> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
@@ -77,54 +225,29 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
             visSet: 'vis-2-widgets-gauges',
             visSetLabel: 'set_label',
             visSetColor: '#334455',
-            visWidgetLabel: 'water', // Label of widget
+            visWidgetLabel: 'water',
             visName: 'Water gauge',
+            visHelp: 'help_water',
+            visOrder: 2,
             visAttrs: [
                 {
                     name: 'common',
                     fields: [
+                        { name: 'noCard', label: 'without_card', type: 'checkbox' },
+                        { name: 'widgetTitle', label: 'name', hidden: '!!data.noCard' },
+                        Generic.oidField(),
+                        { name: 'min', type: 'number', label: 'min' },
+                        { name: 'max', type: 'number', label: 'max' },
+                        { name: 'size', type: 'number', label: 'size', tooltip: 'size_tooltip' },
+                        { name: 'unit', label: 'unit' },
                         {
-                            name: 'noCard',
-                            label: 'without_card',
-                            type: 'checkbox',
-                        },
-                        {
-                            name: 'widgetTitle',
-                            label: 'name',
-                            hidden: '!!data.noCard',
-                        },
-                        {
-                            name: 'oid',
-                            type: 'id',
-                            label: 'oid',
-                            onChange: async (field, data, changeData, socket) => {
-                                const object = await socket.getObject(data.oid);
-                                if (object && object.common) {
-                                    data.min = object.common.min !== undefined ? object.common.min : 0;
-                                    data.max = object.common.max !== undefined ? object.common.max : 100;
-                                    data.unit = object.common.unit !== undefined ? object.common.unit : '';
-                                    changeData(data);
-                                }
-                            },
-                        },
-                        {
-                            name: 'min',
-                            type: 'number',
-                            label: 'min',
-                        },
-                        {
-                            name: 'max',
-                            type: 'number',
-                            label: 'max',
-                        },
-                        {
-                            name: 'size',
-                            type: 'number',
-                            label: 'size',
-                        },
-                        {
-                            name: 'unit',
-                            label: 'unit',
+                            name: 'digitsAfterComma',
+                            type: 'slider',
+                            label: 'digits_after_comma',
+                            tooltip: 'digits_after_comma_tooltip',
+                            min: 0,
+                            max: 4,
+                            step: 1,
                         },
                         {
                             name: 'textSize',
@@ -135,53 +258,39 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
                             label: 'text_size',
                             tooltip: 'text_size_tooltip',
                         },
-                        {
-                            name: 'textOffsetX',
-                            type: 'number',
-                            label: 'text_offset_x',
-                        },
-                        {
-                            name: 'textOffsetY',
-                            type: 'number',
-                            label: 'text_offset_y',
-                        },
-                        {
-                            name: 'riseAnimation',
-                            type: 'checkbox',
-                            default: true,
-                            label: 'rise_animation',
-                        },
+                        { name: 'textOffsetX', type: 'number', label: 'text_offset_x' },
+                        { name: 'textOffsetY', type: 'number', label: 'text_offset_y' },
+                        { name: 'riseAnimation', type: 'checkbox', default: true, label: 'rise_animation' },
                         {
                             name: 'riseAnimationTime',
                             type: 'number',
                             label: 'rise_animation_time',
                             tooltip: 'rise_animation_time_tooltip',
+                            hidden: '!data.riseAnimation',
                         },
                         {
                             name: 'riseAnimationEasing',
                             type: 'select',
-                            options: ease,
+                            options: EASING_NAMES,
                             noTranslation: true,
                             label: 'rise_animation_easing',
+                            hidden: '!data.riseAnimation',
                         },
-                        {
-                            name: 'waveAnimation',
-                            type: 'checkbox',
-                            default: true,
-                            label: 'wave_animation',
-                        },
+                        { name: 'waveAnimation', type: 'checkbox', default: true, label: 'wave_animation' },
                         {
                             name: 'waveAnimationTime',
                             type: 'number',
                             label: 'wave_animation_time',
                             tooltip: 'wave_animation_time_tooltip',
+                            hidden: '!data.waveAnimation',
                         },
                         {
                             name: 'waveAnimationEasing',
                             type: 'select',
-                            options: ease,
+                            options: EASING_NAMES,
                             noTranslation: true,
                             label: 'wave_animation_easing',
+                            hidden: '!data.waveAnimation',
                         },
                         {
                             name: 'waveFrequency',
@@ -200,7 +309,7 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
                             type: 'slider',
                             min: 0.1,
                             max: 1,
-                            step: 0.1,
+                            step: 0.01,
                             label: 'inner_radius',
                             tooltip: 'inner_radius_tooltip',
                         },
@@ -209,7 +318,7 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
                             type: 'slider',
                             min: 0.1,
                             max: 1,
-                            step: 0.1,
+                            step: 0.01,
                             label: 'outer_radius',
                             tooltip: 'outer_radius_tooltip',
                         },
@@ -222,26 +331,16 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
                             label: 'margin',
                             tooltip: 'margin_tooltip',
                         },
+                        { name: 'textColor', type: 'color', label: 'text_color' },
+                        { name: 'textWaveColor', type: 'color', label: 'text_overlapped_color' },
+                        { name: 'circleColor', type: 'color', label: 'circle_color' },
                         {
-                            name: 'textColor',
+                            name: 'waveColor',
                             type: 'color',
-                            label: 'text_color',
+                            label: 'wave_color',
+                            hidden: '!!data.gradient && data.levelsCount > 0',
                         },
-                        {
-                            name: 'textWaveColor',
-                            type: 'color',
-                            label: 'text_overlapped_color',
-                        },
-                        {
-                            name: 'circleColor',
-                            type: 'color',
-                            label: 'circle_color',
-                        },
-                        {
-                            name: 'gradient',
-                            type: 'checkbox',
-                            label: 'gradient',
-                        },
+                        { name: 'gradient', type: 'checkbox', label: 'gradient', tooltip: 'gradient_tooltip' },
                         {
                             name: 'levelsCount',
                             type: 'number',
@@ -257,11 +356,7 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
                     indexTo: 'levelsCount',
                     hidden: '!data.gradient',
                     fields: [
-                        {
-                            name: 'stopColor',
-                            type: 'color',
-                            label: 'level_stop_color',
-                        },
+                        { name: 'stopColor', type: 'color', label: 'level_stop_color' },
                         {
                             name: 'stopOpacity',
                             type: 'slider',
@@ -276,9 +371,7 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
                             type: 'number',
                             label: 'level_threshold',
                             tooltip: 'level_threshold_tooltip',
-                            hidden(data, index) {
-                                return index === 1 || index === data.levelsCount;
-                            },
+                            hidden: (data, index) => index === 1 || index === parseInt(data.levelsCount, 10),
                         },
                     ],
                 },
@@ -298,145 +391,84 @@ export default class WaterGauge extends Generic<WaterGaugeRxData> {
         return WaterGauge.getWidgetInfo();
     }
 
+    /** Stops of the gradient: the first level at the bottom, the last at the top, the others at their threshold */
+    getGradient(min: number, max: number): GradientStop[] | null {
+        const data = this.state.rxData;
+        const count = Math.round(num(data.levelsCount, 0));
+        if (!isTrue(data.gradient) || count < 1) {
+            return null;
+        }
+        const stops: GradientStop[] = [];
+        for (let i = 1; i <= count; i++) {
+            const threshold = toNumber(data[`levelThreshold${i}`]) ?? max;
+            stops.push({
+                offset: i === 1 ? 0 : Math.round(((threshold - min) / (max - min)) * 100),
+                color: data[`stopColor${i}`] || LIQUID_COLOR,
+                opacity: num(data[`stopOpacity${i}`], 1),
+            });
+        }
+        return stops;
+    }
+
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
-        const value = this.getValue();
-
-        const gradientStops = [];
-
-        const min = this.state.rxData.min || 0;
-        const max = this.state.rxData.max || 100;
-
-        for (let i = 1; i <= this.state.rxData.levelsCount; i++) {
-            let threshold = this.state.rxData[`levelThreshold${i}`];
-            threshold = threshold === null || threshold === undefined ? max : threshold;
-            const levelThreshold = i === 1 ? 0 : Math.round(((threshold - min) / (max - min)) * 100);
-
-            gradientStops.push({
-                key: `${levelThreshold}%`,
-                stopColor: this.state.rxData[`stopColor${i}`],
-                stopOpacity: this.state.rxData[`stopOpacity${i}`],
-                offset: `${levelThreshold}%`,
-            });
+        const data = this.state.rxData;
+        const theme = this.getGaugeTheme();
+        const min = num(data.min, 0);
+        let max = num(data.max, 100);
+        if (max === min) {
+            max = min + 1;
         }
+        const { value, text } = this.getMainValue();
+        const digits = this.getDigits();
+        const isFloatComma = this.isFloatComma();
+        const contrast: string = (this.props.context.theme as any)?.palette?.primary?.contrastText || '#ffffff';
 
-        let size = this.state.rxData.size;
-
-        if (!size) {
-            if (!this.refCardContent.current) {
-                setTimeout(() => this.forceUpdate(), 50);
-            } else {
-                size = this.refCardContent.current.offsetWidth;
-                if (size > this.refCardContent.current.offsetHeight) {
-                    size = this.refCardContent.current.offsetHeight;
-                }
-            }
-            if (size) {
-                size -= 10;
-            }
-        }
-
-        let showValue;
-        let showText = null;
-        const textStyle: React.CSSProperties = {
-            fill:
-                this.state.rxData.textColor ||
-                this.state.rxStyle?.color ||
-                this.props.context.theme.palette.text.primary,
+        const drawing: Omit<DrawingProps, 'diameter' | 'textOffsetY'> = {
+            percent: value === null ? 0 : ((value - min) / (max - min)) * 100,
+            formatValue: (percent: number): string =>
+                value === null ? '–' : formatNumber(min + (percent / 100) * (max - min), digits, isFloatComma),
+            unit: data.unit || '',
+            customText: text,
+            textSize: num(data.textSize, 0) || 1,
+            textOffsetX: num(data.textOffsetX, 0),
+            riseAnimation: isTrue(data.riseAnimation),
+            riseAnimationTime: num(data.riseAnimationTime, 0) || 2000,
+            riseAnimationEasing: data.riseAnimationEasing || 'cubicInOut',
+            waveAnimation: isTrue(data.waveAnimation),
+            waveAnimationTime: num(data.waveAnimationTime, 0) || 2000,
+            waveAnimationEasing: data.waveAnimationEasing || 'linear',
+            waveFrequency: num(data.waveFrequency, 0) || 2,
+            waveAmplitude: num(data.waveAmplitude, 0) || 1,
+            innerRadius: num(data.innerRadius, 0) || 0.9,
+            outerRadius: num(data.outerRadius, 0) || 1,
+            margin: num(data.margin, 0) || 0.025,
+            textColor: data.textColor || theme.text,
+            waveTextColor: data.textWaveColor || (this.state.rxStyle as any)?.color || contrast,
+            circleColor: data.circleColor || LIQUID_COLOR,
+            waveColor: data.waveColor || LIQUID_COLOR,
+            gradient: this.getGradient(min, max),
         };
-        const waveTextStyle: React.CSSProperties = {
-            fill:
-                this.state.rxData.textWaveColor ||
-                this.state.rxStyle?.color ||
-                this.props.context.theme.palette.primary.contrastText,
-        };
+        const fixedSize = num(data.size, 0);
+        const offsetY = num(data.textOffsetY, 0);
 
-        if (!window.isFinite(value)) {
-            showValue = null;
-            showText = value;
-            textStyle.display = 'none';
-            waveTextStyle.display = 'none';
-        } else {
-            showValue = ((value - min) / (max - min)) * 100;
-        }
-
-        const content = (
-            <div
-                ref={this.refCardContent}
-                style={{
-                    flex: 1,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    height: this.state.rxData.noCard || props.widget.usedInWidget ? '100%' : undefined,
+        return this.wrapGauge(
+            <GaugeFrame fontFamily={theme.fontFamily}>
+                {size => {
+                    const diameter = Math.max(1, fixedSize || Math.min(size.width, size.height) - 10);
+                    return (
+                        <WaterDrawing
+                            {...drawing}
+                            diameter={diameter}
+                            textOffsetY={offsetY || Math.round(diameter / 15)}
+                            width={size.width}
+                            height={size.height}
+                        />
+                    );
                 }}
-            >
-                {this.renderCustomText(showText?.toString())}
-                {size ? (
-                    <LiquidFillGauge
-                        value={showValue}
-                        textRenderer={(textProps: {
-                            height: number;
-                            width: number;
-                            textSize: number;
-                            percent: number;
-                        }) => {
-                            const radius = Math.min(textProps.height / 2, textProps.width / 2);
-                            const textPixels = (textProps.textSize * radius) / 2;
-                            const valueStyle = {
-                                fontSize: textPixels,
-                            };
-                            const percentStyle = {
-                                fontSize: textPixels * 0.6,
-                            };
-
-                            return (
-                                <tspan>
-                                    <tspan
-                                        className="value"
-                                        style={valueStyle}
-                                    >
-                                        {value}
-                                    </tspan>
-                                    <tspan style={percentStyle}>{textProps.percent}</tspan>
-                                </tspan>
-                            );
-                        }}
-                        percent={this.state.rxData.unit || undefined}
-                        width={size}
-                        height={size}
-                        textSize={this.state.rxData.textSize || undefined}
-                        textOffsetX={this.state.rxData.textOffsetX || undefined}
-                        textOffsetY={this.state.rxData.textOffsetY || Math.round(size / 15)}
-                        riseAnimation={this.state.rxData.riseAnimation || undefined}
-                        riseAnimationTime={this.state.rxData.riseAnimationTime || undefined}
-                        riseAnimationEasing={this.state.rxData.riseAnimationEasing || undefined}
-                        waveAnimation={this.state.rxData.waveAnimation || undefined}
-                        waveFrequency={this.state.rxData.waveFrequency || undefined}
-                        waveAmplitude={this.state.rxData.waveAmplitude || undefined}
-                        waveAnimationTime={this.state.rxData.waveAnimationTime || undefined}
-                        waveAnimationEasing={this.state.rxData.waveAnimationEasing || undefined}
-                        innerRadius={this.state.rxData.innerRadius || undefined}
-                        outerRadius={this.state.rxData.outerRadius || undefined}
-                        margin={this.state.rxData.margin || undefined}
-                        gradient={!!(this.state.rxData.gradient && gradientStops.length) || undefined}
-                        gradientStops={gradientStops}
-                        circleStyle={{ fill: this.state.rxData.circleColor || undefined }}
-                        textStyle={textStyle}
-                        waveTextStyle={waveTextStyle}
-                    />
-                ) : null}
-            </div>
+            </GaugeFrame>,
+            props,
         );
-
-        if (this.state.rxData.noCard || props.widget.usedInWidget) {
-            return content;
-        }
-
-        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
