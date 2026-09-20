@@ -116,6 +116,10 @@ async function capture(cdp, url, attr, scale, outDir, fileName, filter) {
         }))`),
     ).filter(shot => !filter.length || filter.includes(shot.name));
 
+    // A discarded frame first: the very first clip after the navigation sometimes comes back before the page
+    // was painted - that made the first image of the page empty
+    await cdp.send('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, width: 8, height: 8, scale: 1 } });
+
     fs.mkdirSync(outDir, { recursive: true });
     for (const shot of shots) {
         // Rounded inwards, so a section on a fractional position does not pull in a line of the page background
