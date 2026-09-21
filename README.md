@@ -100,6 +100,8 @@ Every widget with all its settings and screenshots: [English](docs/en/README.md)
 ### 0.1.4 (2022-11-13)
 * (bluefox) initial commit
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 The MIT License (MIT)
 
