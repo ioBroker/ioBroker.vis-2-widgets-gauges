@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "2.0.3",
+    "version": "3.0.0",
     "news": {
+      "3.0.0": {
+        "en": "Rewrote the color, water and battery gauge as plain SVG without react-gauge-chart, react-liquid-gauge, react-battery-gauge, d3 and MUI - the widget set works with the React 19 version of vis-2 again. Projects keep all their settings\nAdded 7 new widgets: radial gauge, arc gauge, linear gauge, thermometer, compass, tank and rings\nColor gauge: the value is shown below the needle, minimum and maximum can be shown, the needle length works, `0` for corner radius, padding and margin is really 0\nWater gauge: digits after comma and color of the liquid; the value counts up during the rise animation\nBattery gauge: optional medium level, stroke width of the body, percent sign can be hidden, the text stays horizontal in a vertical battery\nValues that are not numbers are shown as text, a missing value as `–`\nAll widgets follow the dark theme of vis-2\nAdded documentation with screenshots (English and German)\nThe adapter icon is an SVG now\nUpdated packages and the build (vite 8, React 19 types)",
+        "de": "Ich habe Farbe, Wasser und Akkuanzeige in SVG ohne React-Gauge-Chart, React-Liquid-Gauge, d3 und MUI umgeschrieben — das Widget-Set funktioniert wieder mit der React 19-Version von Vis-2. Projekte behalten alle Einstellungen\n7 neue Widgets hinzugefügt: Radial-, Bogen-, Linear-, Thermometer, Kompass, Tank und Ringe\nFarbmessgerät: Der Wert wird unter der Nadel angezeigt, Minimum und Maximum, die Nadellänge passt, `0` für Eckenradius, Abstand und Rand ist 0\nWasseruhr: Ziffern nach dem Komma und Farbe der Flüssigkeit; der Wert steigt\nAkkuanzeige: optional, mittlere Stufe, Strichstärke, Prozentzeichen ausblendbar, Text bleibt waagerecht\nWerte ohne Zahlen werden als Text angezeigt, fehlende Werte als `—`\nAlle Widgets folgen dem Dark Theme Vis-2\nDokumentation mit Screenshots (Englisch und Deutsch)\nDas Adaptersymbol ist jetzt SVG\nNeue Pakete und Build (Vite 8, React 19-Typen)",
+        "ru": "Измеритель цвета, воды и заряда батареи переписан в обычный SVG без диаграммы индикаторов реакции, индикатора реактивной жидкости, индикатора реакционной батареи, d3 и MUI — набор виджетов снова работает с версией vis-2 для React 19. Проекты сохраняют все свои настройки\nДобавлено 7 новых виджетов: радиальный датчик, дугомер, линейный датчик, термометр, компас, резервуар и кольца\nЦветомер: значение указано под иглой, можно указать минимум и максимум, длина иглы работает, «0» для радиуса угла, отступа и поля действительно равно 0\nИндикатор уровня воды: цифры после запятой и цвета жидкости; во время анимации подъема значение отсчитывается\nИндикатор заряда батареи: дополнительный средний уровень, ширина штриха корпуса, знак процента можно скрыть, текст остается горизонтальным на вертикальной батарее\nЗначения, не являющиеся числами, отображаются в виде текста, пропущенное значение в виде `—`\nВсе виджеты соответствуют темной теме vis-2\nДобавлена документация со скриншотами (на английском и немецком языках)\nЗначок адаптера теперь в формате SVG\nОбновленные пакеты и сборка (vite 8, типы React 19)",
+        "pt": "Reescreveu o medidor de cor, água e bateria como SVG simples sem react-gauge-chart, react-liquid-gauge, d3 e MUI - o conjunto de widgets funciona com a versão React 19 do vis-2 novamente. Projetos mantêm todos os ajustes\n7 novos widgets: medidor radial, arco, linear, termômetro, bússola, tanque e anéis\nMedidor de cor: o valor é mostrado abaixo da agulha, mínimo e máximo, o comprimento da agulha funciona, `0` para raio de canto, espaço e margem é 0\nMedidor de água: dígitos após vírgula e cor do líquido; o valor conta na animação\nMedidor de bateria: nível médio opcional, largura do corpo, sinal percentual oculto, texto na horizontal em uma bateria vertical\nValores que não são números aparecem como texto e faltam como `—`\nTodos os widgets seguem o tema sombrio vis-2\nDocumentação adicionada com capturas (inglês e alemão)\nO ícone do adaptador é SVG\nPacotes atualizados e o build (vite 8, React 19)",
+        "nl": "De kleur-, water- en batterijmeter herschreven naar gewone SVG zonder reactiemetergrafiek, react-vloeistofmeter, react-batterijmeter, d3 en MUI - de widgetset werkt weer met de React 19-versie van vis-2. Projecten behouden al hun instellingen\n7 nieuwe widgets toegevoegd: radiale meter, boogmeter, lineaire meter, thermometer, kompas, tank en ringen\nKleurmeter: de waarde wordt onder de naald weergegeven, het minimum en het maximum kunnen worden weergegeven, de naaldlengte werkt, `0` voor de hoekradius, de vulling en de marge is in feite 0\nWatermeter: cijfers achter de komma en kleur van de vloeistof; de waarde wordt opgeteld tijdens de stijganimatie\nBatterijmeter: optioneel, gemiddeld niveau, lijndikte van de behuizing, procentteken kan worden verborgen, de tekst blijft horizontaal in een verticale batterij\nWaarden die geen getallen zijn, worden weergegeven als tekst, een ontbrekende waarde als `—`\nAlle widgets volgen het donkere thema van vis-2\nDocumentatie met schermafbeeldingen toegevoegd (Engels en Duits)\nHet adapterpictogram is nu een SVG\nBijgewerkte pakketten en de build (vite 8, typen React 19)",
+        "fr": "La jauge de couleur, d'eau et de batterie a été réécrite en SVG, sans React-Gauge-Chart, React-Liquid-Gauge, React-Battery-Gauge, D3 et MUI. Le set de widgets fonctionne à nouveau avec la version React 19 de vis-2. Les projets conservent tous leurs paramètres\nAjout de 7 nouveaux widgets : jauge radiale, à arc, linéaire, thermomètre, boussole, cuve et anneaux\nColorimètre : la valeur est indiquée sous l'aiguille, le minimum et le maximum peuvent être indiqués, la longueur de l'aiguille fonctionne, « 0 » pour le rayon des coins\nJauge à eau : chiffres après une virgule et couleur du liquide ; la valeur compte pendant l'animation\nIndicateur de batterie : niveau moyen en option, largeur du trait, le signe du pourcentage peut être masqué, le texte reste horizontal\nLes valeurs qui ne sont pas des chiffres sont du texte, il manque « — »\nTous les widgets ont le thème sombre de Vis-2\nDocumentation ajoutée avec captures d'écran (anglais et allemand)\nL'icône de l'adaptateur est en SVG\nPackages et build mis à jour (type Vite 8, React 19)",
+        "it": "Ha riscritto l'indicatore di colore, acqua e batteria come semplice SVG senza react-gauge-chart, react-liquid-gauge, react-battery-gauge, d3 e MUI: il set di widget funziona anche con la versione React 19 di vis-2. I progetti sono impostati\nAggiunti 7 nuovi widget: radiale, ad arco, lineare, termometro, bussola, serbatoio e anelli\nIndicatore di colori: il valore è sotto l'ago, minimo e massimo, la lunghezza dell'ago funziona, `0` per raggio d'angolo, padding e margine è davvero 0\nIndicatore d'acqua: cifre dopo virgola e colore del liquido; il valore aumenta\nIndicatore batteria: medio opzionale, larghezza del tratto, percentuale nascosta, testo orizzontale in verticale\nI valori non numerici sono mostrati come testo, quelli mancanti «—»\nTutti i widget seguono il tema scuro di vis-2\nAggiunta documentazione con schermate (inglese e tedesco)\nL'icona adattatore ora è SVG\nPacchetti e build aggiornati (vite 8, tipi React 19)",
+        "es": "Reescribió el indicador de color, agua y batería como SVG simple sin tabla de reacción, líquido de reacción, indicador de batería de reacción, d3 y MUI; el conjunto de widgets vuelve a funcionar con la versión React 19 de vis-2. Los proyectos conservan su entorno\nSe han añadido 7 nuevos artilugios: indicador radial, arco, lineal, termómetro, brújula, tanque y anillos\nCalibre de color: el valor se muestra debajo de la aguja, se muestran el mínimo y el máximo, la longitud de la aguja funciona, 0 para el radio de la esquina, el relleno y el margen son realmente 0\nIndicador de agua: dígitos tras la coma y el color del líquido; el valor cuenta durante la animación de subida\nIndicador de batería: nivel medio opcional, ancho del cuerpo, el signo porcentual se puede ocultar, el texto permanece en posición horizontal en vertical\nLos valores que no son números se muestran como texto, el que falta es `—`\nTodos los widgets siguen el tema oscuro de vis-2\nDocumentación añadida con capturas de pantalla (inglés y alemán)\nEl icono adaptador ahora es SVG\nPaquetes actualizados y compilación (vite 8, tipos React 19)",
+        "pl": "Przepisałem wskaźnik koloru, wody i baterii jako zwykły SVG bez wykresu reagowania, miernika cieczy reaktu, wskaźnika reakcji baterii, d3 i MUI - zestaw widżetów ponownie współpracuje z wersją vis-2 React 19. Projekty zachowują wszystkie swoje ustawienia\nDodano 7 nowych widżetów: miernik promieniowy, miernik łuku, miernik liniowy, termometr, kompas, zbiornik i pierścienie\nMiernik koloru: wartość jest pokazana poniżej igły, można pokazać minimalną i maksymalną, długość igły działa, `0` dla promienia narożnika, wyściółki i marginesu wynosi naprawdę 0\nWodomierz: cyfry po przecinku i kolor cieczy; wartość odlicza się podczas animacji wzrostu\nWskaźnik baterii: opcjonalny średni poziom, szerokość obrysu korpusu, znak procentowy może być ukryty, tekst pozostaje poziomy w pionowej baterii\nWartości, które nie są liczbami, są wyświetlane jako tekst, brakująca wartość jako „—”\nWszystkie widżety są zgodne z ciemnym motywem vis-2\nDodano dokumentację ze zrzutami ekranu (angielski i niemiecki)\nIkona adaptera jest teraz SVG\nZaktualizowane pakiety i kompilacja (vite 8, React 19 typy)",
+        "uk": "Переписано значення кольору, води та акумулятора як звичайний SVG без react-gauge-chart, react-liquid-gauge, react-battery-gauge, d3 та MUI - набір віджетів знову працює з версією React 19 vis-2. Проекти зберігають усі свої налаштування\nДодано 7 нових віджетів: радіальний манометр, дуговий манометр, лінійний датчик, термометр, компас, бак і кільця\nКолірний вимірювач: значення показано під голкою, можна показати мінімум і максимум, довжина голки працює, `0` для радіуса кута, підкладки та поля насправді 0\nВодомір: цифри після коми та колір рідини; значення підраховується під час анімації підйому\nДатчик батареї: додатковий середній рівень, ширина обведення корпусу, знак відсотка можна приховати, текст залишається горизонтальним у вертикальній батареї\nЗначення, які не є числами, відображаються як текст, відсутнє значення як `—`\nВсі віджети відповідають темній темі vis-2\nДодана документація зі скріншотами (англійською та німецькою)\nПіктограма адаптера тепер є SVG\nОновлені пакети та збірка (vite 8, React 19 типів)",
+        "zh-cn": "将颜色、水和电池电量计重写为没有反应仪表图、反应液量计、反应电池量计、d3 和 MUI 的普通 SVG ——该小部件集再次适用于 React 19 版本的 vis-2。项目保留所有设置\n添加了 7 个新小工具：径向仪表、弧度计、线性仪表、温度计、指南针、坦克和戒指\n色规：数值显示在指针下方，可以显示最小值和最大值，指针长度有效，圆角半径的`0`，边距和边距实际上是0\n水位计：逗号和液体颜色之后的数字；该值在上升动画中向上计数\n电池电量计：可选中等电平，正文的笔触宽度，百分比符号可以隐藏，文字在垂直电池中保持水平状态\n不是数字的值显示为文本，缺失值显示为 `—`\n所有插件都遵循vis-2的深色主题\n添加了带有屏幕截图的文档（英语和德语）\n适配器图标现在是 SVG\n更新了软件包和构建（vite 8、React 19 类型）"
+      },
       "2.0.3": {
         "en": "Updated packages",
         "de": "Aktualisierte Pakete",
@@ -69,19 +82,6 @@
         "zh-cn": "用 Styles 软件包删除"
       },
       "1.0.4": {
-        "en": "updated packages",
-        "de": "aktualisierte pakete",
-        "ru": "обновления пакетов",
-        "pt": "pacotes atualizados",
-        "nl": "bijgewerkte pakketten",
-        "fr": "paquets mis à jour",
-        "it": "pacchetti aggiornati",
-        "es": "paquetes actualizados",
-        "pl": "zaktualizowane pakiety",
-        "uk": "оновлені пакети",
-        "zh-cn": "更新软件包"
-      },
-      "1.0.3": {
         "en": "updated packages",
         "de": "aktualisierte pakete",
         "ru": "обновления пакетов",
@@ -212,14 +212,14 @@
         ]
       }
     },
-      "dependencies": [
-          {
-              "vis-2": ">=2.20.0"
-          }
-      ],
-      "restartAdapters": [
-          "vis-2"
-      ],
+    "dependencies": [
+      {
+        "vis-2": ">=2.20.0"
+      }
+    ],
+    "restartAdapters": [
+      "vis-2"
+    ],
     "tier": 3,
     "licenseInformation": {
       "type": "free",

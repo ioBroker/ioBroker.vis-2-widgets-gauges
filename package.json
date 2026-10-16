@@ -1,6 +1,6 @@
 {
   "name": "iobroker.vis-2-widgets-gauges",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Gauge widgets for ioBroker.vis-2",
   "author": "bluefox <dogafox@gmail.com>",
   "contributors": [
