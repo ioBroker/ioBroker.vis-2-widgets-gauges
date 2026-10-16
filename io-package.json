@@ -212,9 +212,14 @@
         ]
       }
     },
-    "restartAdapters": [
-      "vis-2"
-    ],
+      "dependencies": [
+          {
+              "vis-2": ">=2.20.0"
+          }
+      ],
+      "restartAdapters": [
+          "vis-2"
+      ],
     "tier": 3,
     "licenseInformation": {
       "type": "free",
