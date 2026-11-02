@@ -235,6 +235,19 @@ export function decimalsForStep(step: number): number {
     return 4;
 }
 
+/**
+ * Number of decimals of the scale labels: as many as the step needs, but not more than the value shows. -10 to 40
+ * in 6 steps would be labelled "31.6667" next to a value of "18.9" otherwise.
+ *
+ * @param min - start of the scale
+ * @param max - end of the scale
+ * @param majorTicks - number of steps between min and max
+ * @param valueDigits - digits after the comma of the value, `null` if not set: then at most two, like the value
+ */
+export function scaleLabelDigits(min: number, max: number, majorTicks: number, valueDigits: number | null): number {
+    return Math.min(decimalsForStep((max - min) / majorTicks), valueDigits ?? 2);
+}
+
 /** Clamps a value into a range */
 export function clamp(value: number, min: number, max: number): number {
     if (min > max) {

@@ -8,9 +8,9 @@ import {
     arcBounds,
     arcPath,
     clamp,
-    decimalsForStep,
     majorTickValues,
     polar,
+    scaleLabelDigits,
     sectorPath,
     uniqueId,
 } from './Components/geometry';
@@ -547,7 +547,7 @@ export default class RadialGauge extends Generic<RadialGaugeRxData> {
         const digits = this.getDigits();
         const isFloatComma = this.isFloatComma();
         const majorTicks = Math.max(1, Math.round(num(data.majorTicks, 10)));
-        const labelDigits = decimalsForStep((max - min) / majorTicks);
+        const labelDigits = scaleLabelDigits(min, max, majorTicks, digits);
 
         let valueText: string;
         if (text !== null) {

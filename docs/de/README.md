@@ -64,7 +64,7 @@ alle Attributnamen sind gleich geblieben, bestehende Projekte behalten ihre Eins
 | Objekt-ID | `oid` | | Der anzuzeigende Zustand. Beim Auswählen werden die Einheit und - falls das Objekt sie festlegt - Minimum und Maximum übernommen. Statt einer ID nimmt das Feld auch eine Konstante: eine Zahl wird als Wert angezeigt, ein Wort ohne Punkt als Text. |
 | Minimalwert / Maximalwert | `min` / `max` | 0 / 100 | Bereich der Skala. Werte außerhalb bleiben am Ende stehen. |
 | Einheit | `unit` | | Wird hinter dem Wert angezeigt. |
-| Nachkommastellen | `digitsAfterComma` | | Leer: so viele wie nötig, höchstens zwei. Das Dezimaltrennzeichen folgt den Systemeinstellungen von ioBroker. |
+| Nachkommastellen | `digitsAfterComma` | | Leer: so viele wie nötig, höchstens zwei. Die Beschriftung einer Skala zeigt nicht mehr. Das Dezimaltrennzeichen folgt den Systemeinstellungen von ioBroker. |
 
 Die Textfarbe aus dem Stil eines Widgets (`color`) wird für den Wert verwendet, wenn das Widget keine eigene Textfarbe
 hat.

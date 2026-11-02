@@ -4,7 +4,7 @@ import type { RxRenderWidgetProps, RxWidgetInfo } from '@iobroker/types-vis-2';
 
 import Generic from './Generic';
 import GaugeFrame, { fitFontSize, type GaugeTheme } from './Components/GaugeFrame';
-import { clamp, decimalsForStep, majorTickValues, uniqueId } from './Components/geometry';
+import { clamp, majorTickValues, scaleLabelDigits, uniqueId } from './Components/geometry';
 import { animationsFrozen, useAnimatedValue } from './Components/hooks';
 import { formatNumber, isTrue, num } from './Components/format';
 import { colorOfGradient, colorOfLevel, getLevels, type Level } from './Components/levels';
@@ -493,7 +493,7 @@ export default class TankGauge extends Generic<TankGaugeRxData> {
         const { value, text } = this.getMainValue();
         const isFloatComma = this.isFloatComma();
         const majorTicks = Math.max(1, Math.round(num(data.majorTicks, 4)));
-        const labelDigits = decimalsForStep((max - min) / majorTicks);
+        const labelDigits = scaleLabelDigits(min, max, majorTicks, this.getDigits());
 
         let valueText: string;
         if (text !== null) {
