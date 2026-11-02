@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-gauges",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "news": {
+      "3.0.1": {
+        "en": "Thermometer, linear, radial and tank gauge: the labels of the scale show no more digits after the comma than the value. A scale from -10 to 40 in 6 steps was labelled \"31.6667\" next to a value of \"18.9\"",
+        "de": "Thermometer, Linear, Radialthermometer und Tankuhr: Auf der Waage stehen nicht mehr Ziffern als der Wert. Eine Skala von -10 bis 40 in 6 Schritten trug „31,6667“ neben „18,9“",
+        "ru": "Термометр, линейный, радиальный и баковый манометр: на этикетках шкалы после запятой указано не больше цифр, чем значение. Шкала от -10 до 40, состоящая из 6 ступеней, была помечена как «31,6667» рядом со значением «18,9»",
+        "pt": "Termômetro, linear, radial e medidor: os rótulos da escala não mostram mais dígitos após a vírgula. Uma escala de -10 a 40 em 6 etapas foi rotulada como “31,6667\" ao lado de “18,9\"",
+        "nl": "Thermometer, lineair, radiaal en tankmeter: op de etiketten van de weegschaal staan niet meer cijfers achter de komma dan de waarde. Een schaal van -10 tot 40 in 6 stappen werd aangeduid met „31.6667\" naast een waarde van „18,9\"",
+        "fr": "Thermomètre, linéaire, radial et manomètre : les étiquettes de la balance ne comportent pas plus de virgules que la valeur. Une échelle de -10 à 40 en 6 étapes était étiquetée « 31,6667 » à côté de « 18,9 »",
+        "it": "Termometro lineare, radiale e per serbatoio: le etichette della bilancia non mostrano più cifre dopo la virgola. Una scala da -10 a 40 in 6 fasi recava «31,6667\" accanto a «18,9\"",
+        "es": "Termómetro, lineal, radial y de tanque: las etiquetas de la báscula no muestran más dígitos después de la coma que el valor. Una escala de -10 a 40 en 6 pasos decía «31,6667» junto al valor de «18,9»",
+        "pl": "Termometr, miernik liniowy, promieniowy i zbiornikowy: etykiety skali nie pokazują więcej cyfr po przecinku niż wartość. Skala od -10 do 40 w 6 krokach została oznaczona jako „31.6667” obok wartości „18,9”",
+        "uk": "Термометр, лінійний, радіальний та цистерний манометр: на етикетках шкали видно не більше цифр після коми, ніж значення. Шкала від -10 до 40 з 6 кроків була позначена «31.6667\" поруч із значенням «18.9\"",
+        "zh-cn": "温度计、线性仪表、径向仪表和油箱压力表：秤标签在逗号后显示的数字不超过数值。在 “18.9” 的值旁边，分为 6 步从 -10 到 40 的刻度被标记为 “31.6667”"
+      },
       "3.0.0": {
         "en": "Rewrote the color, water and battery gauge as plain SVG without react-gauge-chart, react-liquid-gauge, react-battery-gauge, d3 and MUI - the widget set works with the React 19 version of vis-2 again. Projects keep all their settings\nAdded 7 new widgets: radial gauge, arc gauge, linear gauge, thermometer, compass, tank and rings\nColor gauge: the value is shown below the needle, minimum and maximum can be shown, the needle length works, `0` for corner radius, padding and margin is really 0\nWater gauge: digits after comma and color of the liquid; the value counts up during the rise animation\nBattery gauge: optional medium level, stroke width of the body, percent sign can be hidden, the text stays horizontal in a vertical battery\nValues that are not numbers are shown as text, a missing value as `–`\nAll widgets follow the dark theme of vis-2\nAdded documentation with screenshots (English and German)\nThe adapter icon is an SVG now\nUpdated packages and the build (vite 8, React 19 types)",
         "de": "Ich habe Farbe, Wasser und Akkuanzeige in SVG ohne React-Gauge-Chart, React-Liquid-Gauge, d3 und MUI umgeschrieben — das Widget-Set funktioniert wieder mit der React 19-Version von Vis-2. Projekte behalten alle Einstellungen\n7 neue Widgets hinzugefügt: Radial-, Bogen-, Linear-, Thermometer, Kompass, Tank und Ringe\nFarbmessgerät: Der Wert wird unter der Nadel angezeigt, Minimum und Maximum, die Nadellänge passt, `0` für Eckenradius, Abstand und Rand ist 0\nWasseruhr: Ziffern nach dem Komma und Farbe der Flüssigkeit; der Wert steigt\nAkkuanzeige: optional, mittlere Stufe, Strichstärke, Prozentzeichen ausblendbar, Text bleibt waagerecht\nWerte ohne Zahlen werden als Text angezeigt, fehlende Werte als `—`\nAlle Widgets folgen dem Dark Theme Vis-2\nDokumentation mit Screenshots (Englisch und Deutsch)\nDas Adaptersymbol ist jetzt SVG\nNeue Pakete und Build (Vite 8, React 19-Typen)",
@@ -80,19 +93,6 @@
         "pl": "Usunięty z pakietem Styles",
         "uk": "Видаліть пакет \"Стиль\"",
         "zh-cn": "用 Styles 软件包删除"
-      },
-      "1.0.4": {
-        "en": "updated packages",
-        "de": "aktualisierte pakete",
-        "ru": "обновления пакетов",
-        "pt": "pacotes atualizados",
-        "nl": "bijgewerkte pakketten",
-        "fr": "paquets mis à jour",
-        "it": "pacchetti aggiornati",
-        "es": "paquetes actualizados",
-        "pl": "zaktualizowane pakiety",
-        "uk": "оновлені пакети",
-        "zh-cn": "更新软件包"
       }
     },
     "title": "Gauges for vis-2",

@@ -35,7 +35,7 @@ Every widget with all its settings and screenshots: [English](docs/en/README.md)
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 3.0.1 (2026-11-02)
 * (bluefox) Thermometer, linear, radial and tank gauge: the labels of the scale show no more digits after the comma than the value. A scale from -10 to 40 in 6 steps was labelled "31.6667" next to a value of "18.9"
 
 ### 3.0.0 (2026-10-16)
@@ -58,9 +58,6 @@ Every widget with all its settings and screenshots: [English](docs/en/README.md)
 
 ### 2.0.1 (2025-07-01)
 * (bluefox) Rewritten with TypeScript
-
-### 1.1.1 (2024-11-25)
-* (bluefox) Allowed to define digits after comma for the color gauge
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

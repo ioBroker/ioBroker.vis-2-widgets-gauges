@@ -1,4 +1,8 @@
 # Older changes
+## 1.1.1 (2024-11-25)
+* (bluefox) Allowed to define digits after comma for the color gauge
+
+
 ## 1.1.0 (2024-07-07)
 * (bluefox) Removed withStyles package
 
