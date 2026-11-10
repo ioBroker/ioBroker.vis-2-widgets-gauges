@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ioBroker/testing-action-check@v1
+      - uses: ioBroker/testing-action-check@v2
         with:
-          node-version: 24.15.0
+          node-version: '24.x'
           install-command: 'npm ci && cd src-widgets && npm ci'
           lint: true
 
@@ -42,6 +42,9 @@ jobs:
     needs: [check-and-lint]
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x, 24.x, 26.x]
 
     steps:
       - uses: ioBroker/testing-action-adapter@v1
@@ -49,7 +52,7 @@ jobs:
           build: true
           install-command: 'npm ci && cd src-widgets && npm ci'
           os: 'ubuntu-latest'
-          node-version: 24.15.0
+          node-version: ${{ matrix.node-version }}
 
   # Deploys the final package to NPM
   deploy:
